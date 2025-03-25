@@ -1,0 +1,88 @@
+    
+<app-floating-nav></app-floating-nav>
+
+<div class="min-h-screen h-screen mx-6 md:m-0">
+    
+    <div class="h-full flex -mt-8 lg:-mt-28 pb-12 lg:pb-0">
+
+        <div class="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:flex-none l:px-20 xl:px-24">
+            
+            <div class="mx-auto w-full max-w-sm lg:w-96">
+                
+                <div>
+
+                    <h2 class="mt-4 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+
+                    <p *ngIf="user.username && user.password" class="mt-2 text-sm text-gray-600 cursor-pointer">
+                        Or <a (click)="reset()" class="text-indigo-600 hover:text-indigo-500"> sign in to different account</a>
+                    </p>
+
+                </div>
+            
+                <div class="mt-12">
+
+                    <form class="space-y-6">
+                    
+                        <div>
+                            <label for="username" class="block text-sm text-gray-700"> Username </label>
+                            <div class="mt-1">
+                                <input name="username" type="username" autocomplete="username" required [(ngModel)]="user.username" [ngClass]="{ 'ring-red-500 border-red-500': status == 'danger', 'ring-yellow-500 border-yellow-500': !user.username &&  status == 'warning', 'ring-indigo-500': status != 'danger' && status != 'warning' }" class="appearance-none bock w-full px-3 py-2 border border-gray-300 focus:border-indigo-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none s:text-sm">
+                            </div>
+                        </div>
+                
+                        <div class="space-y-1">
+                            <label for="password" class="block text-sm text-gray-700"> Password </label>
+                            <div class="mt-1">
+                                <input name="password" type="password" autocomplete="current-password" required [(ngModel)]="user.password" [ngClass]="{ 'ring-red-500 border-red-500': status == 'danger', 'ring-yellow-500 border-yellow-500': !user.password &&  status == 'warning', 'ring-indigo-500': status != 'danger' && status != 'warning' }" class="appearance-none bock w-full px-3 py-2 border border-gray-300 focus:border-indigo-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none s:text-sm">
+                            </div>
+                
+                            <div class="flex items-center justify-between pt-3 px-1">
+                                
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="toggle toggle-sm toggle-primary" [checked]="rememberUser" (change)="toggleRememberMe()" />
+                                    <!-- <input id="remember-me" name="remember-me" type="checkbox" [checked]="rememberUser" (change)="toggleRememberMe()" class="h-4 w-4 accent-indigo-600 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded cursor-pointer"> -->
+                                    <label for="remember-me" class="ml-2 block text-xs text-gray-700"> Remember me </label>
+                                </div>
+                        
+                                <div class="text-xs">
+                                    <a (click)="resetPassword()" class="text-indigo-600 hover:text-indigo-500 cursor-pointer"> Forgot your password? </a>
+                                </div>
+                            
+                            </div>
+                        </div>
+            
+                        <div>
+                            <button (click)="signIn(user)" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none fcus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Sign in</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <p class="mt-16 text-xs text-gray-400 cursor-pointer flex justify-center">
+                <span>Don't have an account?</span> <a (click)="startTrial()" class="ml-1 text-indigo-500 hover:text-indigo-600 hover:underline"> Start your 14-day free trial </a>
+            </p>
+
+        </div>
+
+        <div class="hidden lg:block relative w-0 flex-1">
+            <img class="absolute inset-0 h-full w-full object-cover" src="background/background_2.jpg" alt="">
+        </div>
+
+        <!-- <div class="hidden lg:block relative w-0 flex-1">
+            <video class="absolute inset-0 h-full w-full object-cover" autoplay loop muted playsinline>
+                <source src="videos/backvideo4.mp4" type="video/mp4">
+                Your browser does not support the video tag. 
+            </video>
+        </div> -->
+        
+        
+        
+
+    </div>
+
+</div>
+
+  

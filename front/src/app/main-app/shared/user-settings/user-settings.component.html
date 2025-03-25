@@ -1,0 +1,90 @@
+<div class="min-h-screen p-6">
+    <div class="text-gray-700 p-6 rounded-lg shadow-lg w-full">
+      <h2 class="text-lg font-semibold mb-2">Personal Information</h2>
+      <p class="text-sm text-gray-400 mb-4">
+        Use a permanent address where you can receive mail.
+      </p>
+  
+      <!-- Profile Image Upload -->
+      <div class="flex items-center space-x-4">
+        <img src="https://scontent.facc5-1.fna.fbcdn.net/v/t1.6435-9/50580512_2197173420495574_3843761679972171776_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeF-_2CRvzNrN1VGGjzz4udbDtap0Rq5FlAO1qnRGrkWUAH7UG-c7R8X0Bf4sItx6be4emWpqTFbFANPjHW1NIgn&_nc_ohc=LvD7CrfZPg4Q7kNvgHyX7qw&_nc_oc=Adl0LNlpGJDL8kgDJxFERSPInqGOcSmyq95bHCj8hnSruCSgdKZKWpQeqv3Li3kQYAg&_nc_zt=23&_nc_ht=scontent.facc5-1.fna&_nc_gid=kAjRVzBPqCeHLaZUmppqPQ&oh=00_AYFp2p-40rRN8fYryYs24s14L6rxoJM22PrL0qkBB_EB4w&oe=680498F4" alt="Avatar" class="w-16 h-16 rounded-lg shadow-md">
+        <div>
+          <button class="px-3 py-1.5 bg-white text-gray-200 rounded-lg hover:bg-gray-600">
+            Change avatar
+          </button>
+          <p class="text-xs text-gray-500 mt-1">JPG, GIF or PNG. 1MB max.</p>
+        </div>
+      </div>
+  
+      <!-- Form Fields -->
+      <div class="mt-6">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm mb-1">First name</label>
+            <input type="text" class="w-full px-3 py-2 bg-white rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <div>
+            <label class="block text-sm mb-1">Last name</label>
+            <input type="text" class="w-full px-3 py-2 bg-white rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+        </div>
+  
+        <div class="mt-4">
+          <label class="block text-sm mb-1">Email address</label>
+          <input type="email" class="w-full px-3 py-2 bg-white rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+  
+        <div class="mt-4">
+          <label class="block text-sm mb-1">Username</label>
+          <input type="text" class="w-full px-3 py-2 bg-white rounded-lg border border-gray-200 text-gray-500" placeholder="example.com/janesmith" disabled>
+        </div>
+  
+        <div class="mt-4">
+          <label class="block text-sm mb-1">Timezone</label>
+          <select class="w-full px-3 py-2 bg-white rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option>Pacific Standard Time</option>
+            <option>Eastern Standard Time</option>
+            <option>Central Standard Time</option>
+          </select>
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="mt-6">
+        <button class="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="max-w-2xl mx-auto p-6 bg-gray-900 text-white rounded-lg shadow-md">
+    <!-- Change Password Section -->
+    <div class="mb-8">
+        <h2 class="text-lg font-semibold">Change password</h2>
+        <p class="text-gray-400 text-sm mb-4">Update your password associated with your account.</p>
+        <div class="space-y-4">
+            <input type="password" placeholder="Current password" class="w-full p-2 bg-gray-800 text-white rounded border border-gray-700 focus:ring focus:ring-blue-500">
+            <input type="password" placeholder="New password" class="w-full p-2 bg-gray-800 text-white rounded border border-gray-700 focus:ring focus:ring-blue-500">
+            <input type="password" placeholder="Confirm password" class="w-full p-2 bg-gray-800 text-white rounded border border-gray-700 focus:ring focus:ring-blue-500">
+            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">Save</button>
+        </div>
+    </div>
+
+    <!-- Log Out Other Sessions Section -->
+    <div class="mb-8 border-t border-gray-700 pt-6">
+        <h2 class="text-lg font-semibold">Log out other sessions</h2>
+        <p class="text-gray-400 text-sm mb-4">Please enter your password to confirm you would like to log out of your other sessions across all of your devices.</p>
+        <div class="space-y-4">
+            <input type="password" placeholder="Your password" class="w-full p-2 bg-gray-800 text-white rounded border border-gray-700 focus:ring focus:ring-blue-500">
+            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">Log out other sessions</button>
+        </div>
+    </div>
+
+    <!-- Delete Account Section -->
+    <div class="border-t border-gray-700 pt-6">
+        <h2 class="text-lg font-semibold text-red-500">Delete account</h2>
+        <p class="text-gray-400 text-sm mb-4">No longer want to use our service? You can delete your account here. This action is not reversible. All information related to this account will be deleted permanently.</p>
+        <button class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded">Yes, delete my account</button>
+    </div>
+</div>

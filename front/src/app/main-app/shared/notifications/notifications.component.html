@@ -1,0 +1,146 @@
+<!-- <div class=" cursor-pointer {{slideOver ? 'pt-16' :''}}"> -->
+    <div class=" cursor-pointer pt-16">
+
+    <div class="px-6 pt-6 border-b border-gray-200">
+        <nav class="-mb-px flex space-x-6">
+            
+            <a (click)="filter('unread')" [ngClass]="switchNav === 'unread' ? 'border-indigo-500 text-indigo-600' : 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300'" class="whitespace-nowrap pb-2 px-1 border-b-2 font-medium text-sm"> Unread </a>
+                    
+            <a (click)="filter('pneumaflow')"[ngClass]="switchNav === 'pneumaflow' ? 'border-indigo-500 text-indigo-600' : 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300'" class="whitespace-nowrap pb-2 px-1 border-b-2 font-medium text-sm"> Pneumaflow </a>
+            
+            <a (click)="filter('all')" [ngClass]="switchNav === 'all' ? 'border-indigo-500 text-indigo-600' : 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300'" class="whitespace-nowrap pb-2 px-1 border-b-2 font-medium text-sm"> All Notifications</a>
+        
+        </nav>
+    </div>
+
+    <!-- Searchbox -->
+    <div class="relative m-2 py-2">
+        <div class="relative flex items-center text-gray-400 focus-within:text-indigo-400">
+            <span class="absolute left-4 flex h-6 items-center border-r border-gray-300 pr-3">
+                <svg xmlns="http://ww50w3.org/2000/svg" class="w-4 fill-current" viewBox="0 0 35.997 36.004">
+                    <path data-name="search" d="M35.508,31.127l-7.01-7.01a1.686,1.686,0,0,0-1.2-.492H26.156a14.618,14.618,0,1,0-2.531,2.531V27.3a1.686,1.686,0,0,0,.492,1.2l7.01,7.01a1.681,1.681,0,0,0,2.384,0l1.99-1.99a1.7,1.7,0,0,0,.007-2.391Zm-20.883-7.5a9,9,0,1,1,9-9A8.995,8.995,0,0,1,14.625,23.625Z"></path>
+                </svg>
+            </span>
+            <input type="search" name="leadingIcon" placeholder="Search here" class="outline-none w-full rounded-xl border border-gray-300 py-2.5 pl-14 pr-4 text-sm text-gray-600 transition focus:border-indigo-300" />
+        </div>
+    </div>
+
+</div> 
+ 
+ 
+<!-- Notifications list. Filtered based on tab selected -->
+<div class="min-h-screen overflow-y-auto">
+    <ul role="list" class="flex-1 divide-y divide-gray-200 overflow-y-auto pb-28 mb-4">
+    
+        <li *ngFor="let notif of notifications" class="cursor-pointer border-y border-gray-100">
+            
+                <div class="group relative flex items-center py-3 px-5">
+                    
+                    <a (click)="selected(notif)" class="-m-1 block flex-1 p-1">
+                        <div [ngClass]="selectedNotif == notif ? 'bg-indigo-100': 'bg-gray-50'" class="absolute inset-0 group-hover:bg-indigo-50" aria-hidden="true"></div>
+                        <div class="relative flex min-w-0 flex-1 items-center justify-between">
+                            <span class="flex items-center justify-start">
+                                <span class="relative inline-block flex-shrink-0">
+                                    <img class="h-10 w-10 rounded-full" [src]="notif.sender_img" alt="">
+                                </span>
+                                <div class="ml-4">
+                                    <p [ngClass]="unread ? 'text-indigo-700 font-semibold' : 'font-medium text-gray-900'" class="truncate text-sm">{{notif.title}}</p>
+                                    <p class="trunc text-sm text-gray-500">{{notif.intro}}</p>
+                                </div>
+                            </span>
+                        </div>
+                    </a>
+
+                    <div class="relative ml-2 inline-block flex-shrink-0 text-left">
+
+                        <button type="button" class="group relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                            <span class="flex h-full w-full items-center justify-center rounded-full">
+                                <svg class="h-5 w-5 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                                </svg>
+                            </span>
+
+                            <div class="hidden group-focus:block cursor-pointer absolute top-6 right-10 z-20 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button">
+                                <div class="py-1" role="none">
+                                    <a (click)="options('read')" class="hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm text-left" role="menuitem">
+                                        Mark As Read
+                                    </a>
+                                    <a class="hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm text-left" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
+                                        Mark as read
+                                    </a>
+                                    <a (click)="options('delete')" class="hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm text-left" role="menuitem">
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+
+                        </button>
+
+                    </div>
+                </div>
+                
+
+        </li>   
+    
+    </ul>
+</div>
+
+<!-- When notification clicked. details -->
+<div *ngIf="notifShow" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+    <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+  
+    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+      <div class="flex min-h-screen justify-center p-4 text-center items-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"> 
+                <div class="mx-1 border-y p-1">
+                    <div class="h-full overflow-y-auto bg-gray-100 px-6 p-4 rounded-lg shadow">
+                        <div class="space-y-3 pb-8">
+                
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h2 class="font-medium text-indigo-700">{{selectedNotif.title}}</h2>
+                                    </div>
+                                    <button (click)="close()" type="button" class="ml-4 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                
+                            <div>
+                                <dl class="divide-y divide-gray-100 border-t border-b border-gray-100">
+                                    <div class="flex justify-between py-2 text-sm font-medium">
+                                        <dt class="text-gray-500">Date</dt>
+                                        <dd class="text-gray-900">{{selectedNotif.date}}. {{selectedNotif.time}}</dd>
+                                    </div>
+                                    <div class="flex justify-between py-2 text-sm font-medium">
+                                        <dt class="text-gray-500">Sent by</dt>
+                                        <dd class="text-gray-900">{{selectedNotif.sender_name}}</dd>
+                                    </div>
+                                </dl>
+                            </div>
+                
+                            <div class="pb-4">
+                                <h3 class="font-medium text-gray-900 mt-4">Details</h3>
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm text-gray-500">{{selectedNotif.msg}}</p>
+                                </div>
+                            </div>
+                
+                            <div class="flex">
+                                <button type="button" (click)="close()" class="flex-1 rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Delete</button>
+                                <button type="button" (click)="close()" class="ml-3 flex-1 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Close</button>
+                            </div>
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+    
+</div>
+  

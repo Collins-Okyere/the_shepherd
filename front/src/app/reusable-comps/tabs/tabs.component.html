@@ -1,0 +1,16 @@
+<div class="flex items-baseline border-b-2 border-{{theme}}-200 m-1 lg:mx-4 cursor-pointer">
+  <a *ngFor="let tab of tabsData.tabs; let i = index;" (click)="switch(i+1)"  [ngClass]="tabsData.page === i+1 ? 'bg-'+theme+'-700 text-white rounded-t-md z-10 shadow-sm' : 'hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-t-md'" class="text-sm lg:text-lg whitespace-nowrap px-2 lg:px-6 py-2 font-medium">
+     
+    <span class="lg:px-6 flex items-center text-sm font-medium lg:space-x-6 justify-start lg:justify-normal">
+      <span class="hidden lg:flex lg:flex-shrink-0">
+        <span [ngClass]="tabsData.page === i+1 ? 'border-2 border-white' : 'border-2 border-slate-200'" class="w-10 h-10 flex items-center justify-center rounded-full">
+          <span [ngClass]="tabsData.page === i+1 ? 'text-white' : 'text-slate-500'">0{{i+1}}</span>
+        </span>
+      </span>
+      <span class="min-w-0 flex flex-col">
+        <span class="text-xs lg:text-sm font-semibold {{ tabsData.page === i+1 ? 'text-white' : 'text-slate-500' }} tracking-wide uppercase">{{tab.title}}</span>
+        <span class="hidden lg:flex text-xs font-medium {{ tabsData.page === i+1 ? 'text-slate-200' : 'text-slate-500' }}">{{tab.description}}</span>
+      </span>
+    </span>
+  </a>
+</div>

@@ -1,0 +1,113 @@
+.container {
+  position: relative;
+  padding: 10px;
+  margin: auto;
+  font-family: 'Open Sans', sans-serif;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}
+
+.head {
+  width: 100%;
+}
+
+.reduce{
+  width: 80%;
+}
+
+.logo {
+  width: 20%;
+  text-align: center;
+}
+
+.sign {
+  width: 150px;
+  height: 50px;
+}
+
+.qrcode {
+  width: 180px;
+  height: 150px;
+}
+
+.img{
+  width: 80px;
+  height: 80px;
+  margin-right: 40px;
+  margin-top: 15px;
+}
+
+.details {
+  text-align: center;
+  width: 80%;
+}
+
+.center {
+  text-align: center;
+}
+
+.cursive {
+  font-family: 'Pinyon Script', cursive;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.text-underline {
+  border-bottom: 1px solid #777;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+
+.border{
+  border: 4px solid white;
+  border-collapse: collapse;
+}
+
+.white{
+  background-color: white;
+  height: 100%;
+}
+
+.top {
+  margin-top: 5%;
+}
+
+.top2 {
+  margin-top: 15%;
+  margin: 10%;
+}
+
+.marg {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+}
+
+.watermarked {
+  position: relative;
+}
+
+.watermarked:after {
+  content: "";
+  display: block;
+  justify-self: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -3%;
+  left: 22%;
+  background-image: url('../../../../logos/rehoboth.jpeg');
+  background-size: 600px 600px;
+  background-position: 30px 30px;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+
+.button {
+  font-weight: bold;
+  background: rgb(20, 26, 194);
+  padding: 12px;
+  color: aliceblue;
+}

@@ -1,0 +1,554 @@
+
+
+<div class="fixed w-full min-h-full">
+
+    <!-- Main Header -->
+    <header [ngClass]="{'lg:ml-60': isDrawerOpen && navShow, 'bg-white': !filled, 'bg-indigo-800 lg:bg-white': filled }" class="z-40 shadow">
+        <div class="px-4 lg:py-2 {{isDrawerOpen ? 'border-b border-gray-200' : ''}} lg:pr-6 lg:pl-0">
+            <div class="lg:-mt-2 flex justify-between items-center flex-wrap sm:flex-nowrap">
+
+                <!-- Church Logo & Name -->
+                <div class="lg:mt-4 lg:ml-4 flex justify-start items-center lg:space-x-6">
+
+                    <!-- Logo and Version -->
+                    <div class="{{isDrawerOpen ? 'hidden' : 'hidden lg:flex'}} items-center space-x-1 justify-between">
+                        
+                        <div class="space-x-2 flex">
+                            <img class="h-6 w-6 rounded-full" src="favicon.ico" alt="">
+                            <h1 class="text-xl font-bold text-gray-900"><span class="text-xs align-super">the</span>Shepherd</h1>
+                        </div>
+
+                        <!-- <span class="bg-indigo-100 text-indigo-600 text-xs font-semibold px-2 rounded">v1.1.0</span> -->
+                    </div>
+
+                    <!-- For Mobile -->
+                    <div class="flex lg:hidden">
+
+                        <div class="flex drawer-content">
+                            <label for="my-drawer-5" type="button" class="text-white relative swap swap-rotate drawer-button inline-flex items-center justify-center" aria-controls="mobile-menu" aria-expanded="false">
+
+                                <span class="absolute -inset-0.5"></span>
+                                
+                                <input type="checkbox" class="theme-controller" [checked]="isDrawerOpen" (change)="toggleDrawer($event)"  />
+
+                                <svg [ngClass]="filled ? 'text-indigo-100' : 'text-gray-500'"class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                </svg>
+
+                            </label>
+                        </div>
+
+                        <!-- Mobile Page Name -->
+                        <div class="lg:hidden mx-auto p-4">
+                            <h1 class="text-lg font-bold tracking-tight {{filled ? 'text-indigo-100' : 'text-indigo-700'}}"> {{pageName}}</h1>
+                        </div>
+
+                    </div>
+
+                    <!-- Desk hide side menu button -->
+                    <div *ngIf="showToggler == 1" class="hidden lg:flex drawer-content">
+                        <label for="my-drawer" type="button" class="relative swap swap-rotate drawer-button inline-flex items-center justify-center rounded-md text-gray-600 hover:text-gray-700 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+
+                            <span class="absolute -inset-0.5"></span>
+                            
+                            <input type="checkbox" class="theme-controller" [checked]="isDrawerOpen" (change)="toggleDrawer($event)"  />
+
+                            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+
+                        </label>
+                        
+                    </div>
+
+                    <!-- Desk hide top menu button -->
+                    <div *ngIf="showToggler == 2" class="hidden lg:flex drawer-content">
+                        <label type="button" class="relative swap swap-rotate drawer-button inline-flex items-center justify-center rounded-md text-gray-600 hover:text-gray-700 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+
+                            <span class="absolute -inset-0.5"></span>
+                            
+                            <input type="checkbox" class="theme-controller" [checked]="navShow" (change)="uiControls('navShow')" />
+
+                            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+
+                        </label>
+                    </div>
+
+                    <div class="hidden lg:flex items-center">
+
+                        <div class="flex-shrink-0">
+                            <img class="h-8 w-8 rounded-full" [src]="currChurch.logo" alt="">
+                        </div>
+
+                        <div class="ml-4">
+                            <h1 class="text-xl font-bold tracking-tight text-indigo-900">{{currChurch.name}} - {{currChurch.alt_name}} ({{currBranch.name}})</h1>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                <!-- Searchbar, Messages & Navigations -->
+                <div class="flex items-center space-x-4 lg:space-x-4 md:space-x-2 lg:-mb-2">
+
+                    <!-- search bar -->
+                    <div hidden class="hidden lg:block mr-4">
+                        <div class="relative flex items-center text-gray-400 group group-focus-within:text-indigo-400">
+                            <span class="absolute left-4 flex h-6 items-center border-r group-focus-within:border-indigo-400 pr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="group-focus-within:text-indigo-400 text-gray-300 w-4  h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                            </span>
+                            <input type="search" name="leadingIcon" placeholder="Search here" class="outline-none w-full rounded-xl border border-gray-300 py-2.5 pl-14 pr-4 text-sm text-gray-600 transition focus:border-indigo-300" />
+                        </div>
+                    </div>
+
+                    <!-- Messages menu button -->
+                    <div class="flex drawer-content group">
+                        <label for="my-drawer-4" type="button" class="relative group indicator swap drawer-button flex items-center h-10 w-10 justify-center rounded-xl bg-gray-100 p-2 text-gray-600 group group-hover:text-indigo-700 {{messageIndicator ? 'text-indigo-700 bg-indigo-100' : 'bg-gray-100'}} border border-gray-200 group-hover:bg-indigo-100 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+                            
+                            <span class="absolute -inset-0.5"></span>
+                            
+                            <input type="checkbox" class="theme-controller" [checked]="isDrawerOpen" (change)="uiControls('drawer');" />
+                            
+                            <svg xmlns="http://www.w3.org/2000/svg" class="m-auto size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                            </svg>
+                            
+                            <span *ngIf="messageIndicator" class="badge badge-xs bg-indigo-600 indicator-item"></span>
+
+                        </label>
+                    </div>
+
+                    <!-- Notification menu button -->
+                    <div class="flex drawer-content group">
+                        <label for="my-drawer-3" type="button" class="relative group indicator swap drawer-button flex items-center h-10 w-10 justify-center rounded-xl bg-gray-100 p-2 text-gray-600 group group-hover:text-indigo-700 {{messageIndicator ? 'text-indigo-700 bg-indigo-100' : 'bg-gray-100'}} border border-gray-200 group-hover:bg-indigo-100 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+                            
+                            <span class="absolute -inset-0.5"></span>
+                            
+                            <input type="checkbox" class="theme-controller" [checked]="isDrawerOpen" (change)="uiControls('drawer');" />
+                            
+                            <svg xmlns="http://www.w3.org/2000/svg" class="m-auto size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"></path>
+                            </svg>
+                            
+                            <span *ngIf="notifIndicator" class="badge badge-xs bg-indigo-600 indicator-item"></span>
+
+                        </label>
+                    </div>
+
+                    <!-- User Button & dropdown -->
+                    <div *ngIf="!isDrawerOpen" class="hidden lg:block relative dropdown dropdown-end mt-1.5">
+                        <app-dropdown [dropDownType]="'click'" [image]="currUser.photo" [dropdownWidth]="'narrow'" [options]="userMenu" (optionClick)="optionSelected($event)" [hasDropTitle]="true" [dropDownTitle]="currUser.fullName"></app-dropdown>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- UI Controls -->
+    <!-- <app-ui-settings-button></app-ui-settings-button> -->
+
+    <!-- Navigation Bars -->
+    <nav [ngClass]="{'animate-nav-slide-in-top': navShow, 'animate-nav-slide-out-top': !navShow, 'bg-indigo-800': filled, 'bg-white': !filled }">
+
+        <!-- Top Nav -->
+        <div *ngIf="showToggler == 2 && navShow" class="hidden lg:block mx-auto w-full px-4">
+            <div class="flex h-12 items-center justify-between">
+
+                <!--Main Desktop Nav-->
+                <div class="lg:flex items-center justify-start ml-32">
+                    <div class="flex space-x-2">
+
+                                <a *ngFor="let main of menu;" (click)="main.subPages?.length < 1 ? getPage(main.page) : null" [ngClass]="main.isActive && filled ? 'bg-indigo-600 text-white' : !main.isActive && filled ? 'hover:bg-indigo-600 text-indigo-200' : main.isActive && !filled ? 'bg-indigo-100 text-indigo-700' : !main.isActive && !filled ? 'hover:bg-indigo-50 text-indigo-900' : ''" class="group w-full py-2 px-4 rounded-md flex justify-start whitespace-nowrap items-center text-sm cursor-pointer">
+                                
+                                    <svg *ngIf="main.icon"  class="mr-2 size-5" [attr.fill]="main.icon.fill || 'none'" [attr.viewBox]="main.icon.viewBox || '0 0 24 24'" [attr.stroke-width]="main.icon.strokeWidth || '1.5'" stroke="currentColor" aria-hidden="true">
+                                        <path [attr.d]="main.icon.path" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                
+                                    <span class="whitespace-nowrap flex">
+                                        {{ main.pageName }}
+                                    </span>
+
+                                    <svg *ngIf="main.subPages?.length > 0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                
+                                    <div *ngIf="main?.subPages?.length > 0" class="outline-gray-100 drop-shadow-lg">
+                                        <ul class="hidden absolute -ml-36 top-5 py-4 px-2 text-gray-600 group-hover:block w-56 rounded-md shadow-lg bg-white">
+                                            <li *ngFor="let sub of main.subPages; let i = index;" (click)="getPage(sub.page)">
+                                                <a [ngClass]="sub.isActive ? 'bg-indigo-100 text-indigo-800' : 'hover:bg-indigo-50'" class="px-3 py-2 group flex justify-start items-center text-sm">
+                                                    <svg *ngIf="sub.icon" class="mr-2 size-5" [attr.fill]="sub.icon.fill || 'none'" [attr.viewBox]="sub.icon.viewBox || '0 0 24 24'" [attr.stroke-width]="sub.icon.strokeWidth || '1.5'" stroke="currentColor" aria-hidden="true">
+                                                        <path [attr.d]="sub.icon.path" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                    <span>{{ sub.pageName }}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </a>
+                                
+                    </div>
+                </div>
+
+                <!-- Mobile FIll Change & Notofi buttons -->
+                <div class="flex lg:hidden justify-end items-center space-x-2 -mr-2">
+
+                    <!-- Messages menu button -->
+                    <div class="drawer-content group">
+                        <label for="my-drawer-4" type="button" class="relative group indicator swap drawer-button flex items-center h-10 w-10 justify-center rounded-xl bg-gray-100 p-2 text-gray-600 group group-hover:text-indigo-700 {{messageIndicator ? 'text-indigo-700 bg-indigo-100' : 'bg-gray-100'}} border border-gray-200 group-hover:bg-indigo-100 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+                            
+                            <span class="absolute -inset-0.5"></span>
+                            
+                            <input type="checkbox" class="theme-controller" [checked]="isDrawerOpen" (change)="uiControls('drawer');" />
+                            
+                            <svg xmlns="http://www.w3.org/2000/svg" class="m-auto size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                            </svg>
+                            
+                            <span *ngIf="messageIndicator" class="badge badge-xs bg-indigo-600 indicator-item"></span>
+
+                        </label>
+                    </div>
+
+                    <!-- Notification menu button -->
+                    <div class="drawer-content group">
+                        <label for="my-drawer-3" type="button" class="relative group indicator swap drawer-button flex items-center h-10 w-10 justify-center rounded-xl bg-gray-100 p-2 text-gray-600 group group-hover:text-indigo-700 {{messageIndicator ? 'text-indigo-700 bg-indigo-100' : 'bg-gray-100'}} border border-gray-200 group-hover:bg-indigo-100 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+                            
+                            <span class="absolute -inset-0.5"></span>
+                            
+                            <input type="checkbox" class="theme-controller" [checked]="isDrawerOpen" (change)="uiControls('drawer');" />
+                            
+                            <svg xmlns="http://www.w3.org/2000/svg" class="m-auto size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"></path>
+                            </svg>
+                            
+                            <span *ngIf="notifIndicator" class="badge badge-xs bg-indigo-600 indicator-item"></span>
+
+                        </label>
+                    </div>
+
+                </div>
+
+                <!-- Actions & Help Buttons -->
+                <div class="hidden ml-4 lg:flex items-center md:ml-6 lg:space-x-1">
+
+                    <!-- Desktop Fill Change button -->
+                    <div class="hidden lg:flex">
+                        <label type="button" class="swap swap-rotate cursor-pointer relative items-center justify-center {{!filled ? 'hover:bg-indigo-100' : ''}} rounded-xl p-2 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+
+                            <input type="checkbox" class="theme-controller" [checked]="filled" (change)="uiControls('fill')" />
+
+                            <svg class="swap-off size-6 {{filled ? 'text-indigo-300 group-hover:text-white' : 'text-indigo-600 group-hover:text-indigo-700'}}"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                            </svg>
+
+                            <svg class="swap-on size-6 {{filled ? 'text-indigo-300 group-hover:text-white' : 'text-indigo-600 group-hover:text-indigo-700'}}"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                            </svg>
+
+                        </label>
+                    </div>
+
+                    <!-- Desktop Nav Change button -->
+                    <div class="hidden lg:flex drawer-content">
+                        <label for="my-drawer" type="button" (click)="uiControls('drawer'); showToggler = 1;" class="cursor-pointer relative drawer-button inline-flex items-center justify-center {{!filled ? 'hover:bg-indigo-100' : ''}} rounded-xl p-2 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+
+                            <span class="absolute -inset-0.5" ></span>
+
+                            <svg *ngIf="!filled" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-indigo-700 hover:text-indigo-800 flex-shrink-0 rotate-270" stroke-linecap="round" stroke-linejoin="round">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></g>
+                            </svg>
+
+                            <svg *ngIf="filled" fill="currentColor" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg" class="size-6 text-indigo-300 hover:text-white flex-shrink-0 rotate-90">
+                                <g id="SVGRepo_bgCarrier" stroke-width="1.5"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><defs> <style> .cls-1 { fill: none; } </style> </defs><title>open-panel--solid--bottom</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4Zm0,2V18H4V6Z"></path><rect id="_Transparent_Rectangle_" data-name="<Transparent Rectangle>"></rect></g>
+                            </svg>
+
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Side Nav Left (Main Menu)-->
+        <div class="drawer {{isDrawerOpen ? 'lg:w-60' : ''}}">
+
+            <input id="my-drawer" (change)="toggleDrawer($event)" [checked]="isDrawerOpen" type="checkbox" class="drawer-toggle" />
+
+            <div class="drawer-side {{isDrawerOpen ? 'lg:w-0' : ''}}">
+
+                <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay {{isDrawerOpen ? 'lg:w-0' : ''}}"></label>
+
+                <div class="flex menu bg-base-200 text-base-content lg:fixed min-h-full lg:w-60 {{filled ? 'bg-indigo-800' : ' bg-gray-50 border-r-2 border-dashed border-gray-200'}}">
+
+                    <!-- Logo and Version -->
+                    <div class="lg:mt-3 flex items-center space-x-1 justify-between">
+                        
+                        <div class="space-x-2 flex items-center">
+                            <img class="h-4 w-4 lg:h-6 lg:w-6 rounded-full" [src]="filled ? 'logos/logo_plain.png' : 'logos/logo_fill.png'" alt="">
+                            <h1 class="text-xs font-semibold lg:font-bold {{filled ? 'text-white' : 'text-gray-900'}}"><span class="text-[8px] lg:text-xs align-super font-normal">the</span>Shepherd</h1>
+                        </div>
+
+                        <!-- <span class="bg-indigo-100 text-indigo-600 text-xs font-semibold px-2 rounded">v1.1.0</span> -->
+                        
+                        <div class="flex items-center justify-end">
+                            <div class="flex items-center justify-between">
+
+                                <!-- Desktop FIll Change button -->
+                                <div>
+                                    <label type="button" class="swap swap-rotate cursor-pointer relative items-center justify-center {{!filled ? 'hover:bg-indigo-100' : ''}} rounded-xl p-2 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+
+                                        <input type="checkbox" class="theme-controller" [checked]="filled" (change)="uiControls('fill')" />
+
+                                        <svg class="swap-off size-5 lg:size-6 {{filled ? 'text-indigo-300 group-hover:text-white' : 'text-indigo-600 group-hover:text-indigo-700'}}" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                                        </svg>
+
+                                        <svg class="swap-on size-5 lg:size-6 {{filled ? 'text-indigo-300 group-hover:text-white' : 'text-indigo-600 group-hover:text-indigo-700'}}" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                                        </svg>
+
+                                    </label>
+                                </div>
+
+                                <!-- Desktop menu button -->
+                                <div class="hidden lg:flex drawer-content">
+                                    <label for="my-drawer" type="button" (click)="uiControls('drawer'); showToggler = 2" class="relative drawer-button inline-flex items-center justify-center rounded-md p-2 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+                                        <span class="absolute -inset-0.5"></span>
+                                        <svg *ngIf="!filled" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-indigo-700 flex-shrink-0 rotate-90" stroke-linecap="round" stroke-linejoin="round">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g> <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g> <g id="SVGRepo_iconCarrier"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></g>
+                                        </svg>
+                                        <svg *ngIf="filled" fill="currentColor" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg" class="size-6 text-indigo-200 flex-shrink-0 -rotate-180">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="1.5"></g> <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g> <g id="SVGRepo_iconCarrier"><defs><style>.cls-1 {fill: none;}</style></defs><title>open-panel--solid--bottom</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4Zm0,2V18H4V6Z"></path><rect id="_Transparent_Rectangle_" data-name="<Transparent Rectangle>"></rect></g>
+                                        </svg>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="flex lg:hidden items-center border-b py-2 pb-4 px-1 border-indigo-500 space-x-2">
+
+                        <div class="flex-shrink-0">
+                            <img class="h-8 w-8 rounded-full" [src]="currChurch.logo" alt="churchLogo">
+                        </div>
+
+                        <div class="items-center text-xs">
+                            <div class="font-bold tracking-tight {{filled ? 'text-indigo-100' : 'text-indigo-700'}}"> {{currChurch.name}}</div>
+                            <div class="font-bold tracking-tight {{filled ? 'text-indigo-100' : 'text-indigo-700'}}">({{currChurch.alt_name}} - {{currBranch.name}})</div>
+                        </div>
+
+                    </div>
+
+                    <!-- User Profile -->
+                    <div class="mt-6 mb-4 collapse collapse-arrow {{!filled && activeIndex === 0 ? 'bg-white' : filled && activeIndex === 0 ? 'bg-indigo-100' : activeIndex !== 0 ? 'bg-indigo-60 text-indigo-200' : ''}} rounded-lg shadow-sm border">
+                        <input type="checkbox" [checked]="activeIndex === 0" (change)="toggleMenu(0)" />
+                        <div class="collapse-title flex items-center py-3 pl-2">
+                            <img class="w-10 h-10 rounded-full ml-1" [src]="currUser.photo" alt="photo">
+                            <div class="ml-3 {{activeIndex === 0 ? 'text-indigo-800' : filled ? 'text-white' : 'text-gray-700'}}">
+                                <p class="font-semibold">{{currUser.fullName}}</p>
+                                <p class="text-xs {{activeIndex !== 0 && filled ? 'text-gray-400' : 'text-gray-600'}}">{{currUser.position ?? currUser.email}}</p>
+                            </div>
+                        </div>                        
+                        <div class="collapse-content pl-12">
+                            <a *ngFor="let sub of userMenu; let i = index" (click)="optionSelected(sub); getPage(sub.action)" [ngClass]="sub.isActive ? 'text-indigo-800' :'text-gray-500' " class="cursor-pointer group w-full flex items-center justify-start  space-x-1 text-sm rounded-md"> 
+                                <div class="text-3xl mb-0.5 pl-1">•</div> <div>{{sub.pageName}}</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Nav Links -->
+                    <div [ngClass]="{'rounded-lg shadow my-1': main.isActive, 'collapse-arrow': main.subPages?.length > 0}" class="collapse {{!filled && main.isActive ? 'bg-white' : filled && main.isActive ? 'bg-indigo-100' : 'text-gray-600'}}" *ngFor="let main of menu; let i = index;">
+
+                        <input type="checkbox" [checked]="activeIndex === i+1" (change)="toggleMenu(i+1, main);" />
+
+                        <button type="button" [ngClass]="{'text-indigo-700 font-medium': main.isActive, 'text-gray-600': !main.isActive, 'hover:bg-indigo-50': !filled, 'hover:bg-white text-indigo-200': filled}" class="collapse-title text-left cursor-pointer w-full flex items-center p-2 text-sm rounded-md focus:outline-none">
+
+                            <svg *ngIf="main.icon" class="mx-2 size-5" [attr.fill]="main.icon.fill || 'none'" [attr.viewBox]="main.icon.viewBox || '0 0 24 24'" [attr.stroke-width]="main.icon.strokeWidth || '1.5'" stroke="currentColor" aria-hidden="true">
+                                <path [attr.d]="main.icon.path" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+
+                            <span >{{main.pageName}}</span>
+
+                        </button>
+
+                        <div [ngClass]="{'collapse-content': main.subPages?.length > 0}" class="pl-6">
+                            <a *ngFor="let sub of main.subPages; let i = index" (click)="getPage(sub.page)" [ngClass]="sub.isActive && filled ? 'text-indigo-700' : main.isActive && !sub.isActive  && filled ? 'hover:bg-indigo-50 text-gray-600' : !main.isActive && !sub.isActive  && filled ? 'hover:bg-indigo-700 text-indigo-200' : sub.isActive && !filled ? 'text-indigo-700' : !sub.isActive && !filled ? 'hover:bg-indigo-50 text-gray-600' : '' " class="cursor-pointer group w-full flex items-center justify-start  space-x-1 text-sm rounded-md">
+                               <div class="text-3xl mb-0.5 pl-1">•</div> <div>{{sub.pageName}}</div>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Mobile Side Nav Left (Main Menu)-->
+        <div class="drawer lg:hidden z-50">
+
+            <input id="my-drawer-5" (change)="toggleDrawer($event)" [checked]="isDrawerOpen" type="checkbox" class="drawer-toggle" />
+
+            <div class="drawer-side">
+
+                <label for="my-drawer-5" aria-label="close sidebar" class="drawer-overlay"></label>
+
+                <div class="flex menu bg-base-200 text-base-content lg:fixed min-h-full w-80 lg:w-60 {{filled ? 'bg-indigo-800' : ' bg-gray-50 border-r-2 border-dashed border-gray-200'}}">
+
+                    <!-- Logo and Version -->
+                    <div class="pl-1 lg:pl-0 lg;mb-0 flex items-center space-x-1 justify-between">
+                        
+                        <div class="space-x-2 flex items-center">
+                            <img class="h-4 w-4 lg:h-6 lg:w-6 rounded-full" [src]="filled ? 'logos/logo_plain.png' : 'logos/logo_fill.png'" alt="">
+                            <h1 class="text-xs font-semibold lg:font-bold {{filled ? 'text-white' : 'text-gray-900'}}"><span class="text-[8px] lg:text-xs align-super font-normal">the</span>Shepherd</h1>
+                        </div>
+
+                        <!-- <span class="bg-indigo-100 text-indigo-600 text-xs font-semibold px-2 rounded">v1.1.0</span> -->
+                        
+                        <div class="flex items-center justify-end px-2">
+                            <label type="button" class="swap swap-rotate cursor-pointer relative items-center justify-center {{!filled ? 'hover:bg-indigo-100' : ''}} rounded-xl p-2 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
+
+                                <input type="checkbox" class="theme-controller" [checked]="filled" (change)="uiControls('fill')" />
+
+                                <svg class="swap-off size-5 lg:size-6 {{filled ? 'text-indigo-300 group-hover:text-white' : 'text-indigo-600 group-hover:text-indigo-700'}}" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                                </svg>
+
+                                <svg class="swap-on size-5 lg:size-6 {{filled ? 'text-indigo-300 group-hover:text-white' : 'text-indigo-600 group-hover:text-indigo-700'}}" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                                </svg>
+
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="flex items-center border-b py-2 pb-4 px-1 border-indigo-500 space-x-2">
+
+                        <div class="flex-shrink-0">
+                            <img class="h-8 w-8 rounded-full" [src]="currChurch.logo" alt="churchLogo">
+                        </div>
+
+                        <div class="items-center text-xs">
+                            <div class="font-bold tracking-tight {{filled ? 'text-indigo-100' : 'text-indigo-800'}}"> {{currChurch.name}}</div>
+                            <div class="font-bold tracking-tight {{filled ? 'text-indigo-100' : 'text-indigo-800'}}">({{currChurch.alt_name}} - {{currBranch.name}})</div>
+                        </div>
+
+                    </div>
+
+                    <!-- User Profile -->
+                    <div class="mt-6 mb-4 collapse collapse-arrow {{!filled && activeIndex === 0 ? 'bg-white' : filled && activeIndex === 0 ? 'bg-indigo-100' : activeIndex !== 0 ? 'bg-indigo-60 text-indigo-200' : ''}} rounded-lg shadow-sm border">
+                        <input type="checkbox" [checked]="activeIndex === 0" (change)="toggleMenu(0)" />
+                        <div class="collapse-title flex items-center py-3 pl-2">
+                            <img class="w-10 h-10 rounded-full ml-1" [src]="currUser.photo" alt="photo">
+                            <div class="ml-3 {{activeIndex === 0 ? 'text-indigo-800' : filled ? 'text-white' : 'text-gray-700'}}">
+                                <p class="font-semibold">{{currUser.fullName}}</p>
+                                <p class="text-xs {{activeIndex !== 0 && filled ? 'text-gray-400' : 'text-gray-600'}}">{{currUser.position ?? currUser.email}}</p>
+                            </div>
+                        </div>                        
+                        <div class="collapse-content pl-12">
+                            <a *ngFor="let sub of userMenu; let i = index" (click)="optionSelected(sub); getPage(sub.action)" [ngClass]="sub.isActive ? 'text-indigo-800' :'text-gray-500' " class="cursor-pointer group w-full flex items-center justify-start  space-x-1 text-sm rounded-md"> 
+                                <div class="text-3xl mb-0.5 pl-1">•</div> <div>{{sub.pageName}}</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Nav Links -->
+                    <div [ngClass]="{'rounded-lg shadow my-1': main.isActive, 'collapse-arrow': main.subPages?.length > 0}" class="collapse {{!filled && main.isActive ? 'bg-white' : filled && main.isActive ? 'bg-indigo-100' : 'text-gray-600'}}" *ngFor="let main of menu; let i = index;">
+
+                        <input type="checkbox" [checked]="activeIndex === i+1" (change)="toggleMenu(i+1, main);" />
+
+                        <button type="button" [ngClass]="{'text-indigo-700 font-medium': main.isActive, 'text-gray-600': !main.isActive, 'hover:bg-indigo-50': !filled, 'hover:bg-white text-indigo-200': filled}" class="collapse-title text-left cursor-pointer w-full flex items-center p-2 text-sm rounded-md focus:outline-none">
+
+                            <svg *ngIf="main.icon" class="mx-2 size-5" [attr.fill]="main.icon.fill || 'none'" [attr.viewBox]="main.icon.viewBox || '0 0 24 24'" [attr.stroke-width]="main.icon.strokeWidth || '1.5'" stroke="currentColor" aria-hidden="true">
+                                <path [attr.d]="main.icon.path" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+
+                            <span >{{main.pageName}}</span>
+
+                        </button>
+
+                        <div [ngClass]="{'collapse-content': main.subPages?.length > 0}" class="pl-6">
+                            <a *ngFor="let sub of main.subPages; let i = index" (click)="getPage(sub.page)" [ngClass]="sub.isActive && filled ? 'text-indigo-700' : main.isActive && !sub.isActive  && filled ? 'hover:bg-indigo-50 text-gray-600' : !main.isActive && !sub.isActive  && filled ? 'hover:bg-indigo-700 text-indigo-200' : sub.isActive && !filled ? 'text-indigo-700' : !sub.isActive && !filled ? 'hover:bg-indigo-50 text-gray-600' : '' " class="cursor-pointer group w-full flex items-center justify-start  space-x-1 text-sm rounded-md">
+                               <div class="text-3xl mb-0.5 pl-1">•</div> <div>{{sub.pageName}}</div>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Side Nav Right -->
+        <div class="z-50 drawer drawer-end">
+
+            <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+
+            <div class="drawer-side">
+
+                <label for="my-drawer-4" aria-label="close sidebar"class="drawer-overlay"></label>
+
+                <div class="menu bg-base-200 text-base-content min-h-full w-96 p-4">
+                    <app-chat></app-chat>
+                </div>
+
+            </div>
+
+        </div>        
+        
+        <div class="z-50 drawer drawer-end">
+
+            <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+
+            <div class="drawer-side">
+
+                <label for="my-drawer-3" aria-label="close sidebar"class="drawer-overlay"></label>
+
+
+                <div class="menu bg-base-200 text-base-content min-h-full w-96 p-4">
+                    <app-notifications></app-notifications>
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- Main Page Area -->
+    <main [ngClass]="{'lg:ml-60': isDrawerOpen && navShow}" class="min-h-screen overflow-y-auto bg-gray-50">
+        
+        <div class="text-sm breadcrumbs p-3 lg:px-8 lg:py-3">
+            <ul>
+                <li *ngFor="let breadcrumb of breadcrumbs; let i = index; let last = last">
+                    <a *ngIf="!last" (click)="i > 0 ? getPage(breadcrumb.page): ''" class="text-indigo-700 hover:underline cursor-pointer">
+                        {{ breadcrumb.pageName }}
+                    </a>
+                    <span *ngIf="last" class="{{breadcrumbs?.length < 2 ? 'text-indigo-700 hover:underline cursor-pointer' : 'text-gray-600'}}">{{ breadcrumb.pageName }}</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="max-h-screen overflow-y-auto p-4 pb-48 bg-gray-50 z-0">
+            <router-outlet></router-outlet>
+        </div>
+
+    </main>
+
+</div>

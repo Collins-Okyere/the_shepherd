@@ -1,0 +1,29 @@
+.td-control {
+    @apply px-2 py-2 border
+}
+
+.th-control {
+    @apply px-3 py-2 border border-gray-600 text-center
+}
+
+.allow-breaks {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+::ng-deep .ng-select .ng-select-container,
+::ng-deep .ng-select.ng-select-single .ng-select-container {
+  min-height: 45px;
+}
+
+::ng-deep .ng-select.ng-select-single .ng-select-container {
+  height: 45px !important;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
+}

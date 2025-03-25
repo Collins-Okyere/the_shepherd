@@ -1,0 +1,51 @@
+
+.head {
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.mainhead {
+    border: 2px solid rgb(56, 41, 152);
+    border-collapse: collapse;
+}
+img{
+    height: 400px;
+    width: 400px;
+    margin: 5px;
+}
+.details {
+    text-align: center;
+    width: 60%;
+    padding: 5px;
+}
+.logo {
+    width: 20%;
+    text-align: start;
+}
+.border{
+    border: 0.5px solid rgb(56, 41, 152);
+    text-align: end;
+}
+.padding1{
+    padding: 60px;
+}
+.padding3{
+    padding: 25px;
+}
+.boldColor{
+    font-weight: bold;
+    color: rgb(56, 41, 152);
+}
+.button {
+    font-weight: bold;
+    color: white;
+    background: rgb(56, 41, 152);
+    padding: 12px;
+}
+.main{
+    width: 90%;
+    height: 80%;
+    margin: auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}

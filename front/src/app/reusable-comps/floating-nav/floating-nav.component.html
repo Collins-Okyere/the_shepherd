@@ -1,0 +1,28 @@
+<nav class="sticky mxauto w-full items-center flex justify-between z-30 pr-2 pl-4 lg:px-4 py-2 top-1 shadow-sm rounded-xl bg-indigo-700/10 backdrop-blur-2xl backdrop-saturate-200">
+                
+    <div class="space-x-2 flex">
+        <img class="h-6 w-6 rounded-full" src="favicon.ico" alt="">
+        <h1 class="lg:text-xl font-bold text-gray-900"><span class="text-xs align-super">the</span>Shepherd</h1>
+    </div>
+                
+    <div class="flex justify-end space-x-3">
+                    
+        <div [routerLink]="'/auth/sign_in'" (click)="selected('sign_in');" class="cursor-pointer whitespace-nowrap block px-1.5 lg:px-4 py-2 lg:mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-xs md:text-md {{page == 'sign_in' ? 'text-indigo-700 lg:text-white' : 'hover:text-black text-gray-700'}} lg:px-2">
+            Signin
+        </div>
+
+        <div [routerLink]="'/pages/pricing'" (click)="selected('pricing');" class="cursor-pointer whitespace-nowrap block px-1.5 lg:px-4 py-2 lg:mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-xs md:text-md {{page == 'pricing' ? 'text-indigo-700': page == 'sign_in' ? 'text-gray-300' : 'hover:text-black text-slate-700'}} lg:px-2">
+            Pricing
+        </div>
+
+        <div [routerLink]="'/pages/sign_up'" (click)="selected('sign_up')" class="cursor-pointer whitespace-nowrap block px-1.5 lg:px-4 py-2 lg:mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-xs md:text-md {{page == 'sign_up' ? 'text-indigo-700' : page == 'sign_in' ? 'text-gray-300' : 'hover:text-black text-slate-700'}} lg:px-2">
+            Signup
+        </div>
+
+        <div [routerLink]="'/pages/contact_us'" (click)="selected('contact_us');" class="cursor-pointer whitespace-nowrap hidden lg:block px-1.5 lg:px-4 py-2 lg:mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-xs md:text-md {{page == 'contact_us' ? 'text-indigo-700' : page == 'sign_in' ? 'text-gray-300' : 'hover:text-black text-slate-700'}} lg:px-2">
+            Support
+        </div>
+
+    </div>
+
+</nav>

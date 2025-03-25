@@ -1,0 +1,65 @@
+<div class="min-h-screen h-full m-4 flex flex-col justify-center py-4 lg:py-12 sm:px-6 lg:px-8">
+  
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="space-x-2 flex">
+          <!-- <img class="h-6 w-6 rounded-full" src="favicon.ico" alt=""> -->
+          <h1 class="text-xl font-bold text-indigo-800"><span class="text-xs align-super">the</span>Shepherd</h1>
+      </div> 
+        <h2 class="mt-12 mb-4 text-center text-3xl font-extrabold text-gray-900">Unlock Screen</h2>
+  </div>
+  
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+      <div class="bg-white px-4 py-8 md:p-10 shadow sm:rounded-lg">
+
+        <img class="mx-auto h-16 w-auto rounded-full ring-2 ring-indigo-200"  width=100 height="150" [src]="user.userInfo.photo" alt="image">
+
+        <div class="flex flex-inline mx-auto space-x-1 items-center justify-center my-3">
+            <svg class="h-4 w-4 text-gray-400 mx-1 flex-shrink-0" viewBox="0 0 24 24"><path fill="currentColor" d="M21,11C21,16.55 17.16,21.74 12,23C6.84,21.74 3,16.55 3,11V5L12,1L21,5V11M12,21C15.75,20 19,15.54 19,11.22V6.3L12,3.18L5,6.3V11.22C5,15.54 8.25,20 12,21M14.8,11V9.5C14.8,8.1 13.4,7 12,7C10.6,7 9.2,8.1 9.2,9.5V11C8.6,11 8,11.6 8,12.2V15.7C8,16.4 8.6,17 9.2,17H14.7C15.4,17 16,16.4 16,15.8V12.3C16,11.6 15.4,11 14.8,11M13.5,11H10.5V9.5C10.5,8.7 11.2,8.2 12,8.2C12.8,8.2 13.5,8.7 13.5,9.5V11Z" /></svg>
+            <p class="text-sm xl:text-md flex flex-col md:flex text-gray-400">
+                <span>Hello {{user.userInfo.first_name}}! Enter password to unlock.</span>
+            </p>
+        </div>
+
+        <div class="mt-6 space-y-6 pt-6 px-3 md:px-0">
+            
+          <div class="space-y-1">
+            <label for="password" class="block text-sm font-medium text-gray-700"> Password </label>
+            <div class="mt-1">
+                <input id="password" name="password" type="password" autocomplete="current-password" required [(ngModel)]="user.password" [ngClass]="{ 'ring-red-500 border-red-500': status == 'danger', 'ring-yellow-500 border-yellow-500': !user.password &&  status == 'warning', 'ring-indigo-500': status != 'danger' && status != 'warning' }" class="appearance-none block w-full px-3 py-2 border border-gray-300 focus:border-indigo-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none sm:text-sm">
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+              
+            <div class="flex items-center">
+              <input id="remember-me" name="remember-me" type="checkbox" [checked]="rememberUser" (change)="toggleRememberMe()" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+              <label for="remember-me" class="ml-2 block text-sm text-gray-900"> Remember me </label>
+            </div>
+
+            <div class="text-sm">
+                <a (click)="forgotPassword()" class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
+            </div>
+      
+          </div>
+  
+          <div>
+            <button (click)="unlock(user.password)" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Unlock</button>
+          </div>
+
+        </div>
+  
+        <div class="mt-6">
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span (click)="signOut()" class="px-2 bg-white text-gray-500 cursor:pointer"> Or <span class="text-indigo-500 hover:underline">Sign out</span> </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+  
+</div>

@@ -1,0 +1,73 @@
+<!-- <div class="center pt-32">
+    <button (click)="generatePDF('a4', 'landscape')" type="button" class="button">
+      <span>Click To Generate PDF</span>
+    </button>
+</div> -->
+
+
+<div class="container {{bgTheme}}" id="cert">
+
+  <div class="border">
+    <div class="border m-4">
+
+      <div class="white watermarked">
+
+        <div class="flex justify-between p-4">
+          <img class="m-2 w-auto h-28 rounded-full" src="logos/rehoboth.jpeg">
+          <div class="font-bold pt-8 text-3xl {{textTheme}}">RESCUE WORLD CHAPEL INTERNATIONAL (RWCI)</div>
+          <img class="p-2 h-36 w-36" src="assets/pneuma/images/seal2.png">
+        </div>
+
+        <div class="cursive center">
+          <h1 class="font-bold text-gray-900">Membership Certificate</h1>
+        </div>
+
+        <div class="marg">
+
+          <div class="center">
+            <span class=" text-gray-900">This is to certify that</span>
+          </div>
+
+          <div class="text-underline center">
+            <h1 class="font-bold {{textTheme}}">{{member.last_name}} {{member.other_names}} {{member.first_name}}</h1>
+          </div>
+
+          <div class="center">
+            <span>is a fully recognised and registered member of <span class="bold">RWCI</span></span>
+          </div>
+
+        </div>
+
+        <div class="flex justify-between items-end p-4">
+
+          <div class="pb-4">
+            <div class="text-underline center">
+              <img class="sign" src="../assets/pneuma/images/signature.png">
+            </div>
+            <div class="center">
+              <span class="cursive bold {{textTheme}}">General Overseer</span>
+            </div>
+          </div>
+
+          <div class="pb-4 flex flex-col justify-center">
+            <img class="qrcode" src="../assets/pneuma/images/qrcode.png">
+            <div>CERT. NO.: <span class="bold">1124ED2</span></div>
+          </div>
+
+          <div class="pb-4">
+            <div class="text-underline center">
+              <img class="sign" src="../assets/pneuma/images/signature.png">
+            </div>
+            <div class="center">
+              <span class="cursive bold {{textTheme}}">Branch Pastor</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

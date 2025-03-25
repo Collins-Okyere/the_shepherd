@@ -1,0 +1,15 @@
+<ul class="absolute border-2 border-gray-400 overflow-y-auto h-60 right-0 mt-11 py-2 w-48 bg-white rounded-md shadow-xl z-20" id="slim-scroll" [ngClass]="{'left-1': downloadData.mainDownload}">
+
+    <li *ngFor="let menuLink of downloadData.menuLinks" (click)="callComponentFnc()" class="px-2 py-2 h-12 border-b border-b-gray-400 flex items-center text-gray-700
+         hover:bg-blue-500 hover:text-white">
+        <i class="fa-solid fa-lg ml-1" [ngClass]="menuLink.icon"></i>
+        <span class="ml-5 text-sm font-bold">{{menuLink.title}}</span>
+    </li>
+
+    <li *ngFor="let fileLink of downloadLinks" (click)="downloadFile({o: fileLink.o, ps: fileLink.name })" class="px-2 py-2 h-12 border-b border-b-gray-400 flex items-center text-gray-700
+         hover:bg-blue-500 hover:text-white">
+        <img *ngIf="fileLink.icon" class="h-8 p-1" src="/assets/images/{{fileLink.icon}}" alt="">
+        <span class="ml-3 text-sm font-bold">{{fileLink.title}}</span>
+    </li>
+
+</ul>

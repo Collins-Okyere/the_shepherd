@@ -1,0 +1,528 @@
+<!-- <div *ngIf="chatHead" class=" cursor-pointer {{slideOver ? 'pt-16' :''}}"> -->
+
+
+<div class="bg-white">
+
+    <div *ngIf="chatHead" class="cursor-pointer">
+
+        <div class="px-6 pt-4 lg:pt-8 border-b border-gray-200">
+            <nav class="-mb-px flex space-x-6"><a (click)="slideNav('unread_msgs')" [ngClass]="switchNav === 'unread_msgs' ? 'border-indigo-500 text-indigo-600' : 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300 '" class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm flex"> Unread <span class="nline-flex ml-1">Messages</span></a>
+                <a (click)="slideNav('all_msgs')" [ngClass]="switchNav === 'all_msgs' ? 'border-indigo-500 text-indigo-600' : 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300 '" class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm flex"> All <span class="inline-flex ml-1">Messages</span></a>
+                <a (click)="slideNav('contacts')" [ngClass]="switchNav === 'contacts' ? 'border-indigo-500 text-indigo-600' : 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300 '" class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm flex"> Contacts</a>
+            </nav>
+        </div>
+    
+        <!-- Searchbox -->
+        <div class="relative m-2 py-2">
+            <div class="relative flex items-center text-gray-400 focus-within:text-indigo-400">
+                <span class="absolute left-4 flex h-6 items-center border-r border-gray-300 pr-3">
+                    <svg xmlns="http://ww50w3.org/2000/svg" class="w-4 fill-current" viewBox="0 0 35.997 36.004">
+                        <path data-name="search" d="M35.508,31.127l-7.01-7.01a1.686,1.686,0,0,0-1.2-.492H26.156a14.618,14.618,0,1,0-2.531,2.531V27.3a1.686,1.686,0,0,0,.492,1.2l7.01,7.01a1.681,1.681,0,0,0,2.384,0l1.99-1.99a1.7,1.7,0,0,0,.007-2.391Zm-20.883-7.5a9,9,0,1,1,9-9A8.995,8.995,0,0,1,14.625,23.625Z"></path>
+                    </svg>
+                </span>
+                <input type="search" name="leadingIcon" placeholder="Search here" class="outline-none w-full rounded-xl border border-gray-300 py-2.5 pl-14 pr-4 text-sm text-gray-600 transition focus:border-indigo-300" />
+            </div>
+        </div>
+    
+    </div>
+
+    <!-- Chats List Page -->
+    <div *ngIf="switchNav === 'unread_msgs' || switchNav === 'all_msgs'">
+        <ul role="list" *ngIf="chatList" class="lg:px-1 bg-white flex-1 divide-y divide-gray-200 overflow-y-auto cursor-pointer border-t border-gray-100" id="slim-scroll">
+
+            <li class="border-b border-gray-100" (click)="chatShow = true; chatHead = false; chatList = false;">
+                <div class="group relative flex items-center p-5">
+
+                    <a class="-m-1 block flex-1 p-1">
+
+                        <div class="absolute inset-0 bg-gray-50 group-hover:bg-indigo-50" aria-hidden="true"></div>
+
+                        <div class="relative flex min-w-0 flex-1 items-center">
+
+                            <span class="relative inline-block flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" src="avatars/avatar_male.pngg" alt="profilPic" />
+                                <span *ngIf="unread" class="bg-indigo-600 absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white" aria-hidden="true"></span>
+                            </span>
+
+                            <div class="ml-4 truncate">
+                                <p [ngClass]="unread ? 'font-semibold text-indigo-700' : 'font-medium text-gray-900'" class="truncate text-sm">Michael</p>
+                                <p class="truncate text-sm text-gray-500">Hey, how're you?</p>
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                    <div class="relative ml-2 inline-block flex-shrink-0 text-left">
+                        <p [ngClass]="unread ? 'font-medium text-indigo-600' : 'text-gray-600 mt-4'" class="truncate text-sm">4:46pm</p>
+                    </div>
+
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <!-- Contact List Page -->
+    <div *ngIf="switchNav === 'contacts'">
+
+        <!-- contact list -->
+        <ul *ngIf="contactList" role="list" class="lg:px-1 flex-1 divide-y divide-gray-200 overflow-y-auto border-t border-gray-100 pb-20" id="slim-scroll">
+
+
+            <li class="border-b border-gray-100">
+                <div class="relative flex items-center p-6 cursor-pointer">
+
+                    <a class="-m-1 block flex-1 p-1 group">
+                        <div class="absolute inset-0 group-hover:bg-indigo-100 bg-gray-50" aria-hidden="true"></div>
+                        <div class="relative flex min-w-0 flex-1 items-center">
+                        <span class="relative inline-block flex-shrink-0">
+                            <img class="h-10 w-10 rounded-full" src="avatars/avatar_male.pngg" alt="profilPic" />
+                            <span class="bg-red-500 absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white" aria-hidden="true"></span>
+                        </span>
+                        <div class="ml-4 truncate">
+                            <p class="truncate text-sm font-medium text-gray-900"> Collins Okyere </p>
+                            <p class="truncate text-sm text-gray-500"> &#64;CollinsOkyere </p>
+                        </div>
+                        </div>
+                    </a>
+
+                    <div class="relative ml-2 inline-block flex-shrink-0 text-left">
+
+                        <button type="button" class="group relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
+                            <span class="flex h-full w-full items-center justify-center rounded-full">
+                                <svg class="h-5 w-5 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                                </svg>
+                            </span>
+
+                            <div class="hidden group-focus:block cursor-pointer absolute top-6 right-10 z-20 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0-button">
+                                <div class="py-1" role="none">
+                                    <a (click)="viewProfile()" class="hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm text-left" role="menuitem">
+                                        View profile
+                                    </a>
+                                    <a class="hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm text-left" role="menuitem" tabindex="-1" id="options-menu-0-item-1">
+                                        Mark as read
+                                    </a>
+                                    <a (click)="messageView()" class="hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm text-left" role="menuitem">
+                                        Send Message
+                                    </a>
+                                </div>
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                </div>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- Messaging Area-->
+    <div class="mx-auto z-50 bg-white" *ngIf="chatShow" aria-labelledby="notes-title">
+
+        <div class="sm:overflow-hidden z-50">
+
+            <!-- Chat Header -->
+            <div class="w-full fixed top-0 lg:absolute flex bg-indigo-700 items-center border-b border-gray-200 px-1 py-2 z-30">
+                <a class="-m-1 flex items-center flex-1 p-2">
+                    <div class="relative flex min-w-0 flex-1 items-center space-x-4 text-white">
+                        <button (click)="chatBackTab()" class="relative group space-x-1 items-center justify-between flex flex-row flex-shrink-0 hover:bg-indigo-500 focus:bg-indigo-100 p-1 hover:rounded-2xl focus:rounded-2xl">
+                            <svg class="rounded-md flex text-white focus:ring-2 focus:ring-indigo-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+                            </svg>
+                            <img class="h-10 w-10 rounded-full flex" src="avatars/avatar_male.pngg">
+                        </button>
+                        <div class="truncate cursor-pointer" (click)="viewProfile()">
+                            <p class="truncate text-lg hover:font-semibold font-medium text-white hover:underline hover:undertext-white">Michael</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Main Chat Area  -->
+            <!-- <div class="p-4 {{slideOver ?  'pt-16 lg:pt-20' : 'pt-4'}} lg:pt-6 pb-24 overflow-y-scroll bg-white" id="slim-scroll"> -->
+                <div class="p-4 pt-16 lg:pt-20 pb-24 overflow-y-scroll bg-white" id="slim-scroll">
+                    <div>
+
+                    <!-- a loop of messages per day -->
+                    <ul role="list" class="space-y-3">
+
+                        <!-- Message date -->
+                        <div class="sticky flex items-center justify-center text-center pt-4 lg:mt-12">
+                            <span align="center" class="text-sm bg-indigo-50 w-fit font-semibold text-indigo-700 p-2 flex my-2 rounded-full">
+                                12/10/2023
+                            </span>
+                        </div>
+
+                        <!-- Messages for current date below -->
+
+                        <!-- Incoming message -->
+                        <li style="float: left" class="w-3/4 border border-gray-200 bg-yellow-50 shadow rounded-b-2xl rounded-tr-2xl">
+                            <div class="flex space-x-3 p-2">
+                                <div class="flex-shrink-0">
+                                    <img class="h-10 w-10 rounded-full" src="avatars/avatar_male.pngg">
+                                </div>
+                                <div>
+                                    <div class="text-sm">
+                                        <a (click)="viewProfile()" class="font-medium text-indigo-800 hover:underline cursor-pointer">Michael</a>
+                                    </div>
+                                    <div class="mt-1 text-sm text-gray-700">
+                                        <p>Hey! What's up?</p>
+                                    </div>
+                                    <div class="mt-2 space-x-2 text-right">
+                                        <span class="text-gray-500 font-sm text-xs">4d ago</span>
+                                        <span class="text-gray-500 font-medium">&middot;</span>
+                                        <button type="button" class="text-gray-900 cursor-pointer font-medium text-xs hover:underline hover:text-indigo-700 mr-2" (click)="replyChat()">Reply</button>
+                                        <button type="button" class="text-gray-900 cursor-pointer font-medium text-xs hover:underline hover:text-indigo-700" (click)="forwardChat()">Forward</button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center absolute right-12" *ngIf="forwardBox && !replyBox">
+                                    <input type="checkbox" checked class="rounded-lg focus:ring-indigo-500 h-4 w-4 text-indigo-600 cursor-pointer border-indigo-300">
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Outgoing message -->
+                        <li style="float: right" class="w-3/4 border border-gray-200 bg-green-50 shadow rounded-t-2xl rounded-bl-2xl">
+                            <div class="flex space-x-3 p-2">
+                                <div class="flex-shrink-0">
+                                    <img class="h-10 w-10 rounded-full" src="avatars/avatar_male.pngg" alt="">
+                                </div>
+                                <div>
+                                    <div class="text-sm">
+                                        <a class="font-medium text-green-800">You</a>
+                                    </div>
+                                    <div class="mt-1 text-sm text-gray-700">
+                                        <p>Hi. I'm good. You?</p>
+                                    </div>
+                                    <div class="mt-2 space-x-2 text-right">
+                                        <span class="text-gray-500 font-sm text-xs">5:33pm</span>
+                                        <span class="text-gray-500 font-medium">&middot;</span>
+                                        <button type="button" class="text-gray-900 cursor-pointer font-medium text-xs hover:underline hover:text-indigo-700 mr-2" (click)="replyChat()">Reply</button>
+                                        <button type="button" class="text-gray-900 cursor-pointer font-medium text-xs hover:underline hover:text-indigo-700" (click)="forwardChat()">Forward</button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center absolute right-12" *ngIf="forwardBox && !replyBox">
+                                    <input type="checkbox" checked class="rounded-lg focus:ring-indigo-500 h-4 w-4 text-indigo-600 cursor-pointer border-indigo-300">
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+
+            <!-- If reply -->
+            <div class="w-full bg-blue-100 bottom-20 pb-6 absolute rounded-t-3xl" *ngIf="replyBox && !forwardBox">
+                <div class="p-4 lg:py-2">
+                    <div class="flex items-center justify-start lg:pr-12">
+                        <div class="flex items-center">
+                            <button (click)="replyBox = false;" type="button" class="rounded-md bg-none text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-300 mx-2">
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="flex items-center my-0.5">
+                            <a class="font-sm text-xs text-indigo-900 italic mx-1">Replying to Collins...</a>
+                        </p>
+                    </div>
+                    <div class="mb-0.5 lg:mb-0 text-sm text-gray-700 bg-blue-50 rounded-md">
+                        <p class="py-2 m-2 lg:mr-0 lg:pr-16">Hi. I'm good. You?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- If forward -->
+            <div class="w-full bg-blue-100 bottom-20 absolute rounded-t-3xl" *ngIf="!replyBox && forwardBox">
+                <div class="p-4">
+                    <div class="flex items-center justify-between lg:pr-12">
+                        <p class="flex items-center my-1">
+                            <a class="font-semibold text-md text-indigo-900 italic mx-1">Forward Message to</a>
+                        </p>
+                        <div class="flex items-center">
+                            <button (click)="replyBox = forwardBox = false" type="button" class="rounded-md bg-none text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-300 mx-2">
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            <button (click)="pushForward = true" type="button" class="rounded-md  font-xtrabold bg-none text-indigo-700 hover:text-indigo-900 mx-2">
+                                <svg class="h-6 w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forwarding Contact List popup -->
+            <div *ngIf="pushForward" class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+
+                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                    <div class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+
+                        <div>
+
+                            <div>
+                                <h1 class="font-semibold tracking-tight text-indigo-900 px-4">Forward To</h1>
+                            </div>
+
+                            <!-- Searchbox -->
+                            <div class="relative m-2">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <input name="search" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-400 focus:border-indigo-400 sm:text-sm" placeholder="Search" type="search">
+                            </div>
+
+                            <!-- Contact List -->
+                            <ul role="list" class="flex-1 h-80 divide-y divide-gray-200 overflow-y-auto border-t border-gray-100 pb-20" id="slim-scroll">
+                                <li>
+                                    <div class="cursor-pointer group relative flex items-center py-3 px-5">
+                                        <a class="-m-1 block flex-1 p-1">
+                                            <div class="absolute inset-0 group-hover:bg-gray-50 group-focus:bg-gray-5" aria-hidden="true"></div>
+                                            <div class="relative flex min-w-0 flex-1 items-center">
+                                                <span class="relative inline-block flex-shrink-0">
+                                                    <img class="h-10 w-10 rounded-full" src="avatars/avatar_male.pngg" alt="">
+                                                </span>
+                                                <div class="ml-4 truncate">
+                                                    <p class="truncate text-sm font-medium text-gray-900">Michael Osei</p>
+                                                    <p class="truncate text-sm text-gray-500">Teacher: Basic 4</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="relative ml-2 inline-block flex-shrink-0 text-left">
+                                            <div class="flex items-center justify-center">
+                                                <input type="checkbox" class="rounded-lg focus:ring-indigo-500 h-4 w-4 text-indigo-600 cursor-pointer border-indigo-300">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="mt-2 grid grid-cols-2 gap-3 grid-flow-row-dense border-t border-gray-100 pt-2">
+                            <button (click)="sendMessage()" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 col-start-2 text-sm">Send Message(s)</button>
+                            <button (click)="pushForward = false" type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-red-500 font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-0 col-start-1 text-sm">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- desktop textbox -->
+            <div class="bg-gray-100 p-4 pr-8 w-full bottom-0 lg:block absolute hidden">
+                <div class="flex space-x-6">
+                    <div class="min-w-0 flex-1">
+                        <div class="items-center justify-left flex flex-inline">
+                            <textarea id="message" name="message" rows="3" class="w-3/4 inline-block shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md p-2" placeholder="Type your message"></textarea>
+                            <button (click)="sendMessage()" type="submit" class="inline-block items-center justify-center mx-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- mobile textbox-->
+            <div class="bg-gray-100 p-2 w-full bottom-0 fixed lg:hidden">
+                <div class="flex {{slide ? 'ml-1 mr-10' : ''}}">
+                    <div class="min-w-0 flex-1">
+                        <div class="items-center justify-between flex flex-inline space-x-3">
+                            <textarea id="message" name="message" rows="2" class="w-4/5 inline-block shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md p-2" placeholder="Type your message"></textarea>
+                            <button (click)="sendMessage()" type="submit" class="inline-block items-center justify-center mx-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Profile Page -->
+    <!-- <div *ngIf="chatProfile" class="flex h-full flex-col bg-white {{slideOver ? 'pt-12' : ''}} lg:pt-0 mb-12"> -->
+        <div *ngIf="chatProfile" class="flex h-full flex-col bg-white pt-12 lg:pt-0 mb-12">
+
+        <!-- Desktop back Button -->
+        <!-- <div class="absolute {{slideOver ? 'pt-4 lg:pt-12' : ''}}"> -->
+            <div class="absolute pt-4 lg:pt-12">
+                <div class="flex items-center justify-between text-white">
+                <button (click)="profileBackTab()" class="relative group space-x-1 items-center justify-between flex flex-row flex-shrink-0 transparent px-1 hover:rounded-2xl focus:rounded-2xl">
+                    <svg class="rounded-md flex text-white focus:ring-2 focus:ring-indigo-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+                    </svg>
+                    <h2 class="text-lg flex text-white font-bold px-1 pb-1.5" id="slide-over-title">Back</h2>
+                </button>
+            </div>
+        </div>
+        
+        <div class="flex h-full flex-col">
+
+            <!-- Upper Section & tabs -->
+            <div class="divide-y divide-gray-200">
+                <div class="pb-6">
+
+                    <!-- Profile header -->
+                    <div class="bg-white">
+
+                        <!-- Header image -->
+                        <img class="cursor-pointer h-48 w-full object-cover" src="assets/logos/adesualogo.jpeg" alt="">
+
+                        <!-- image & summary details section -->
+                        <div class="max-w-5xl mx-auto px-4 md:mt-12 lg:mt-0">
+
+                            <div class="-mt-16 sm:-mt-24 lg:-mt-16 sm:flex sm:items-end sm:space-x-5">
+
+                                <!-- Header & image -->
+                                <div>
+                                    <div class="-m-1 flex">
+
+                                        <!-- Image (replaceable) -->
+                                        <label class="group inline-flex overflow-hidden rounded-full border-4 border-white bg-white" id="slim-scroll">
+                                            <!-- <input type="file" style="display:none"> -->
+                                            <img class="cursor-pointer h-24 w-24 flex-shrink-0 sm:h-32 sm:w-32" src="avatars/avatar_male.pngg"   alt="">
+                                        </label>
+
+                                        <!-- Mobile Name -->
+                                        <div class="md:hidden min-w-0 inline-flex pt-6 mt-2">
+                                            <h1 class="text-xl px-4 pt-6 font-bold text-gray-700 truncate">
+                                                Collins Okyere
+                                            </h1>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Desktop ame & position etc -->
+                                <div class="mt-2 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 md:space-x-2 lg:space-x-6 sm:pb-1">
+                                    <div class="hidden md:block min-w-0 flex-1">
+                                        <h1 class="text-2xl font-bold text-gray-900 truncate">
+                                            Collins Okyere Agyei
+                                        </h1>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <!-- Department & Position -->
+                            <div class="flex flex-col mt-4 min-w-0 flex-1">
+                                
+                                <div class="flex flex-col sm:ml-0 sm:mt-1 sm:flex-row sm:flex-wrap">
+
+                                    <dd class="cursor-pointer flex items-center text-sm text-gray-500 font-medium capitalize sm:mr-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 mr-1.5 h-5 w-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                                        </svg> Junior High school (JHS) Department
+                                    </dd>
+
+                                    <dd class="cursor-pointer mt-3 lg:mt-0 flex items-center text-sm text-gray-500 font-medium sm:mr-6 sm:mt-0 capitalize">
+                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg> Teacher
+                                    </dd>
+
+                                </div>
+
+                                <!-- Other Action Buttons -->
+                                <div class="my-4 space-y-3 sm:flex-row sm:space-y-0 space-x-1 lg:space-x-4">
+
+                                    <button (click)="profileBackTab()" type="button" class="cursor-pointer inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500">
+                                        <svg class="text-white -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                        </svg>
+                                        <span>Message</span>
+                                    </button>
+
+                                </div>
+
+                            </div>
+                            
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Main Tabs -->
+                    <div class="border-b border-gray-200 pt-6 lg:pt-8 sm:mx-4">
+                        <div class="px-6">
+                            <nav class="-mb-px flex space-x-8 lg:space-x-12">
+
+                                <a (click)="userProfileTab = 1" [ngClass]="userProfileTab == 1 ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500'" class="cursor-pointer lg:hover:text-gray-700 lg:hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Personal Info</a>
+
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Basic Info Page -->
+            <div *ngIf="userProfileTab == 1" class="grid gap-x-8 gap-y-6 lg:gap-10 grid-cols-2 px-6 md:px-12 lg:px-16 pb-24">
+
+                <div class="col-span-1">
+                    <dt class="text-sm font-medium text-indigo-800"> First Name </dt>
+                    <dd class="mt-1 text-sm text-gray-900"> Collins </dd>
+                </div>
+
+                <div class="col-span-1">
+                    <dt class="text-sm font-medium text-indigo-800"> Last Name </dt>
+                    <dd class="mt-1 text-sm text-gray-900"> Okyere </dd>
+                </div>
+
+                <div class="col-span-1">
+                    <dt class="text-sm font-medium text-indigo-800"> Other Name(s) </dt>
+                    <dd class="mt-1 text-sm text-gray-900"> Agyei </dd>
+                </div>
+
+                <div class="col-span-1">
+                    <dt class="text-sm font-medium text-indigo-800"> Gender </dt>
+                    <dd class="mt-1 text-sm text-gray-900"> Male </dd>
+                </div>
+
+                <div class="col-span-1">
+                    <dt class="text-sm font-medium text-indigo-800"> Date Of birth </dt>
+                    <dd class="mt-1 text-sm text-gray-900"> June 23, 1990 </dd>
+                </div>
+
+                <div class="col-span-1">
+                    <dt class="text-sm font-medium text-indigo-800"> Phone </dt>
+                    <dd class="mt-1 text-sm text-gray-900"> 024-236-5698 </dd>
+                </div>
+
+                <div class="col-span-1">
+                    <dt class="text-sm font-medium text-indigo-800"> Email </dt>
+                    <dd class="mt-1 text-sm text-gray-900"> prince2023&#64;yahoo.com </dd>
+                </div>
+
+                <div class="col-span-1">
+                    <dt class="text-sm font-medium text-indigo-800"> Residencial Address </dt>
+                    <dd class="mt-1 text-sm text-gray-900"> Block 123, 244 Gbawe road. </dd>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>

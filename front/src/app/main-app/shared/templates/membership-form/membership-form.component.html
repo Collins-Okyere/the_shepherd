@@ -1,0 +1,211 @@
+<div class="center mt-28">
+    <button (click)="generatePDF('a4', 'portrait')" type="button" class="button">
+      <span>Click To Generate PDF</span>
+    </button>
+  </div>
+  
+  <div class="main padding1" id="membership_form">
+    <div class="mainhead padding3">
+  
+  
+        <!-- TOP DETAILS -->
+        <table class="head">
+                <tr>
+  
+                    <td class="logo"><img src="logos/rehoboth.jpeg"></td>
+                    
+                    <td class="details">
+                        <div class=" mb-8">
+                            <h1 class="boldColor">RESCUE WORLD CHAPEL INTERNATIONAL (RWCI)</h1>
+                            <p class="boldColor mb-8">(THE REHOBOTH ARENA)</p>                         
+                            <p><span class="font-bold">LOC:</span> MENDSKROM, ADJACENT REGENT UNIVERSITY.</p>
+                            <p><span class="font-bold">TEL:</span> 0543455867 / 0246426466</p>
+                            <p><span class="font-bold">EMAIL:</span> RWCI_REHOBOTHARENA&#64;GMAIL.COM</p>
+                        </div>
+
+                        <h2 class="font-bold" style="text-decoration: underline">MEMBERSHIP FORM</h2>
+  
+                    </td>
+  
+                    <td>
+                        <img class="img border" src="avatars/avatar_male.png">
+                        <span class="mx-auto justify-center flex text-xs text-gray-400">(Member's Passport Photo)</span>
+                    </td>
+                
+                </tr>
+        </table>
+        
+        <div id="full_form" class="w-full px-4 pt-12 pb-24 border-t border-indigo-700">
+
+      
+              <div class="p-6 grid grid-cols-3 col-span-2 mb-4 gap-6">
+                
+                <p class="font-semibold text-lg leading-5 text-indigo-700 col-span-3 mt-4">Personal Information:</p>
+      
+                  <div class="col-span-1">
+                    <label for="first_name" class="flex text-md font-medium text-gray-900 justify-between">First Name </label>
+                    <div class="mt-3">
+                        <input type="text" name="first_name" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                    </div>
+                  </div>
+      
+                  <div class="col-span-1">
+                    <label for="last_name" class="flex text-md font-medium text-gray-900 justify-between">Last Name  </label>
+                    <div class="mt-3">
+                        <input type="text" name="last_name" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                    </div>
+                  </div>
+      
+                  <div class="col-span-1">
+                    <label for="other_names" class="flex textmdm font-medium text-gray-900 justify-between">Other Names <span class="mx-1 text-sm text-gray-400">(If Apllicable)</span> </label>
+                    <div class="mt-3">
+                        <input type="text" name="other_names" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                    </div>
+                  </div> 
+      
+                  <div class="col-span-1">
+                      <span for="gender" class="flex text-md font-medium text-gray-900 justify-between">Gender </span>
+                    <div class="mt-3">
+                      <input type="text" name="gender" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                    </div>
+                  </div>
+
+      
+                  <div class="col-span-1">
+                    <label for="birth_date" class="flex text-md font-medium text-gray-900 justify-between">Date of Birth </label>
+                      <div class="mt-3">
+                        <input type="text" name="birth_date" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                      </div>
+                    </div>
+
+                    <div class="col-span-1">
+                        <span for="title" class="flex text-md font-medium text-gray-900 justify-between">Title <span class="mx-1 text-sm text-gray-400">(If Apllicable)</span></span>
+                        <div class="mt-3">
+                            <input type="text" name="title" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                        </div>
+                    </div>   
+      
+              </div>
+      
+              <div class="p-6 grid grid-cols-3 col-span-2 mb-4 gap-x-6 gap-y-8 border-indigo-100 border-t">
+                
+                <p class="font-semibold text-lg leading-5 text-indigo-700 col-span-3 mt-6">Contact Information:</p>
+      
+                <div class="col-span-1">
+                    <label for="phone1" class="flex text-md font-medium text-gray-900 justify-between">  Phone Number 1 </label>
+                  <div class="mt-3">
+                    <input type="text" name="phone1" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                  </div>
+                </div>
+      
+                <div class="col-span-1">
+                    <label for="phone2" class="flex text-md font-medium text-gray-900 justify-between">  Phone Number 2  <span class="mx-1 text-sm text-gray-400">(If Apllicable)</span> </label>
+                  <div class="mt-3">
+                    <input type="text" name="phone2" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                  </div>
+                </div>
+      
+                <div class="col-span-1">
+                  <label for="email" class="flex text-md font-medium text-gray-900 justify-between">Email  <span class="mx-1 text-sm text-gray-400">(If Apllicable)</span> </label>
+                  <div class="mt-3">
+                    <input type="text" name="email" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                  </div>
+                </div>
+      
+              </div>
+      
+              <div class="p-6 grid grid-cols-3 col-span-2 mb-4 gap-x-6 gap-y-8 border-indigo-100 border-t">
+                
+                <p class="font-semibold text-lg leading-5 text-indigo-700 col-span-3 mt-6">Membership Information:</p>
+      
+                <div class="col-span-1">
+                  <label for="join_date" class="flex text-md font-medium text-gray-900 justify-between">Join Date  <span class="mx-1 text-sm text-gray-400">(DD/MM/YYY)</span> </label>
+                  <div class="mt-3">
+                    <input type="text" name="join_date" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                  </div>
+                </div>
+      
+                <div class="col-span-1">
+                  <span for="baptism_status" class="flex text-md font-medium text-gray-900 justify-between">Baptismal Status <span class="mx-1 text-sm text-gray-400">(Baptised / Not baptised)</span> </span>
+                  <div class="mt-3">
+                    <input type="text" name="baptism_status" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                  </div>
+                </div>
+      
+                <div class="col-span-1">
+                  <span for="invited_by" class="flex text-md font-medium text-gray-900 justify-between">Invited By  <span class="mx-1 text-sm text-gray-400">(Name Of Person If Applicable)</span> </span>
+                  <div class="mt-3">
+                    <input type="text" name="invited_by" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                  </div>
+                </div>
+      
+                <div class="col-span-2">
+                  <span for="siblings" class="flex text-md font-medium text-gray-900 justify-between">Siblings <span class="mx-1 text-sm text-gray-400">(List Relatives In Church If Applicable)</span> </span>
+                  <div class="mt-3">
+                    <textarea type="text" rows="2" name="siblings" class="min-w-0 w-full border rounded p-4 border-indigo-700"></textarea>
+                  </div>
+                </div>
+      
+                <div class="col-span-1">
+                  <span for="siblings" class="flex text-md font-medium text-gray-900 justify-between"> Ministry of Interest <span class="mx-1 text-sm text-gray-400">(Eg. Choir, Ushers etc.)</span> </span>
+                  <div class="mt-3">
+                    <textarea type="text" rows="2" name="siblings" class="min-w-0 w-full border rounded p-4 border-indigo-700"></textarea>
+                  </div>
+                </div>
+      
+            </div>
+
+              <div class="p-6 grid grid-cols-3 col-span-2 mb-4 gap-x-6 gap-y-8 border-indigo-100 border-t">
+                
+                <div class="flex text-md leading-5 text-indigo-700 col-span-2 lg:col-span-3 mt-6">Other Information:</div>  
+      
+                <div class="col-span-1">
+                  <span for="nationality" class="flex text-md font-medium text-gray-900 justify-between">Nationality </span>
+                  <div class="mt-3">
+                    <input type="text" name="nationality" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                  </div>
+                </div>
+      
+                <div class="col-span-1">
+                  <span for="age_group" class="flex text-md font-medium text-gray-900 justify-between">Age Group <span class="mx-1 text-sm text-gray-400">(Eg. Adult, Youth, Child etc.)</span> </span>
+                  <div class="mt-3">
+                    <input type="text" name="age_group" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                  </div>
+                </div>          
+      
+                <div class="col-span-1">
+                  <span for="marital_status" class="flex text-md font-medium text-gray-900 justify-between">Marital Status <span class="mx-1 text-sm text-gray-400">(If Apllicable)</span></span>
+                  <div class="mt-3">
+                    <input type="text" name="marital_status" class="min-w-0 w-full border rounded p-4 border-indigo-700">          
+                  </div>
+                </div>
+      
+                <div class="col-span-1">
+                  <span for="edu_level" class="flex text-md font-medium text-gray-900 justify-between">Highest Educational Level </span>
+                  <div class="mt-3">
+                    <textarea type="text" rows="2" name="edu_level" class="min-w-0 w-full border rounded p-4 border-indigo-700"></textarea>
+                  </div>
+                </div>
+      
+                <div class="col-span-1">
+                  <label for="resid_address" class="flex text-md font-medium text-gray-900 justify-between">Residential Address </label>
+                  <div class="mt-3">
+                    <textarea type="text" rows="2" name="resid_address" class="min-w-0 w-full border rounded p-4 border-indigo-700"></textarea>
+                  </div>
+                </div>
+                
+                <div class="col-span-1">
+                  <label for="notes" class="flex text-md font-medium text-gray-900 justify-between">Notes <span class="mx-1 text-sm text-gray-400">(If Apllicable)</span></label>
+                  <div class="mt-3">
+                    <textarea type="text" rows="2" name="notes" class="min-w-0 w-full border rounded p-4 border-indigo-700"></textarea>
+                  </div>
+                </div>
+      
+                </div>
+                
+            
+          </div>
+  
+  
+    </div>
+  </div>

@@ -1,0 +1,62 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div>
+
+  <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]" aria-hidden="true">
+    <div class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+  </div>
+  
+    <div class="max-w-7xl mx-auto pt-12 py-24 lg:pt-24 px-4 sm:px-6 lg:px-8">
+
+      <div class="sm:flex sm:flex-col sm:align-center">
+        
+        <h1 class="text-4xl lg:text-5xl font-extrabold text-indigo-800 sm:text-center">Pricing Plans</h1>
+        <p class="mt-5 text-sm lg:text-lg text-gray-500 sm:text-center">Start for free, then add a plan to unlock additional features.</p>
+        
+        <div class="relative self-center mt-6 bg-gray-200 rounded-lg p-0.5 flex sm:mt-8">
+          <button (click)="switch('monthly')" type="button" class="relative w-1/2 py-2 text-sm font-medium {{paytPeriod === 'monthly' ? 'text-indigo-800 rounded-md bg-white border border-gray-100 shadow shadow-gray-500' : 'text-gray-700 hover:rounded-md border-transparent hover:bg-gray-200 hover:border-gray-200'}} whitespace-nowrap focus:outline-none focus:z-10 sm:w-auto sm:px-8">Monthly billing</button>
+          <button (click)="switch('yearly')" type="button" class="ml-0.5 relative w-1/2 py-2 text-sm font-medium {{paytPeriod === 'yearly' ? 'text-indigo-800 rounded-md bg-white border border-gray-100 shadow shadow-gray-500' : 'text-gray-700 hover:rounded-md border-transparent hover:bg-gray-200 hover:border-gray-200'}} whitespace-nowrap focus:outline-none focus:z-10 sm:w-auto sm:px-8">Yearly billing</button>
+        </div>
+
+      </div>
+
+      <div class="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 {{paytPeriod === 'monthly' ? 'xl:grid-cols-4' : 'xl:grid-cols-3'}}">
+        
+        <div *ngFor="let item of filteredPlans; let i = index;" (click)="selectPlan(item.name)" class="cursor-pointer group border border-gray-200 {{selectedPlan === item.name ? 'border-2 border-indigo-800 shadow-md shadow-indigo-500 m-0' : ''}} m-2 hover:shadow hover:shadow-indigo-200 hover:border-indigo-500 rounded-lg shadow-sm divide-y divide-gray-200 hover:divide-indigo-200">
+          
+          <div class="p-6">
+            
+            <h2 class="text-lg leading-6 font-medium text-gray-900 {{selectedPlan === item.name ? 'text-indigo-700' : ''}} group-hover:text-indigo-700">{{item.name}}</h2>
+            
+            <p class="mt-4 text-sm text-gray-500">{{item.description}}</p>
+            
+            <p class="mt-8 space-x-2">
+              <span class="text-4xl font-extrabold text-gray-900 {{selectedPlan === item.name ? 'text-indigo-800' : ''}} group-hover:text-indigo-800">${{item.payableAmount}}</span>
+              <span class="text-base font-medium text-gray-500">{{item.msg}}</span>
+            </p>
+            
+            <div (click)="pay(item)" class="mt-8 block w-full bg-gray-200 text-gray-800 border border-gray-100 group-hover:border-indigo-500 rounded-md py-2 text-sm font-semibold {{selectedPlan === item.name ? 'border-indigo-700 bg-indigo-700 text-white' : ''}} group-hover:text-white text-center group-hover:bg-indigo-700 group-hover:shadow-sm">Access {{item.name}}</div>
+          
+          </div>
+
+          <div class="pt-6 pb-8 px-6">
+            
+            <h3 class="text-xs font-medium text-gray-900 tracking-wide uppercase">What's included</h3>
+            
+            <ul role="list" class="mt-6 space-y-4">
+              <li *ngFor="let feat of item.features" class="flex space-x-3">
+                <svg class="flex-shrink-0 h-5 w-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-sm text-gray-500">{{feat}}</span>
+              </li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  

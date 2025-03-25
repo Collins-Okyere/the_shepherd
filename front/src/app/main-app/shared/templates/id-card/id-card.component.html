@@ -1,0 +1,66 @@
+<div class="space-y-12">
+
+
+  <!-- Card Front -->
+  <div class="main card bg-{{theme}}-50 rounded-t-xl">
+
+    <div class="w-full px-3 py-2 bg-{{theme}}-800 flex items-center space-x-6 justify-start rounded-t-xl"> 
+      
+      <img [src]="school.logo" class="h-20 w-auto p-1">
+      
+      <div class="text-white items-center"> 
+        <div class="font-bold text-4xl flex justify-start">{{school.name}} ({{school.code}})</div>
+        <div class="flex justify-start text-lg">(Loc: {{school.address}}, Tel: {{school.phone1}}/{{school.phone2}})</div>
+      </div>
+    
+    </div>
+
+    <div class="flex items-center space-x-8 p-6">   
+        
+      <img [src]="idCardData.selectedItem.photo" class="border-8 border-white flex  h-40 w-auto" alt="img"/>
+
+      <div class="w-full flex items-center justify-between">
+
+        <div class="flex-1 items-start space-y-4 -mt-6">
+        
+          <div class="text-3xl text-gray-900 font-bold">{{idCardData.selectedItem.first_name}} {{idCardData.selectedItem.other_names}} {{idCardData.selectedItem.last_name}}</div> 
+          
+          <div class="text-2xl text-gray-700 font-bold">{{idCardData.selectedItem.student_id ? idCardData.selectedItem.student_id : idCardData.selectedItem.employee_id ? idCardData.selectedItem.employee_id : idCardData.selectedItem.guardian_id ? idCardData.selectedItem.guardian_id : null}}</div>
+            
+          <div class="text-gray-500 text-xl font-semibold"> {{idCardData.selectedItem.house ? idCardData.selectedItem.house : idCardData.selectedItem.department}}</div>
+
+        </div>
+
+        <img src="assets/images/qrcode.png" class="border-8 border-gray-50 bg-white flex  h-28 w-auto" alt="img"/>
+
+      </div>
+
+    </div>    
+      
+    <div class="absolute bottom-0 -mb-2 header w-full p-3 bg-{{theme}}-800 flex items-center space-x-4 justify-center rounded-b-xl"> 
+      <div class="text-white font-bold text-lg"> {{school.motto}}</div>
+    </div>
+
+  </div>
+
+
+  <!-- Card Back -->
+  <div class="card bg-white rounded-xl p-12">
+
+    <div class="w-full first-letter:text-gray-700 flex-1 items-start space-y-1">
+      <div class="text-md text-gray-700">If found, contact:</div>
+      <div class="text-xl font-semibold">{{school.name}}</div> 
+      <div class="text-xl font-semibold">{{school.address}}</div> 
+      <div class="text-xl font-semibold">{{school.phone1}} / {{school.phone2}}</div>
+      <div class="text-md text-gray-700 pt-8">{{school.name}}, {{school.motto}}!</div>
+    </div>
+
+    <div class="absolute bottom-2 flex justify-center items-center space-x-3">
+      <img src="assets/images/barcode.png" class="bg-white h-32 w-60" alt="img"/>
+      <span>Powered By Adesua360</span>
+    </div>
+
+  </div>
+
+
+</div>

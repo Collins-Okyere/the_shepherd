@@ -1,0 +1,56 @@
+<div class="relative {{ dropDownType === 'hover' ? 'dropdown dropdown-hover' : 'dropdown' }} dropdown-end group">
+
+    <button *ngIf="isTextButton" type="button" tabindex="0" role="button"  class="inline-flex items-center px-4 py-2 border border-gray-300 group-hover:border-indigo-300 shadow-sm text-sm font-medium rounded-md text-gray-700 group  group-hover:text-indigo-700 bg-white group-hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        
+        <ng-container>
+
+            <svg *ngIf="icon" class="-ml-1 mr-2 h-5 w-5 text-gray-400 group-hover:text-indigo-700" [attr.fill]="icon.fill || 'none'" [attr.viewBox]="icon.viewBox || '0 0 24 24'" [attr.stroke-width]="icon.strokeWidth || '1.5'" stroke="currentColor" aria-hidden="true">
+                <path [attr.d]="icon.path" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+
+            <span class="text-gray-700 group-hover:text-indigo-700"> {{ buttonText }} </span>
+
+        </ng-container>
+
+    </button>
+
+    <button *ngIf="!isTextButton && (icon || image)" type="button" tabindex="0" role="button" class="{{image ? 'rounded-full bg-gray-200 group-hover:bg-indigo-300' : 'rounded-xl h-10 w-10 border group bg-gray-100 group-hover:bg-indigo-100'}} {{indicator ? 'bg-indigo-100' : ''}} group group-hover:ring-1 group-hover:ring-white group-hover:ring-offset-2 group-focus:ring-offset-indigo-200">
+
+        <ng-container>
+            
+            <div *ngIf="icon" class="indicator">
+
+                <svg class="m-auto mt-1 size-6  text-gray-700 group-hover:text-indigo-700 {{indicator ? 'text-indigo-700' : ''}}" [attr.fill]="icon.fill || 'none'" [attr.viewBox]="icon.viewBox || '0 0 24 24'" [attr.stroke-width]="icon.strokeWidth || '1.5'" stroke="currentColor" aria-hidden="true">
+                    <path [attr.d]="icon.path" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+
+                <span *ngIf="indicator" class="badge badge-xs bg-indigo-600 indicator-item"></span>
+
+            </div>
+
+            <img *ngIf="image" class="size-8 rounded-full m-1" [src]="image" alt="">
+        
+        </ng-container>
+
+    </button>
+
+    <ul tabindex="0" class="z-30 {{options && options.length > 0 ? 'dropdown-content menu lg:-mr-2 shadow-gray-300 shadow-sm bg-gray-50 border border-gray-100 rounded-md' : 'hidden'}}" [ngClass]="{'w-96': dropdownWidth === 'wide', 'w-48': dropdownWidth === 'narrow'}">
+
+        <div *ngIf="tabs && tabs.length > 0" role="tablist" class="tabs tabs-boxed m-1">
+            <a role="tab" *ngFor="let tab of tabs" class="tab" [class.tab-active]="tab === activeTab" (click)="onTabClick(tab)">
+                {{ tab }}
+            </a>
+        </div>
+
+        <span class="p-2 pl-4 mb-1 rounded bg-indigo-50 text-indigo-800 text-sm font-bold" *ngIf="hasDropTitle">{{ dropDownTitle}}</span>
+
+        <ul>
+            <li  *ngFor="let item of options" (click)="onOptionClick(item)">
+                <a *ngIf="item.href"  [href]="item.href" [target]="item.target || ''">{{ item.title || item.pageName }}</a>
+                <a *ngIf="!item.href">{{ item.title|| item.pageName }}</a>
+            </li>
+        </ul>
+
+    </ul>
+
+</div>

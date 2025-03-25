@@ -1,0 +1,294 @@
+<div class="isolate bg-white mx-3 rounded-lg px-2 pt-0 pb-16 lg:pt-6 lg:pb-24 lg:px-8">
+
+    <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]" aria-hidden="true">
+      <div class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+  
+    <div class="mx-auto max-w-2xl text-center">
+
+        <h2 class="text-3xl font-bold tracking-tight text-indigo-700 sm:text-4xl mt-6">Sign Up</h2>
+        
+        <p class="text-sm mt-3 lg:text-md leading-8 text-gray-600"> Provide information below for access. </p>
+
+    </div>
+  
+    <div *ngIf="!paymentPage" class="lg:mx-auto m-3 max-w-3xl grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+          
+        <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8 col-span-2 border-indigo-100 border-y py-6">
+  
+            <p class="text-md leading-5 font-semibold text-indigo-800 col-span-2 mt-1">Church Information:</p>
+    
+            <div class="col-span-2">
+                <label for="churchName" class="block text-sm text-gray-900">Church Name <span class="text-sm text-gray-400">(Full Official Name)</span> </label>
+                <div class="mt-1">
+                    <input type="text" name="churchName" required placeholder="eg. Abc International Church" [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.churchName&& toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.churchName" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                </div>
+            </div>
+
+            <div class="col-span-2 lg:col-span-1">
+
+                <label class="block text-sm text-gray-900">Country</label>
+              
+                <app-select-input [selectInputData]="selectInputData" (selectionChanged)="onSelectionChanged($event)"></app-select-input>
+
+            </div>
+              
+            <div class="col-span-2 lg:col-span-1">
+                <label for="churchEmail" class="block text-sm text-gray-900">Email Address <span class="text-sm text-gray-400">(Official)</span> </label>
+                <div class="mt-1"> 
+                    <input type="email" name="churchEmail" placeholder="eg. abcinternational@abc.com" [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.churchEmail && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.churchEmail" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                </div>
+            </div>
+    
+        </div>
+
+  
+        <p class="text-md leading-5 font-semibold text-indigo-800 col-span-2">Contact Person Information:</p>
+    
+        <div class="col-span-2 lg:col-span-1">
+            <label for="userFirstName" class="block text-sm text-gray-900">First Name</label>
+            <div class="mt-1">
+                <input type="text" required name="userFirstName" placeholder="eg. Simon"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.userFirstName && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.userFirstName" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+            </div>
+        </div>
+  
+        <div class="col-span-2 lg:col-span-1">
+            <label for="userLastName" class="block text-sm text-gray-900">Last Name <span class="text-sm text-gray-400">(And Other Names)</span> </label>
+            <div class="mt-1">
+                <input type="text" required name="userLastName" placeholder="eg. Peters"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.userLastName && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.userLastName" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+            </div>
+        </div>
+    
+        <div class="col-span-2 lg:col-span-1">
+            <div class="flex justify-between">
+                <label for="userPhone" class="block text-sm text-gray-900">Phone Number</label>
+            </div>
+            <div class="mt-1">
+                <input type="text" required name="userPhone" placeholder="eg. (+233)-234-56-789"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.userPhone && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.userPhone" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+            </div>
+        </div>
+  
+        <div class="col-span-2 lg:col-span-1">
+            <label for="userEmail" class="block text-sm text-gray-900">Email</label>
+            <div class="mt-1">
+                <input type="email" required name="userEmail" placeholder="eg. simonpeters123@abc.com"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.userEmail && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.userEmail" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+            </div>
+        </div>
+    
+        <div class="flex items-center gap-x-4 col-span-2">
+            <div class="flex items-center h-5">
+                <input id="trial" name="trial" type="checkbox"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !tryFree && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [checked]="tryFree" (change)="toggleCheckBoxes('tryFree')" class="cursor-pointer h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+            </div>
+            <div class="text-sm">
+                <label for="trial" required class="text-gray-500">Start with <a class="text-indigo-600 hover:underline">14-day trial</a>.</label>
+            </div>
+        </div>
+    
+        <div class="flex items-center gap-x-4 col-span-2">
+            <div class="flex items-center h-5">
+                <input id="acceptTerms" name="acceptTerms" type="checkbox"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !acceptTerms && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [checked]="acceptTerms" (change)="toggleCheckBoxes('accept')" class="cursor-pointer h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+            </div>
+            <div class="text-sm">
+                <label for="acceptTerms" required class="text-gray-500">I accept <a class="text-indigo-600 hover:underline" href="../../pages/terms_and_conditions/" target="_blank">Terms & Conditions</a> and <a href="../../pages/policy/" target="_blank" class="text-indigo-600 hover:underline">Privacy Policy</a>.</label>
+            </div>
+        </div>
+    
+        <div class="col-span-2 border-indigo-100 border-y">
+            <button (click)="submitAndProceed()" type="submit" class="mt-6 block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+        </div>
+
+    </div>
+
+
+    <div *ngIf="paymentPage" class="lg:mx-auto m-3 max-w-3xl">
+
+
+        <div class="mt-8">
+            <a (click)="paymentPage = !paymentPage"  class="text-base font-medium text-indigo-700 hover:text-indigo-700 inline-flex space-x-2 items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+                <span>Back</span>
+            </a>
+        </div>
+
+        <div class="{{this.tryFree ? 'py-4' : 'pt-4 lg:pt-10'}} border-t border-gray-200">
+
+            <p class="text-md leading-5 font-semibold text-indigo-800 col-span-2">Package Information:</p>
+
+            <fieldset *ngIf="!tryFree" class="mt-8">
+                
+                <legend class="sr-only">Package type</legend>
+            
+                <div class="inline-flex items-center space-x-10">
+
+                    <div class="flex items-center">
+                        <input id="monthly" name="paytPeriod" type="radio" [checked]="signupInfo.paytPeriod === 'monthly'" [(ngModel)]="signupInfo.paytPeriod" [value]="'monthly'" (ngModelChange)="switchPaytPeriod(signupInfo.paytPeriod)" class="cursor-pointer focus:ring-indigo-500 h-5 w-5 text-indigo-600 accent-indigo-600 border-gray-300">
+                        <label for="monthly" class="ml-3 block text-sm font-medium {{signupInfo.paytPeriod === 'monthly' ?'text-blue-800' : 'text-gray-600'}}"> Monthly </label>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input id="yearly" name="paytPeriod" type="radio" [checked]="signupInfo.paytPeriod === 'yearly'" [(ngModel)]="signupInfo.paytPeriod" [value]="'yearly'" (ngModelChange)="switchPaytPeriod(signupInfo.paytPeriod)" class="cursor-pointer focus:ring-indigo-500 h-5 w-5 text-indigo-600 accent-indigo-600 border-gray-300">
+                        <label for="yearly" class="ml-3 block text-sm font-medium {{signupInfo.paytPeriod === 'yearly' ?'text-blue-800' : 'text-gray-600'}}"> Yearly </label>
+                    </div>
+
+                </div>
+
+            </fieldset>
+            
+            <div class="space-y-4 sm:mt-8 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
+                    
+                <div *ngFor="let item of filteredPlans" (click)="switchService(item.name)" class="mt-4 md:mt-1 border {{signupInfo.package === item.name ? 'border-2 border-indigo-700' : 'border-gray-100'}} hover:border-indigo-700 cursor-pointer rounded-lg shadow-sm divide-y divide-gray-200">
+                  
+                    <div class="py-4 p-6 space-y-2">
+                        
+                        <div class="flex justify-between">
+                        
+                            <h2 class="text-lg leading-6 font-medium {{signupInfo.package === item.name ? 'text-indigo-700' : 'text-gray-900 hover'}}">{{item.name}}</h2>
+                                
+                            <svg class="h-5 w-5" [ngClass]="signupInfo.package === item.name ? ' text-indigo-600' : 'text-gray-100' " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+
+                        </div>
+        
+                        <p class="text-sm text-gray-500">{{item.description}}</p>
+                            
+                        <p class="space-x-2 pt-3 {{tryFree ? 'pb-2' : ''}}">
+                            <span class="text-xl font-extrabold {{signupInfo.package === item.name ? 'text-indigo-700' : 'text-gray-900 hover'}}">${{item.payableAmount}}</span>
+                            <span class="text-base font-medium text-gray-500">{{item.msg}}</span>
+                        </p>
+                            
+                        <div *ngIf="tryFree" (click)="signUp(signupInfo)" class="block w-full text-white border focus:bg-indigo-700 bg-indigo-600 border-indigo-800 rounded-md py-2 text-sm font-semibold text-center ">Get Access</div>
+                        
+                    </div>
+
+                                
+                </div>  
+
+                <div *ngIf="tryFree" class="border {{signupInfo.package === '' ? 'border-2 border-indigo-700' : 'border-gray-100'}} hover:border-indigo-700 cursor-pointer rounded-lg shadow-sm divide-y divide-gray-200">
+                  
+                    <div class="py-4 p-6 space-y-2">
+                        
+                        <div class="flex justify-between">
+                        
+                            <h2 class="text-lg leading-6 font-medium {{signupInfo.package === ''? 'text-indigo-700' : 'text-gray-900 hover'}}">Other Packages</h2>
+                                
+                            <svg class="h-5 w-5" [ngClass]="signupInfo.package === '' ? ' text-indigo-600' : 'text-gray-100' " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+
+                        </div>
+        
+
+        
+                        <p class="text-sm text-gray-500">Select A Different Package</p>
+                            
+                        <p class="space-x-2 pt-3 {{tryFree ? 'pb-2' : ''}}">
+                            <span class="text-xl font-extrabold text-gray-900"></span>
+                            <span class="text-base font-medium text-gray-500"></span>
+                        </p>
+
+                        <div (click)="viewPlans()" class="block w-full hover:text-white focus:text-white bg-gray-100 text-gray-900 border border-gray-50 focus:bg-indigo-700 hover:bg-indigo-600 focus:border-indigo-800 rounded-md py-2 text-sm font-semibold text-center ">Change Package</div>
+
+                    </div>
+                                
+                </div>
+            
+            </div>
+            
+        </div>
+
+        <div *ngIf="!this.tryFree">
+    
+            <div class="mt-8 border-t border-gray-200 pt-8">
+                
+                <p class="text-md leading-5 font-semibold text-indigo-800 col-span-2">Payment Information:</p>
+
+                <fieldset class="mt-8">
+                
+                    <legend class="sr-only">Payment type</legend>
+                
+                    <div class="inline-flex items-center space-x-10">
+
+                        <div class="flex items-center">
+                            <input id="momo" name="payment-type" type="radio" [checked]="signupInfo.paymentMode === 'momo'" [(ngModel)]="signupInfo.paymentMode" [value]="'momo'" (ngModelChange)="switchPaytMode(signupInfo.paymentMode)" class="cursor-pointer focus:ring-indigo-500 h-5 w-5 text-indigo-600 accent-indigo-600 border-gray-300">
+                            <label for="momo" class="ml-3 block text-sm font-medium {{signupInfo.paymentMode === 'momo' ?'text-blue-800' : 'text-gray-600'}}"> Mobile Money </label>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input id="credit-card" name="payment-type" type="radio" [checked]="signupInfo.paymentMode === 'card'" [(ngModel)]="signupInfo.paymentMode" [value]="'card'" (ngModelChange)="switchPaytMode(signupInfo.paymentMode)" class="cursor-pointer focus:ring-indigo-500 h-5 w-5 text-indigo-600 accent-indigo-600 border-gray-300">
+                            <label for="credit-card" class="ml-3 block text-sm font-medium {{signupInfo.paymentMode === 'card' ?'text-blue-800' : 'text-gray-600'}}"> Credit card </label>
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+            </div>
+
+            <div *ngIf="signupInfo.paymentMode === 'momo'" class="pt-6 pb-6 grid grid-cols-4 gap-y-6 gap-x-4">
+        
+                <div class="col-span-4 lg:col-span-2">
+                    <label for="payt-phone" class="block text-sm text-gray-900">Phone Number</label>
+                    <div class="mt-1">
+                        <input type="text" required name="payt-phone" placeholder="Enter Phone Number"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.userFirstName && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.payt_phone" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                    </div>
+                </div>
+            
+                <div class="col-span-4 lg:col-span-2">
+                    <div class="flex justify-between">
+                        <label for="ref-number" class="block text-sm text-gray-900">Reference Number</label>
+                    </div>
+                    <div class="mt-1">
+                        <input type="text" required name="ref-number" placeholder="Enter Reference Number"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.userPhone && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.payt_ref" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+            </div>
+
+            <div *ngIf="signupInfo.paymentMode === 'card'" class="pt-6 pb-6 grid grid-cols-4 gap-y-6 gap-x-4">
+        
+                <div class="col-span-4 lg:col-span-2">
+                    <label for="card-number" class="block text-sm text-gray-900">Card Number</label>
+                    <div class="mt-1">
+                        <input type="text" required name="card-number" placeholder="Enter Card Number"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.userFirstName && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.payt_card" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                    </div>
+                </div>
+            
+                <div class="col-span-4 lg:col-span-2">
+                    <div class="flex justify-between">
+                        <label for="expiry-date" class="block text-sm text-gray-900">Expiry Date</label>
+                    </div>
+                    <div class="mt-1">
+                        <input type="date" required name="expiry-date"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.userPhone && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.card_exp_date" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                    </div>
+                </div>
+        
+                <div class="col-span-4 lg:col-span-1">
+                    <label for="cvc" class="block text-sm text-gray-900">CVC</label>
+                    <div class="mt-1">
+                        <input type="text" required name="cvc" placeholder="Enter CVC"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.userLastName && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.cvc_num" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                    </div>
+                </div>
+        
+                <div class="col-span-4 lg:col-span-3">
+                    <label for="name" class="block text-sm text-gray-900">Name On Card</label>
+                    <div class="mt-1">
+                        <input type="name" required name="name" placeholder="Enter Full Name"  [ngClass]="{ 'ring-red-500 border-red-500': toastData.toastType == 'danger', 'ring-yellow-500 border-yellow-500': !signupInfo.userEmail && toastData.toastType == 'warning', 'ring-indigo-500': toastData.toastType != 'danger' && toastData.toastType != 'warning' }" [(ngModel)]="signupInfo.card_name" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div *ngIf="!this.tryFree" class="col-span-2 border-indigo-100 border-y">
+
+            <button (click)="signUp(signupInfo)" type="submit" class="mt-6 block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{this.tryFree ? 'Get Access' : 'Pay'}}</button>
+        
+        </div>
+
+    </div>
+  
+</div>

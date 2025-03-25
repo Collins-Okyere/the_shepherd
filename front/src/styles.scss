@@ -1,0 +1,96 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#slim-scroll::-webkit-scrollbar {
+    width: 4px;
+    cursor: pointer;
+}
+
+#slim-scroll::-webkit-scrollbar-track {
+    cursor: pointer;
+    background-color: #a0aec0;
+
+}
+
+#slim-scroll::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: #a0aec0;
+}
+
+.animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-in;
+}
+
+.animate-slide-out-right {
+    animation: slide-out-right 0.3s ease-out;
+}
+    
+.animate-slide-in-left {
+    animation: slide-in-left 0.3s ease-in;
+}
+    
+.animate-slide-out-left {
+    animation: slide-out-left 0.3s ease-out;
+}
+    
+.animate-slide-in-top {
+    animation: slide-in-top 0.3s ease-in;
+}
+    
+.animate-slide-out-top {
+    animation: slide-out-top 0.3s ease-out;
+}
+    
+.animate-slide-in-bottom {
+    animation: slide-in-bottom 0.3s ease-in;
+}
+    
+.animate-slide-out-bottom {
+    animation: slide-out-bottom 0.3s ease-out;
+}
+    
+.animate-nav-slide-in-top {
+    animation: nav-slide-in-top 0.1s ease-in;
+}
+    
+.animate-nav-slide-out-top {
+    animation: nav-slide-out-top 0.1s ease-out;
+}
+
+@keyframes slide-in-right { 0% { transform: translateX(100%); opacity: 0.4; } 100% { transform: translateX(0); opacity: 1; } }
+@keyframes slide-out-right { 0% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(100%); opacity: 0.4; } }
+@keyframes slide-in-left { 0% { transform: translateX(-100%); opacity: 0.4; } 100% { transform: translateX(0); opacity: 1; } }
+@keyframes slide-out-left { 0% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(-100%); opacity: 0.4; } }
+@keyframes slide-in-top { 0% { transform: translateY(-100%); opacity: 0.4; } 100% { transform: translateY(0); opacity: 1; } }
+@keyframes slide-out-top { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-100%); opacity: 0.4; } }
+@keyframes slide-in-bottom { 0% { transform: translateY(-100%); opacity: 0.4; } 100% { transform: translateY(0); opacity: 1; } }
+@keyframes slide-out-bottom { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-100%); opacity: 0.4; } }
+@keyframes nav-slide-in-top { 0% { transform: translateY(-50%); opacity: 0.0; } 100% { transform: translateY(10%); opacity: 1; } }
+@keyframes nav-slide-out-top { 0% { transform: translateY(10); opacity: 1; } 100% { transform: translateY(-100%); opacity: 0.0; } }
+
+/* Default Theme (Indigo) */
+:root {
+    --primary-color: #4F46E5;
+    --secondary-color: #6366F1;
+    --bg-color: #FFFFFF;
+    --text-color: #111827;
+  }
+  
+  /* Emerald Theme */
+  .theme-emerald {
+    --primary-color: #10B981;
+    --secondary-color: #34D399;
+    --bg-color: #ECFDF5;
+    --text-color: #064E3B;
+  }
+  
+  /* Cyan Theme */
+  .theme-cyan {
+    --primary-color: #06B6D4;
+    --secondary-color: #22D3EE;
+    --bg-color: #E0F2FE;
+    --text-color: #083344;
+  }
+  
