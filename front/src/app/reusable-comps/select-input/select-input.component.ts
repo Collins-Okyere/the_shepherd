@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -16,21 +16,29 @@ export class SelectInputComponent {
     displayProperty: 'name',
     searchProperty: 'name',
     multiple: false,
-    autoClose: false,
+    autoClose: true,
     toastData: null,
     defaultValue: null
   }
   @Output() selectionChanged = new EventEmitter<any[]>();
   selectedItems: any[] = [];
-  selectedItem: any;
+  selectedItem: any = null;
   filteredItems: any[] = [];
   searchQuery: string = '';
   dropdownOpen: boolean = false;
 
+  constructor(private elementRef: ElementRef){}
+
   ngOnInit() {
+    if (this.selectInputData.displayProperty === 'full_name') {
+      this.selectInputData.items.forEach((item: any) => {
+        let id = item.member_id ?? item.staff_id ?? item.employee_id ?? item.student_id;
+        item.name = `${item.last_name} ${item.other_names} ${item.first_name}` + (id ? ` (${id})` : '');
+      });
+    }    
     if(this.selectInputData.defaultValue){
       if(this.selectInputData.multiple){
-        this.selectedItems = this.selectInputData.defaultValue;
+        this.selectedItems = [this.selectInputData.defaultValue];
       }else{
         this.selectedItem = this.selectInputData.defaultValue;
       }
@@ -46,9 +54,13 @@ export class SelectInputComponent {
     if (!this.searchQuery) {
       this.filteredItems = [...this.selectInputData.items];
     } else {
-      this.filteredItems = this.selectInputData.items.filter((item:any) =>
-        item[this.selectInputData.searchProperty]?.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
+      this.filteredItems = this.selectInputData.items.filter((item:any) =>{
+        if(item[this.selectInputData.displayProperty] === 'full_name'){
+          item[this.selectInputData.displayProperty] = `${item.last_name}  ${item.other_names} ${item.first_name}`
+        }else{
+          item[this.selectInputData.searchProperty]?.toLowerCase().includes(this.searchQuery.toLowerCase()) || item[this.selectInputData.displayProperty]?.toLowerCase().includes(this.searchQuery.toLowerCase())
+        }
+      })
     }
   }
   
@@ -59,7 +71,7 @@ export class SelectInputComponent {
       } else {
         this.selectedItems.push(item);
       }
-      if(this.selectInputData.autoClose){
+      if(!this.selectInputData.autoClose){
         this.dropdownOpen = false;
       }
       this.selectionChanged.emit(this.selectedItems);
@@ -83,6 +95,13 @@ export class SelectInputComponent {
 
   getSelectedItemsText(): string {
     return this.selectedItems.map(item => item[this.selectInputData.displayProperty]).join(', ');
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.dropdownOpen = false;
+    }
   }
 
 }

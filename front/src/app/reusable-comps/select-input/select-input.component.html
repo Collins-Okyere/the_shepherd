@@ -1,6 +1,6 @@
 <div class="relative mt-1">
 
-  <button *ngIf="selectInputData.multiple" type="button" (click)="!dropdownOpen ? toggleDropdown() : null" [ngClass]="{'outline-red-500 border-red-500': selectInputData.toastData?.toastType === 'danger', 'outline-yellow-500 border-yellow-500': !selectedItems.length && selectInputData.toastData?.toastType === 'warning', 'outline-gray-300': selectInputData.toastData?.toastType !== 'danger' && selectInputData.toastData?.toastType !== 'warning' }" class="grid w-full cursor-default grid-cols-1 rounded-md bg-white {{!selectedItems.length && !dropdownOpen  ? 'py-2.5 px-4' : ''}} text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm" aria-haspopup="listbox" [attr.aria-expanded]="dropdownOpen">
+  <button *ngIf="selectInputData.multiple" type="button" (click)="!dropdownOpen ? toggleDropdown() : null" [ngClass]="{'outline-red-500 border-red-500': selectInputData.toastData?.status === 'danger', 'outline-yellow-500 border-yellow-500': !selectedItems.length && selectInputData.toastData?.status === 'warning', 'outline-gray-300': selectInputData.toastData?.status !== 'danger' && selectInputData.toastData?.status !== 'warning' }" class="grid w-full cursor-default grid-cols-1 rounded-md bg-white {{!selectedItems.length && !dropdownOpen  ? 'py-2.5 px-4' : ''}} text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm" aria-haspopup="listbox" [attr.aria-expanded]="dropdownOpen">
     <span [ngClass]="selectedItems.length > 0 ? 'mb-1.5' : ''" class="col-start-1 row-start-1 justify-between flex items-center gap-3">
 
       <span class="flex items-center pr-6">
@@ -8,9 +8,9 @@
         <span *ngIf="selectedItems.length > 0" class="flex gap-2 flex-wrap p-1">
           <span *ngFor="let item of selectedItems" class="inline-flex items-center gap-1 bg-indigo-100 text-indigo-800 rounded-full py-1 px-3 text-sm">
           
-            <img *ngIf="item.photo || item.flag" [src]="item.photo ?? item.flag" alt="image" class="size-6 shrink-0 rounded-full"/>
+            <img *ngIf="item.photo || item.flag || item.image" [src]="item.photo || item.image || item.flag" alt="image" class="size-6 shrink-0 rounded-full"/>
 
-            <span>{{ item[selectInputData.displayProperty] }}</span>
+            <span>{{ item[selectInputData.displayProperty] || item.name || item.title || item || item.full_name || selectInputData.placeholder}}</span>
             
             <button type="button" (click)="removeItem(item)" class="text-red-600 hover:text-red-800">
               <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -35,11 +35,11 @@
 
   </button>
                   
-  <button *ngIf="!selectInputData.multiple" type="button" (click)="toggleDropdown()"  [ngClass]="{ 'outline-red-500 border-red-500': selectInputData.toastData?.toastType == 'danger', 'outline-yellow-500 border-yellow-500': !selectedItem && selectInputData.toastData?.toastType == 'warning', 'outline-gray-300': selectInputData.toastData?.toastType != 'danger' && selectInputData.toastData?.toastType != 'warning' }" class="grid w-full cursor-default grid-cols-1 rounded-md bg-white {{!selectedItem ? 'py-2.5' : 'py-2'}} px-4 text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2  focus:outline-indigo-600 sm:text-sm" aria-haspopup="listbox" [attr.aria-expanded]="dropdownOpen"> 
+  <button *ngIf="!selectInputData.multiple" type="button" (click)="toggleDropdown()"  [ngClass]="{ 'outline-red-500 border-red-500': selectInputData.toastData?.status == 'danger', 'outline-yellow-500 border-yellow-500': !selectedItem && selectInputData.toastData?.status == 'warning', 'outline-gray-300': selectInputData.toastData?.status != 'danger' && selectInputData.toastData?.status != 'warning' }" class="grid w-full cursor-default grid-cols-1 rounded-md bg-white {{!selectedItem ? 'py-2.5' : 'py-2'}} px-4 text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2  focus:outline-indigo-600 sm:text-sm" aria-haspopup="listbox" [attr.aria-expanded]="dropdownOpen"> 
     
     <span class="col-start-1 row-start-1 flex items-center gap-3 pr-6">
-      <img *ngIf="selectedItem?.photo || selectedItem?.flag" [src]="selectedItem.photo ?? selectedItem.flag" alt="" class="size-6 shrink-0 rounded-full"/>
-      <span class="block truncate {{selectedItem ? 'text-gray-900' : 'text-gray-500'}}">{{ selectedItem ? selectedItem.name : selectInputData.placeholder }}</span>
+      <img *ngIf="selectedItem?.photo || selectedItem?.flag" [src]="selectedItem.photo || selectedItem.flag" alt="" class="size-6 shrink-0 rounded-full"/>
+      <span class="block truncate {{selectedItem ? 'text-gray-900' : 'text-gray-500'}}">{{ !selectedItem ? selectInputData.placeholder : selectedItem?.name || selectedItem?.title || selectedItem ?? selectedItem  }} {{selectedItem?.student_id || selectedItem?.staff_id || selectedItem?.member_id || selectedItem?.employee_id ? '(' + (selectedItem.student_id || selectedItem.staff_id || selectedItem.member_id || selectedItem.employee_id) + ')' : '' }}</span>
     </span>
 
     <svg class="col-start-1 row-start-1 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
@@ -52,14 +52,14 @@
     Clear All
   </label>
   
-  <div *ngIf="dropdownOpen" class="absolute z-10 w-full bg-indigo-50 shadow-lg rounded-md ring-1 ring-black/5 focus:outline-none">
+  <div *ngIf="dropdownOpen" class="absolute z-10 w-full bg-gray-100 shadow-lg rounded-md ring-1 ring-black/5 focus:outline-none">
     
     <ul class="max-h-56 w-full overflow-auto bg-white py-1 text-base sm:text-sm" role="listbox">
       <li *ngFor="let item of filteredItems" (click)="toggleItemSelection(item)" [ngClass]="{'bg-indigo-50 font-semibold': selectedItems.includes(item)}" class="relative cursor-pointer select-none py-2 pl-3 pr-9 text-gray-900 hover:bg-indigo-600 hover:text-white">
         
         <div class="flex items-center">
-          <img *ngIf="item?.photo || item?.flag" [src]="item.photo ? item.photo : item.flag" alt="" class="size-5 shrink-0 rounded-full" />
-          <span class="ml-3 block truncate">{{ item[selectInputData.displayProperty] }}</span>
+          <img *ngIf="item?.photo || item?.flag || item?.image" [src]="item.photo || item.image || item.flag" alt="" class="size-5 shrink-0 rounded-full" />
+          <span class="ml-3 block truncate">{{ item[selectInputData.displayProperty] || item.name || item.title || item || item.full_name }}</span>
         </div>
 
         <span *ngIf="selectedItems.includes(item)" class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">

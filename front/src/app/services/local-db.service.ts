@@ -6,8 +6,6 @@ import { Injectable } from '@angular/core';
 
 export class LocalDbService {
 
-  avatar:string = '../../../assets/avatar-1.jpg'
-
   userMenu:any = [
     {pageName: 'Profile', action: 'profile' },
     { pageName: 'Settings', action: 'settings' }, 
@@ -288,10 +286,13 @@ export class LocalDbService {
     },
   ];
 
-  notifications = [
-    { title: 'Notification 1', content: 'notify' },
-    { title: 'Notification 2', content: 'notify' },
-    { title: 'Notification 3', content: 'notify' },
+  avatar:string = 'avatars/avatar_male.png'
+
+  avatar_femaile:string = 'avatars/avatar_female.png'
+
+  userTypes = [
+    { name: 'Member' },
+    { name: 'Church Leader / Worker' },
   ];
 
   titles = [
@@ -302,6 +303,73 @@ export class LocalDbService {
     { name: 'Prof.' },
     { name: 'Rev.' },
     { name: 'Ps.' },
+  ];
+
+  maritalStatuses:any = [
+    {name: 'Single'},
+    {name: 'Couting'},
+    {name: 'Married'},
+    {name: 'Divorced'},
+    {name: 'Widowed'},
+  ]
+
+  membershipStatuses:any = [
+    {name: 'Active Member'},
+    {name: 'Inactive Member'},
+    {name: 'New Convert'}
+  ]
+
+  baptismalStatuses:any = [
+    {name: 'Baptised'},
+    {name: 'Not Baptised'}
+  ]
+
+  eduLevels:any = [
+    {name: 'Primary'},
+    {name: 'Junior High School'},
+    {name: 'Senior High School'},
+    {name: 'Certificate'},
+    {name: 'Diploma'},
+    {name: 'Degree'},
+    {name: 'Masters'},
+    {name: 'PhD'},
+    {name: 'Others'}
+  ]
+
+  groups:any = [
+    {name: 'Choir'},
+    {name: 'Youth'},
+    {name: 'Ushers'}
+  ]
+
+  departments:any = [
+    {name: 'Pastoral Council'},
+    {name: 'Administration'},
+    {name: 'HR'},
+    {name: 'Finance'}
+  ]
+
+  positions:any = [
+    {name: 'Pastor'},
+    {name: 'Cell Leader'},
+    {name: 'Director'}
+  ]
+
+  privilleges:any = [
+    {name: 'Admit Members'},
+    {name: 'Mark Attendance'}
+  ]
+
+
+
+
+
+
+
+  notifications = [
+    { title: 'Notification 1', content: 'notify' },
+    { title: 'Notification 2', content: 'notify' },
+    { title: 'Notification 3', content: 'notify' },
   ];
 
   churches:any = [
@@ -405,10 +473,10 @@ export class LocalDbService {
   staff:any = [
     {
       id: 1,
-      firstName: 'Admin',
-      otherNames: '',
-      lastName: '',
-      staffId: 'admin',
+      first_name: 'Admin',
+      other_names: '',
+      last_name: 'User',
+      staff_id: 'admin',
       photo: 'avatars/avatar_male.png',
       privlleges: [],
       gender: 'Male',
@@ -443,11 +511,11 @@ export class LocalDbService {
   members:any = [
     {
       id: 1,
-      firstName: 'Collins',
-      otherNames: 'Okyere',
-      lastName: 'Agyei',
-      memberId: 'TS01',
-      photo: 'avatars/avatar_male.pngg',
+      first_name: 'Collins',
+      other_names: 'Okyere',
+      last_name: 'Agyei',
+      member_id: 'TS01',
+      photo: 'avatars/avatar_male.png',
       gender: 'Male',
       title: 'Mr.',
       churchId: '',

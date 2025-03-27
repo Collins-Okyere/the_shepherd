@@ -67,24 +67,30 @@ export class AdmitMemberComponent {
       dob: new Date(),
       membership_date: new Date(),
       photo: this.data.avatar,
-      relations: []
+      relations: [],
+      groups: [],
+      groups_led: [],
+      positions: [],
+      departments: [],
+      privilleges: [],
+      supervisors: []
     };
   }
 
   openUploadModal() {
     this.modal.openModal({
       component: MediaUploadComponent,
-      title: 'Upload Picture',
+      title: 'Upload Avatar',
       closeLabel: 'Cancel',
-      okLabel: 'Confirm',
+      okLabel: 'Upload',
       closeOnOutsideClick: true,
-      width: 'md',
-      okAction: () => this.showtoast(),
+      width: '2xl',
+      okAction: () => null,
     });
   }
 
-  showtoast(){
-    this.toast.showToast('Upload Completed!', 'success')  
-  }
+  // showtoast(){
+  //   this.toast.showToast('Upload Completed!', 'success')  
+  // }
 
 }
