@@ -1,1 +1,251 @@
-<p>admit-staff works!</p>
+<div class="space-y-4 py-4 p-8">
+
+    <!-- Upper Section -->
+    <div class="flex justify-between px-1 items-center">
+
+      <div class="text-2xl font-medium text-gray-800">Staff Admission Form:</div>
+
+      <app-download-button [downloadData]="{ componentId: 'staff_admission_form', light: true, title: 'Print Form' }"></app-download-button>
+
+    </div>
+
+    <!-- Form --> 
+    <div class="space-y-4 my-4 rounded-md">
+
+      <div class="collapse collapse-arrow bg-white rounded-md">
+        
+        <input type="checkbox" class="peer" checked />
+        
+        <div class="collapse-title">
+          <p class="text-md leading-5 text-indigo-800 mb-3 lg:col-span-1 pl-8 my-3">Personal Information:</p>
+        </div>
+        
+        <div class="collapse-content">
+
+          <div class="items-center space-x-4 flex justify-end px-8">
+            
+            <img [src]="staff.photo" alt="Avatar" class="w-16 h-16 rounded-lg shadow-md">
+            
+            <div>
+
+              <button (click)="openUploadModal()" class="text-sm px-4 py-2.5 text-indigo-700 bg-indigo-50 rounded-lg hover:bg-indigo-100">
+                Change avatar
+              </button>
+
+              <p class="text-xs text-gray-500 mt-">JPG or PNG. 1MB max.</p>
+              
+            </div>
+
+          </div>
+
+          <div class="lg:col-span-3 lg:grid lg:grid-cols-2 gap-6 p-8 pt-3">
+
+            <div class="lg:col-span-1">
+              <label for="first_name" class="block text-sm text-gray-700">First Name </label>
+              <div class="mt-1">
+                <input type="text" name="first_name" placeholder="eg. Simon" [(ngModel)]="staff.first_name" autocomplete="true" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              </div>
+            </div>
+
+            <div class="lg:col-span-1">
+              <label for="last_name" class="block text-sm text-gray-700">Last Name </label>
+              <div class="mt-1">
+                <input type="text" name="last_name" placeholder="eg. Peter" [(ngModel)]="staff.last_name" autocomplete="true" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              </div>
+            </div>
+
+            <div class="lg:col-span-1">
+              <label for="other_names" class="block text-sm text-gray-700">Other Name(s) </label>
+              <div class="mt-1">
+                <input type="text" name="other_names" placeholder="eg. Cephas" [(ngModel)]="staff.other_names" autocomplete="true" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              </div>
+            </div>
+
+            <div class="lg:col-span-1">
+              <label for="dob" class="block text-sm text-gray-700">Date of Birth </label>
+              <div class="mt-1">
+                <input type="date" format="dd-MM-yy" name="dob" placeholder="Select Date" [(ngModel)]="staff.dob" class="placeholder:text-sm placeholder:text-slate- appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              </div>
+            </div>
+
+            <div class="lg:col-span-1">
+              <label for="gender" class="block text-sm text-gray-700">Gender </label>
+              <div class="mt-1">
+                <app-select-input id="gender" [selectInputData]="{ items: noDB.gender, placeholder: 'Select Gender', displayProperty: 'name', searchProperty: 'name', defaultValue: noDB.gender[0] }" (selectionChanged)="onSelectionChanged('gender', $event)"></app-select-input>
+              </div>
+            </div>
+
+            <div class="lg:col-span-1">
+              <label for="title" class="block text-sm text-gray-700">Title </label>
+              <div class="mt-1">
+                <app-select-input id="title" [selectInputData]="{ items: noDB.titles, placeholder: 'Select Title', displayProperty: 'name', searchProperty: 'name', defaultValue: noDB.titles[0] }" (selectionChanged)="onSelectionChanged('title', $event)"></app-select-input>
+              </div>
+            </div>
+
+            <div class="lg:col-span-1">
+              <label for="nationality" class="block text-sm text-gray-700">Nationality </label>
+              <div class="mt-1">
+                <app-select-input id="nationality" [selectInputData]="{ items: noDB.countries, placeholder: 'Select Country', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('nationality', $event)"></app-select-input>
+              </div>
+            </div>
+
+            <div class="lg:col-span-1">
+              <label for="highest_edu_level" class="block text-sm text-gray-700">Highest Educational Qualification </label>
+              <div class="mt-1">
+                <app-select-input id="highest_edu_level" [selectInputData]="{ items: noDB.eduLevels, placeholder: 'Select Option', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('highest_edu_level', $event)"></app-select-input>
+              </div>
+            </div>
+
+            <div class="lg:col-span-2">
+              <label for="relations" class="block text-sm text-gray-700">Relations (If Applicable) </label>
+              <div class="mt-1">
+                <app-select-input id="relations" [selectInputData]="{ items: noDB.staff, placeholder: 'Select Relation', displayProperty: 'full_name', searchProperty: 'full_name', multiple: true }" (selectionChanged)="onSelectionChanged('relations', $event)"></app-select-input>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="collapse collapse-arrow bg-white rounded-md">
+        <input type="checkbox" class="peer" checked />
+        <div class="collapse-title">
+          <p class="text-md leading-5 text-indigo-800 mb-3 lg:col-span-1 pl-8 my-3">Admission Information:</p>
+        </div>
+        <div class="collapse-content">
+          <div class="lg:col-span-3 lg:grid lg:grid-cols-2 gap-6 p-8 pt-3">
+
+            <div class="lg:col-span-1">
+              <label for="staff_id" class="font-medium block text-sm text-slate-900">Staff ID <span class="text-slate-500 text-sm"> (Last ID - {{lastStaffId}}):</span> </label>
+              <div class="mt-1">
+                <input type="text" id="staff_id" name="staff_id" placeholder="Staff ID" [(ngModel)]="staff.staff_id" autocomplete="false" class="font-bold bg-indigo-50 placeholder:text-sm appearance-none min-w-0 w-full border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              </div>
+            </div>
+
+            <div class="lg:col-span-1">
+              <label for="admission_date" class="block text-sm text-gray-700">Admission Date </label>
+              <div class="mt-1">
+                <input type="date" id="admission_date" name="admission_date" [(ngModel)]="staff.admission_date" class="placeholder:text-sm placeholder:text-slate-300 appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              </div>
+            </div>
+    
+                  <div class="lg:col-span-1">
+                    <label for="departments" class="block text-sm text-gray-700">Department(s) </label>
+                    <div class="mt-1">
+                      <app-select-input id="departments" [selectInputData]="{ items: noDB.departments, placeholder: 'Select Department(s)', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('departments', $event)"></app-select-input>
+                    </div>
+                  </div>
+        
+                  <div class="lg:col-span-1">
+                    <label for="positions" class="block text-sm text-gray-700">Position(s) </label>
+                    <div class="mt-1">
+                      <app-select-input id="positions" [selectInputData]="{ items: noDB.positions, placeholder: 'Select Position(s)', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('positions', $event)"></app-select-input>
+                    </div>
+                  </div>
+        
+                  <div class="lg:col-span-1">
+                    <label for="supervisors" class="block text-sm text-gray-700">Supervisor(s)</label>
+                    <div class="mt-1">
+                      <app-select-input id="supervisors" [selectInputData]="{ items: noDB.staff, placeholder: 'Select Supervisor(s)', multiple: true, displayProperty: 'full_name', searchProperty: 'full_name' }" (selectionChanged)="onSelectionChanged('supervisors', $event)"></app-select-input>
+                    </div>
+                  </div>
+        
+                  <div class="lg:col-span-1">
+                    <label for="groups_led" class="block text-sm text-gray-700">Group(s) Led </label>
+                    <div class="mt-1">
+                      <app-select-input id="groups_led" [selectInputData]="{ items: noDB.groups, placeholder: 'Select Group(s)', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('groups_led', $event)"></app-select-input>
+                    </div>
+                  </div>
+        
+                  <div class="lg:col-span-2">
+                    <label for="privilleges" class="block text-sm text-gray-700">System Privilleges </label>
+                    <div class="mt-1">
+                      <app-select-input id="privilleges"  [selectInputData]="{ items: noDB.privilleges, placeholder: 'Select Privilleges', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('privilleges', $event)"></app-select-input>
+                    </div>
+                  </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="collapse collapse-arrow bg-white rounded-md">
+        <input type="checkbox" class="peer" checked />
+        <div class="collapse-title">
+          <p class="text-md leading-5 text-indigo-800 mb-3 lg:col-span-1 pl-8 my-3">Contact Information:</p>
+        </div>
+        <div class="collapse-content">
+          <div class="lg:col-span-3 lg:grid lg:grid-cols-2 gap-6 p-8 pt-3">
+
+            <div class="lg:col-span-1">
+              <div class="flex justify-between items-center">
+                <label for="phone" class="block text-sm text-gray-700"> Phone Number</label>
+                <div class="flex justify-end space-x-3 items-center whitespace-nowrap mx-2">
+                  <label for="can_receive_sms" class="block text-xs text-indigo-700">Can Receive SMS:</label>
+                  <input type="checkbox" id="can_receive_sms" name="can_receive_sms" [(ngModel)]="staff.canReceiveSms" (change)="handleToggle('staff.canReceiveSms', staff.canReceiveSms)" class="h-4 w-4 border border-slate-300 rounded-sm accent-indigo-700 shadow-sm focus:border-indigo-500">
+                </div>  
+              </div>
+              <div class="mt-1">
+                <input type="text" id="phone" name="phone" placeholder="eg. (+233)-234-56-788" [(ngModel)]="staff.phone" autocomplete="false" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              </div>            
+            </div>
+
+            <div class="lg:col-span-1">
+              <div class="flex justify-between items-center">
+                <label for="phone2" class="block text-sm text-gray-700"> Phone Number 2</label>
+                <div class="flex justify-end space-x-3 items-center whitespace-nowrap mx-2">
+                  <label for="can_receive_sms2" class="block text-xs text-indigo-700">Can Receive SMS:</label>
+                  <input type="checkbox" id="can_receive_sms2" name="can_receive_sms2" [(ngModel)]="staff.canReceiveSms2" (change)="handleToggle('staff.canReceiveSms2', staff.canReceiveSms2)" class="h-4 w-4 border border-slate-300 rounded-sm accent-indigo-700 shadow-sm focus:border-indigo-500">
+                </div>  
+              </div>
+              <div class="mt-1">
+                <input type="text" id="phone2" name="phone2" placeholder="eg. (+233)-234-56-789" [(ngModel)]="staff.phone" autocomplete="false" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              </div>            
+            </div>
+
+            <div class="lg:col-span-1">
+              <div class="flex justify-between items-center">
+                <label for="email" class="block text-sm text-gray-700"> Email</label>
+                <div class="flex justify-end space-x-3 items-center whitespace-nowrap mx-2">
+                  <label for="can_receive_email" class="block text-xs text-indigo-700">Can Receive Email:</label>
+                  <input type="checkbox" id="can_receive_email" name="can_receive_email" [(ngModel)]="staff.canReceiveEmail" (change)="handleToggle('staff.canReceiveSms', staff.canReceiveSms)" class="h-4 w-4 border border-slate-300 rounded-sm accent-indigo-700 shadow-sm focus:border-indigo-500">
+                </div>  
+              </div>            
+              <div class="mt-1">
+                <input type="email" id="email" name="email" placeholder="eg. simonpeter123@abc.com" [(ngModel)]="staff.email" autocomplete="true" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              </div>
+            </div>
+
+            <div class="lg:col-span-1">
+              <label for="resid_city" class="block text-sm text-gray-700"> Residential City </label>
+              <div class="mt-1">
+                <input type="text" id="resid_city" name="resid_city" placeholder="eg. Accra" [(ngModel)]="staff.resid_city" autocomplete="false" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+              </div>
+            </div>
+
+            <div class="lg:col-span-2">
+              <label for="address" class="block text-sm text-gray-700">Residential Address </label>
+              <div class="mt-1">
+                <textarea rows="2" type="text" id="address" name="address" placeholder="eg. No. 1234, ABC Street / GPS" [(ngModel)]="staff.address" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"></textarea>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex border-indigo-200 pt-8 mt-8 px-2 border-t py-4 justify-end space-x-6">
+        <button type="submit" (click)="reset()" class="hover:-translate-y-px hover:shadow-xs active:opacity-85 tracking-tight-rem transition-all bg-white ease-in-out border border-transparent rounded-md hover:shadow-sm px-10 py-3 flex items-center justify-center text-sm font-medium text-red-700 border-red-200 hover:bg-gray-50">
+          Reset
+        </button>
+        <button type="submit" (click)="saveStaff()" class="hover:-translate-y-px hover:shadow-xs active:opacity-85 tracking-tight-rem transition-all ease-in-out bg-indigo-600 border border-transparent rounded-md hover:shadow-sm px-4 py-3 flex items-center justify-center text-sm font-medium text-white hover:bg-indigo-700">
+          Admit staff
+        </button>
+      </div>
+
+    </div>
+    
+  </div>
+
+  <app-admit-staff-form id="staff_admission_form" class="hidden"></app-admit-staff-form>

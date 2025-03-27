@@ -4,7 +4,7 @@ import { environment } from '../../environment/environment.dev';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { ToastService } from './toast.service';
+import { ToastService } from '../reusable-comps/toast/toast.service';
 
 @Injectable({
   providedIn: 'root',

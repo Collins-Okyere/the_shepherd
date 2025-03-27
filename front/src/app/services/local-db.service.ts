@@ -288,7 +288,7 @@ export class LocalDbService {
 
   avatar:string = 'avatars/avatar_male.png'
 
-  avatar_femaile:string = 'avatars/avatar_female.png'
+  avatar_female:string = 'avatars/avatar_female.png'
 
   userTypes = [
     { name: 'Member' },

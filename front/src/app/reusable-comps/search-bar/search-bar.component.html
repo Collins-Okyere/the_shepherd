@@ -1,0 +1,10 @@
+<div class="relative flex items-center text-slate-400 focus-within:text-indigo-700">
+  <span *ngIf="searchData.showIcon" [ngClass]="'border-r focus:border-indigo-700'" class="absolute left-4 flex h-6 items-center pr-3">
+    <span class="text-slate-400">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+      </svg>      
+    </span>
+  </span>
+  <input [ngClass]="'focus:border-indigo-700'" type="text" [(ngModel)]="searchValue" (ngModelChange)="onSearch(searchValue)" name="search" placeholder="Search here" class="font-light outline-none w-full rounded-xl border border-slate-300 {{searchData.showIcon ? 'pl-14 pr-4 py-2.5' : 'px-4 py-1'}} text-sm text-slate-600 transition"/>
+</div>

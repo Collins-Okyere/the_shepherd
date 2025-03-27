@@ -18,7 +18,7 @@ export class SelectInputComponent {
     multiple: false,
     autoClose: true,
     toastData: null,
-    defaultValue: null
+    defaultValue: null,
   }
   @Output() selectionChanged = new EventEmitter<any[]>();
   selectedItems: any[] = [];

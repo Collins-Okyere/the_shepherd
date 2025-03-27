@@ -8,9 +8,9 @@
         <span *ngIf="selectedItems.length > 0" class="flex gap-2 flex-wrap p-1">
           <span *ngFor="let item of selectedItems" class="inline-flex items-center gap-1 bg-indigo-100 text-indigo-800 rounded-full py-1 px-3 text-sm">
           
-            <img *ngIf="item.photo || item.flag || item.image" [src]="item.photo || item.image || item.flag" alt="image" class="size-6 shrink-0 rounded-full"/>
+            <img *ngIf="item.photo || item.flag || item.image|| item.logo" [src]="item.photo || item.image || item.flag|| item.logo" alt="image" class="size-6 shrink-0 rounded-full"/>
 
-            <span>{{ item[selectInputData.displayProperty] || item.name || item.title || item || item.full_name || selectInputData.placeholder}}</span>
+            <span>{{ item[selectInputData.displayProperty] || item.name || item.title || item || selectInputData.placeholder}}</span>
             
             <button type="button" (click)="removeItem(item)" class="text-red-600 hover:text-red-800">
               <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -38,7 +38,7 @@
   <button *ngIf="!selectInputData.multiple" type="button" (click)="toggleDropdown()"  [ngClass]="{ 'outline-red-500 border-red-500': selectInputData.toastData?.status == 'danger', 'outline-yellow-500 border-yellow-500': !selectedItem && selectInputData.toastData?.status == 'warning', 'outline-gray-300': selectInputData.toastData?.status != 'danger' && selectInputData.toastData?.status != 'warning' }" class="grid w-full cursor-default grid-cols-1 rounded-md bg-white {{!selectedItem ? 'py-2.5' : 'py-2'}} px-4 text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2  focus:outline-indigo-600 sm:text-sm" aria-haspopup="listbox" [attr.aria-expanded]="dropdownOpen"> 
     
     <span class="col-start-1 row-start-1 flex items-center gap-3 pr-6">
-      <img *ngIf="selectedItem?.photo || selectedItem?.flag" [src]="selectedItem.photo || selectedItem.flag" alt="" class="size-6 shrink-0 rounded-full"/>
+      <img *ngIf="selectedItem?.photo || selectedItem?.flag || selectedItem?.logo|| selectedItem?.image" [src]="selectedItem.photo || selectedItem.flag || selectedItem.logo || selectedItem.image" alt="" class="size-6 shrink-0 rounded-full"/>
       <span class="block truncate {{selectedItem ? 'text-gray-900' : 'text-gray-500'}}">{{ !selectedItem ? selectInputData.placeholder : selectedItem?.name || selectedItem?.title || selectedItem ?? selectedItem  }} {{selectedItem?.student_id || selectedItem?.staff_id || selectedItem?.member_id || selectedItem?.employee_id ? '(' + (selectedItem.student_id || selectedItem.staff_id || selectedItem.member_id || selectedItem.employee_id) + ')' : '' }}</span>
     </span>
 
@@ -58,8 +58,8 @@
       <li *ngFor="let item of filteredItems" (click)="toggleItemSelection(item)" [ngClass]="{'bg-indigo-50 font-semibold': selectedItems.includes(item)}" class="relative cursor-pointer select-none py-2 pl-3 pr-9 text-gray-900 hover:bg-indigo-600 hover:text-white">
         
         <div class="flex items-center">
-          <img *ngIf="item?.photo || item?.flag || item?.image" [src]="item.photo || item.image || item.flag" alt="" class="size-5 shrink-0 rounded-full" />
-          <span class="ml-3 block truncate">{{ item[selectInputData.displayProperty] || item.name || item.title || item || item.full_name }}</span>
+          <img *ngIf="item?.photo || item?.flag || item?.image || item.logo" [src]="item.photo || item.image || item.flag|| item.logo" alt="" class="size-5 shrink-0 rounded-full" />
+          <span class="ml-3 block truncate">{{ item[selectInputData.displayProperty] || item.name || item.title || item }}</span>
         </div>
 
         <span *ngIf="selectedItems.includes(item)" class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ToastComponent } from '../../reusable-comps/toast/toast.component';
-import { ToastService } from '../../services/toast.service';
+import { ToastService } from '../../reusable-comps/toast/toast.service';
 
 @Component({
   selector: 'app-not-found',
@@ -20,7 +19,6 @@ export class NotFoundComponent implements OnInit{
 
   showToast(){
     setTimeout(() => {
-      // let toastData = { showIcon: true, isVisible: true, showCloseBtn: true, status: 'danger', message: 'Sorry, page was not found.' };
       this.toast.showToast('Sorry, page was not found.', 'danger' );
     }, 200);
   }

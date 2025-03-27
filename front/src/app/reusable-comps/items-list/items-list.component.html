@@ -1,0 +1,73 @@
+<nav class="lg:fixed h-full overflow-y-auto w-full lg:w-80 border-r border-gray-200  bg-white divide-y divide-x divide-slate-200">
+
+    <div class="fixed z-20 w-full lg:w-80 border-b bg-indigo-800">
+
+        <div class="z-20 items-center bg-gray-200 w-full text-slate-400 focus-within:text-indigo-700 py-3 px-2">
+            <span [ngClass]="'border-r focus:border-indigo-700'" class="absolute h-6 flex items-center m-2 pr-2 pl-1 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>      
+            </span>
+            <input type="text" [(ngModel)]="listData.searchValue" (ngModelChange)="onSearch()" placeholder="Search here" class="font-light outline-none w-full rounded-xl border border-slate-300 pl-14 pr-4 py-2.5 text-sm text-slate-600 transition" />
+        </div>
+
+        <div class="z-20 w-full pl-3 font-semibold flex items-center justify-between">
+            <h3 class="text-white py-2">
+                {{listData.list_type}} List
+            </h3>                                                            
+            <input *ngIf="listData.checkbox" [(ngModel)]="selectAllCheckbox" (click)="toggleAll()" type="checkbox" class="h-5 w-5 rounded-xl outline-none accent-indigo-500 text-white border-slate-300">
+        </div>
+
+
+    </div>
+
+    <div class="min-h-screen pt-24 z-0">
+        
+        <ul *ngIf="loopData && loopData.length > 0" id="slim-scroll" role="list" class="relative z-0 divide-y divide-slate-200 overflow-y-auto pt-2">
+            <li *ngFor="let item of loopData">
+                <div [ngClass]="listData.selectedItem === item ? 'bg-indigo-50' : 'hover:bg-slate-100'" class="group p-3 flex items-center cursor-pointer justify-between">
+                    
+                    <div (click)="selected(item)" class="flex items-center justify-between relative space-x-3 w-full">
+
+                        <div [ngClass]="listData.selectedItem === item ? 'text-indigo-800 bg-indigo-100' : 'text-slate-800 bg-slate-100'" class="flex-shrink-0 rounded-full ">
+                            <img *ngIf="this.loopData" class="h-12 w-12 rounded-full" [src]="item.photo">
+                            <!-- <span [innerHtml]="getIcon('usersIcon2')" *ngIf="listData.action !== 'profile' && listData.action !== 'certs' && listData.action !== 'id_cards'" [ngClass]="'text-indigo-800 bg-indigo-100'"></span> -->
+                        </div>
+
+                        <div class="flex-1 min-w-0">
+                            <a class="focus:outline-none space-y-1">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p [ngClass]="listData.selectedItem === item ? 'text-indigo-800 group-focus:text-darkBlueLight' : 'text-slate-700'" class="text-md font-medium">
+                                    {{item.last_name ? item.last_name : item.name}} {{item.other_names ? item.other_names : '' }} {{item.first_name ? item.first_name : ''}}
+                                </p>
+                                <p *ngIf="item.student_id || item.employee_id || item.guardian_id || item.activity" class="text-sm text-slate-500 truncate">
+                                    {{item.student_id || item.employee_id || item.guardian_id  ? 'ID' : item.activity ? 'Activity' : ''}}: <span class="text-slate-600 font-medium">{{item.student_id ? item.student_id : item.employee_id ? item.employee_id : item.guardian_id ? item.guardian_id : item.code && !item.activity ? item.code : item.activity ? item.activity : ''}}</span>
+                                </p>
+                                <p *ngIf="item.type || item.location || item.info" class="text-sm text-slate-500 truncate">
+                                    {{item.type ? 'Type' : item.location ? 'Location' : item.info ? 'Info' : item.student_id || item.employee_id || item.guardian_id  ? 'ID' : item.activity ? 'Activity' : ''}}: <span class="text-slate-700 font-medium">{{item.student_id ? item.student_id : item.employee_id ? item.employee_id : item.guardian_id ? item.guardian_id : item.code && !item.activity ? item.code : item.activity ? item.activity : item.type ? item.type : item. location ? item.location : item.info ? item.info : ''}}</span>
+                                </p>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="flex-shrink-0 flex items-center justify-between">
+                        <svg  *ngIf="!listData.checkboxes" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" [ngClass]="listData.selectedItem === item ? 'text-indigo-800 group-focus:text-indigo-500' : 'text-white group-hover:text-slate-400'" class="w-6 h-6 font-bold">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                        <input *ngIf="listData.checkboxes" [(ngModel)]="item.checkboxSelected" type="checkbox" class="h-5 w-5 rounded-xl outline-none accent-indigo-800 border-slate-300">
+                    </div>
+                    
+                </div>
+            </li>
+        </ul>
+
+        <ul *ngIf="!loopData.length" role="list" class="relative z-0 divide-y divide-slate-200 overflow-y-auto">
+            <div class="bg-violet-50 text-darkBlueLight group py-8 px-3 flex items-center cursor-pointer justify-between text-lg font-bold">      
+                No Data Available          
+            </div>
+        </ul>
+
+    </div>
+    
+</nav>

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from '../../app.component';
 import { LocalDbService } from '../../services/local-db.service';
 import { ApiService } from '../../services/api.service';
-import { PricingService } from '../../services/pricing.service';
+import { PricingService } from './pricing.service';
 
 @Component({
   selector: 'app-pricing',

@@ -4,10 +4,9 @@ import { CommonModule } from '@angular/common';
 import { LocalDbService } from '../../services/local-db.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { PricingService } from '../../services/pricing.service';
 import { SelectInputComponent } from '../../reusable-comps/select-input/select-input.component';
-import { ToastComponent } from '../../reusable-comps/toast/toast.component';
-import { ToastService } from '../../services/toast.service';
+import { ToastService } from '../../reusable-comps/toast/toast.service';
+import { PricingService } from '../pricing/pricing.service';
 
 @Component({
   selector: 'app-sign-up',

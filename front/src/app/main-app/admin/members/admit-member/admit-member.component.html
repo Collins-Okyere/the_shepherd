@@ -1,4 +1,4 @@
-  <div class="space-y-4 py-4 p-8 bg-gray-100">
+  <div class="space-y-4 py-4 p-8">
 
     <!-- Upper Section -->
     <div class="flex justify-between px-1 items-center">
@@ -12,15 +12,15 @@
     <!-- Form --> 
     <div class="space-y-4 my-4 rounded-md">
 
-      <div class="z-0 collapse collapse-arrow bg-white rounded-md">
+      <div class="collapse collapse-arrow bg-white rounded-md">
         
-        <input type="checkbox" class="z-0 peer" checked />
+        <input type="checkbox" class="peer" checked />
         
         <div class="collapse-title">
           <p class="text-md leading-5 text-indigo-800 mb-3 lg:col-span-1 pl-8 my-3">Personal Information:</p>
         </div>
         
-        <div class="z-0 collapse-content">
+        <div class="collapse-content">
 
           <div class="items-center space-x-4 flex justify-end px-8">
             
@@ -71,42 +71,42 @@
             <div class="lg:col-span-1">
               <label for="gender" class="block text-sm text-gray-700">Gender </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.gender, placeholder: 'Select Gender', displayProperty: 'name', searchProperty: 'name', defaultValue: data.gender[0] }" (selectionChanged)="onSelectionChanged('gender')"></app-select-input>
+                <app-select-input id="gender" [selectInputData]="{ items: noDB.gender, placeholder: 'Select Gender', displayProperty: 'name', searchProperty: 'name', defaultValue: noDB.gender[0] }" (selectionChanged)="onSelectionChanged('gender', $event)"></app-select-input>
               </div>
             </div>
 
             <div class="lg:col-span-1">
               <label for="title" class="block text-sm text-gray-700">Title </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.titles, placeholder: 'Select Title', displayProperty: 'name', searchProperty: 'name', defaultValue: data.titles[0] }" (selectionChanged)="onSelectionChanged('title')"></app-select-input>
+                <app-select-input id="title" [selectInputData]="{ items: noDB.titles, placeholder: 'Select Title', displayProperty: 'name', searchProperty: 'name', defaultValue: noDB.titles[0] }" (selectionChanged)="onSelectionChanged('title', $event)"></app-select-input>
               </div>
             </div>
 
             <div class="lg:col-span-1">
               <label for="nationality" class="block text-sm text-gray-700">Nationality </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.countries, placeholder: 'Select Country', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('nationality')"></app-select-input>
+                <app-select-input id="nationality" [selectInputData]="{ items: noDB.countries, placeholder: 'Select Country', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('nationality', $event)"></app-select-input>
               </div>
             </div>
 
             <div class="lg:col-span-1">
               <label for="marital_status" class="block text-sm text-gray-700">Marital Status </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.maritalStatuses, placeholder: 'Select Status', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('marital_status')"></app-select-input>
+                <app-select-input id="marital_status" [selectInputData]="{ items: noDB.maritalStatuses, placeholder: 'Select Status', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('marital_status', $event)"></app-select-input>
               </div>
             </div>
 
             <div class="lg:col-span-1">
               <label for="highest_edu_level" class="block text-sm text-gray-700">Highest Educational Qualification </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.eduLevels, placeholder: 'Select Option', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('highest_edu_level')"></app-select-input>
+                <app-select-input id="highest_edu_level" [selectInputData]="{ items: noDB.eduLevels, placeholder: 'Select Option', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('highest_edu_level', $event)"></app-select-input>
               </div>
             </div>
 
             <div class="lg:col-span-2">
               <label for="relations" class="block text-sm text-gray-700">Relations (If Applicable) </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.members, placeholder: 'Select Relation', displayProperty: 'full_name', searchProperty: 'full_name', multiple: true }" (selectionChanged)="onSelectionChanged('relations')"></app-select-input>
+                <app-select-input id="relations" [selectInputData]="{ items: noDB.members, placeholder: 'Select Relation', displayProperty: 'full_name', searchProperty: 'full_name', multiple: true }" (selectionChanged)="onSelectionChanged('relations', $event)"></app-select-input>
               </div>
             </div>
 
@@ -115,23 +115,23 @@
 
       </div>
 
-      <div class="z-0 collapse collapse-arrow bg-white rounded-md">
-        <input type="checkbox" class="z-0 peer" checked />
+      <div class="collapse collapse-arrow bg-white rounded-md">
+        <input type="checkbox" class="peer" checked />
         <div class="collapse-title">
           <p class="text-md leading-5 text-indigo-800 mb-3 lg:col-span-1 pl-8 my-3">Membership Information:</p>
         </div>
-        <div class="z-0 collapse-content">
+        <div class="collapse-content">
           <div class="lg:col-span-3 lg:grid lg:grid-cols-2 gap-6 p-8 pt-3">
 
             <div class="lg:col-span-1">
               <label for="user_type" class="block text-sm text-gray-700">Member Type </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.userTypes, placeholder: 'Select Member Type', displayProperty: 'name', searchProperty: 'name', defaultValue: data.userTypes[0] }" (selectionChanged)="onSelectionChanged('user_type')"></app-select-input>
+                <app-select-input id="user_type" [selectInputData]="{ items: noDB.userTypes, placeholder: 'Select Member Type', displayProperty: 'name', searchProperty: 'name', defaultValue: noDB.userTypes[0] }" (selectionChanged)="onSelectionChanged('user_type', $event)"></app-select-input>
               </div>
             </div>
 
             <div class="lg:col-span-1">
-              <label for="member_id" class="font-medium block text-sm text-slate-900">Member ID <span class="text-slate-500 text-sm"> (Last ID - LIS01):</span> </label>
+              <label for="member_id" class="font-medium block text-sm text-slate-900">Member ID <span class="text-slate-500 text-sm"> (Last ID - {{lastMemberId}}):</span> </label>
               <div class="mt-1">
                 <input type="text" id="member_id" name="member_id" placeholder="Member ID" [(ngModel)]="member.member_id" autocomplete="false" class="font-bold bg-indigo-50 placeholder:text-sm appearance-none min-w-0 w-full border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
               </div>
@@ -147,32 +147,32 @@
             <div class="lg:col-span-1">
               <label for="membership_status" class="block text-sm text-gray-700">Membership Status </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.membershipStatuses, placeholder: 'Select Status', displayProperty: 'name', searchProperty: 'name', defaultValue: data.membershipStatuses[0] }" (selectionChanged)="onSelectionChanged('membership_status')"></app-select-input>
+                <app-select-input id="membership_status" [selectInputData]="{ items: noDB.membershipStatuses, placeholder: 'Select Status', displayProperty: 'name', searchProperty: 'name', defaultValue: noDB.membershipStatuses[0] }" (selectionChanged)="onSelectionChanged('membership_status', $event)"></app-select-input>
               </div>
             </div>
 
             <div class="lg:col-span-1">
               <label for="first_name" class="block text-sm text-gray-700">Baptismal Status </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.baptismalStatuses, placeholder: 'Select Status', displayProperty: 'name', searchProperty: 'name'}" (selectionChanged)="onSelectionChanged('baptismal_status')"></app-select-input>
+                <app-select-input id="baptismal_status" [selectInputData]="{ items: noDB.baptismalStatuses, placeholder: 'Select Status', displayProperty: 'name', searchProperty: 'name'}" (selectionChanged)="onSelectionChanged('baptismal_status', $event)"></app-select-input>
               </div>
             </div>
 
             <div class="lg:col-span-1">
               <label for="invited_by" class="block text-sm text-gray-700">Invited By (If Apllicable) </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.members, placeholder: 'Select Member', displayProperty: 'full_name', multiple: true, searchProperty: 'full_name' }" (selectionChanged)="onSelectionChanged('invited_by')"></app-select-input>
+                <app-select-input id="invited_by" [selectInputData]="{ items: noDB.members, placeholder: 'Select Member', displayProperty: 'full_name', multiple: true, searchProperty: 'full_name' }" (selectionChanged)="onSelectionChanged('invited_by', $event)"></app-select-input>
               </div>
             </div>
 
             <div class="lg:col-span-2">
               <label for="groups" class="block text-sm text-gray-700">Member Group(s) </label>
               <div class="mt-1">
-                <app-select-input [selectInputData]="{ items: data.groups, multiple: true, placeholder: 'Select Group', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('groups')"></app-select-input>
+                <app-select-input id="groups" [selectInputData]="{ items: noDB.groups, multiple: true, placeholder: 'Select Group', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('groups', $event)"></app-select-input>
               </div>
             </div>
             
-            <div class="px-2 lg:col-span-2 lg:grid pt-8 mt-4 lg:grid-cols-2 gap-6 border-t border-indigo-200">
+            <div *ngIf="isChurchWorker" class="px-2 lg:col-span-2 lg:grid pt-8 mt-4 lg:grid-cols-2 gap-6 border-t border-indigo-200">
 
                   <p class="lg:col-span-2 text-xs leading-5 text-indigo-700 lg:whitespace-nowrap space-x-2 italic">
                     <span>This section is for <strong>Church leaders and workers only</strong>.</span>
@@ -182,35 +182,35 @@
                   <div class="lg:col-span-1">
                     <label for="departments" class="block text-sm text-gray-700">Department(s) </label>
                     <div class="mt-1">
-                      <app-select-input [selectInputData]="{ items: data.departments, placeholder: 'Select Department(s)', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('departments')"></app-select-input>
+                      <app-select-input id="departments" [selectInputData]="{ items: noDB.departments, placeholder: 'Select Department(s)', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('departments', $event)"></app-select-input>
                     </div>
                   </div>
         
                   <div class="lg:col-span-1">
                     <label for="positions" class="block text-sm text-gray-700">Position(s) </label>
                     <div class="mt-1">
-                      <app-select-input [selectInputData]="{ items: data.positions, placeholder: 'Select Position(s)', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('positions')"></app-select-input>
+                      <app-select-input id="positions" [selectInputData]="{ items: noDB.positions, placeholder: 'Select Position(s)', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('positions', $event)"></app-select-input>
                     </div>
                   </div>
         
                   <div class="lg:col-span-1">
                     <label for="supervisors" class="block text-sm text-gray-700">Supervisor(s)</label>
                     <div class="mt-1">
-                      <app-select-input [selectInputData]="{ items: data.staff, placeholder: 'Select Supervisor(s)', multiple: true, displayProperty: 'full_name', searchProperty: 'full_name' }" (selectionChanged)="onSelectionChanged($event)"></app-select-input>
+                      <app-select-input id="supervisors" [selectInputData]="{ items: noDB.staff, placeholder: 'Select Supervisor(s)', multiple: true, displayProperty: 'full_name', searchProperty: 'full_name' }" (selectionChanged)="onSelectionChanged('supervisors', $event)"></app-select-input>
                     </div>
                   </div>
         
                   <div class="lg:col-span-1">
                     <label for="groups_led" class="block text-sm text-gray-700">Group(s) Led </label>
                     <div class="mt-1">
-                      <app-select-input [selectInputData]="{ items: data.groups, placeholder: 'Select Group(s)', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('groups_led')"></app-select-input>
+                      <app-select-input id="groups_led" [selectInputData]="{ items: noDB.groups, placeholder: 'Select Group(s)', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('groups_led', $event)"></app-select-input>
                     </div>
                   </div>
         
                   <div class="lg:col-span-2">
                     <label for="privilleges" class="block text-sm text-gray-700">System Privilleges </label>
                     <div class="mt-1">
-                      <app-select-input [selectInputData]="{ items: data.privilleges, placeholder: 'Select Privilleges', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('supervisors')"></app-select-input>
+                      <app-select-input id="privilleges"  [selectInputData]="{ items: noDB.privilleges, placeholder: 'Select Privilleges', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('privilleges', $event)"></app-select-input>
                     </div>
                   </div>
       
@@ -220,12 +220,12 @@
         </div>
       </div>
 
-      <div class="z-0 collapse collapse-arrow bg-white rounded-md">
-        <input type="checkbox" class="z-0 peer" checked />
+      <div class="collapse collapse-arrow bg-white rounded-md">
+        <input type="checkbox" class="peer" checked />
         <div class="collapse-title">
           <p class="text-md leading-5 text-indigo-800 mb-3 lg:col-span-1 pl-8 my-3">Contact Information:</p>
         </div>
-        <div class="z-0 collapse-content">
+        <div class="collapse-content">
           <div class="lg:col-span-3 lg:grid lg:grid-cols-2 gap-6 p-8 pt-3">
 
             <div class="lg:col-span-1">
@@ -250,7 +250,7 @@
                 </div>  
               </div>
               <div class="mt-1">
-                <input type="text" id="phone" name="phone" placeholder="eg. (+233)-234-56-789" [(ngModel)]="member.phone" autocomplete="false" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                <input type="text" id="phone2" name="phone2" placeholder="eg. (+233)-234-56-789" [(ngModel)]="member.phone" autocomplete="false" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
               </div>            
             </div>
 
@@ -287,7 +287,7 @@
 
       <!-- Action buttons -->
       <div class="flex border-indigo-200 pt-8 mt-8 px-2 border-t py-4 justify-end space-x-6">
-        <button type="submit" (click)="reset()" class="hover:-translate-y-px hover:shadow-xs active:opacity-85 tracking-tight-rem transition-all bg-gray-50 ease-in-out border border-transparent rounded-md hover:shadow-sm px-10 py-3 flex items-center justify-center text-sm font-medium text-red-700 border-red-200 hover:bg-gray-50">
+        <button type="submit" (click)="reset()" class="hover:-translate-y-px hover:shadow-xs active:opacity-85 tracking-tight-rem transition-all bg-white ease-in-out border border-transparent rounded-md hover:shadow-sm px-10 py-3 flex items-center justify-center text-sm font-medium text-red-700 border-red-200 hover:bg-gray-50">
           Reset
         </button>
         <button type="submit" (click)="saveMember()" class="hover:-translate-y-px hover:shadow-xs active:opacity-85 tracking-tight-rem transition-all ease-in-out bg-indigo-600 border border-transparent rounded-md hover:shadow-sm px-4 py-3 flex items-center justify-center text-sm font-medium text-white hover:bg-indigo-700">
@@ -299,5 +299,4 @@
     
   </div>
 
-
-  <app-membership-form class="hidden"></app-membership-form>
+  <app-membership-form id="membership_form" class="hidden"></app-membership-form>

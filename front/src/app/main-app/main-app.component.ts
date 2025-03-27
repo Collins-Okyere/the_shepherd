@@ -82,15 +82,6 @@ export class MainAppComponent implements OnInit {
       case 'navShow':
         this.navShow = !this.navShow
       break;
-      // case 'mobileNavShow':
-      //   if(this.isDrawerOpen){
-      //     this.isDrawerOpen = false
-      //     this.navShow = false
-      //   }else{
-      //     this.isDrawerOpen = true
-      //     this.navShow = true
-      //   }
-      // break;
     }
     localStorage.setItem('uiSetts', JSON.stringify({filled: this.filled, isDrawerOpen: this.isDrawerOpen, navShow: this.navShow}));
   }
@@ -102,11 +93,6 @@ export class MainAppComponent implements OnInit {
     } else {
       this.isDrawerOpen = !this.isDrawerOpen;
     }
-    // if(this.isDrawerOpen === true){
-    //   this.isDrawerOpen = !this.isDrawerOpen;
-
-      // this.navShow = false
-    // }
   }
 
   toggleMenu(index: number, mainPage?: any) {

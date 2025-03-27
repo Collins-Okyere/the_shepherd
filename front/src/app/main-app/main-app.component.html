@@ -352,7 +352,7 @@
                     </div>
 
                     <!-- User Profile -->
-                    <div class="mt-6 mb-4 collapse collapse-arrow {{!filled && activeIndex === 0 ? 'bg-white' : filled && activeIndex === 0 ? 'bg-indigo-100' : activeIndex !== 0 ? 'bg-indigo-60 text-indigo-200' : ''}} rounded-lg shadow-sm border">
+                    <div class="mt-6 mb-4 collapse collapse-arrow {{!filled && activeIndex === 0 ? 'bg-white shadow' : filled && activeIndex === 0 ? 'bg-indigo-100' : activeIndex !== 0 ? 'bg-indigo-60 text-indigo-200' : ''}} rounded-lg shadow-sm border">
                         <input type="checkbox" [checked]="activeIndex === 0" (change)="toggleMenu(0)" />
                         <div class="collapse-title flex items-center py-3 pl-2">
                             <img class="w-10 h-10 rounded-full ml-1" [src]="currUser.photo" alt="photo">
@@ -369,7 +369,7 @@
                     </div>
 
                     <!-- Nav Links -->
-                    <div [ngClass]="{'rounded-lg shadow my-1': main.isActive, 'collapse-arrow': main.subPages?.length > 0}" class="collapse {{!filled && main.isActive ? 'bg-white' : filled && main.isActive ? 'bg-indigo-100' : 'text-gray-600'}}" *ngFor="let main of menu; let i = index;">
+                    <div [ngClass]="{'rounded-lg shadow my-1': main.isActive, 'collapse-arrow': main.subPages?.length > 0}" class="collapse {{!filled && main.isActive ? 'bg-white shadow' : filled && main.isActive ? 'bg-indigo-100' : 'text-gray-600'}}" *ngFor="let main of menu; let i = index;">
 
                         <input type="checkbox" [checked]="activeIndex === i+1" (change)="toggleMenu(i+1, main);" />
 
@@ -532,9 +532,9 @@
     </nav>
 
     <!-- Main Page Area -->
-    <main [ngClass]="{'lg:ml-60': isDrawerOpen && navShow}" class="min-h-screen overflow-y-auto bg-gray-50">
+    <main [ngClass]="{'lg:ml-60': isDrawerOpen && navShow}" class="min-h-screen bg-gray-50">
         
-        <div class="text-sm breadcrumbs p-3 lg:px-8 lg:py-3">
+        <div class="text-sm breadcrumbs p-3 lg:px-8 lg:py-3 bg-white">
             <ul>
                 <li *ngFor="let breadcrumb of breadcrumbs; let i = index; let last = last">
                     <a *ngIf="!last" (click)="i > 0 ? getPage(breadcrumb.page): ''" class="text-indigo-700 hover:underline cursor-pointer">
@@ -545,7 +545,7 @@
             </ul>
         </div>
         
-        <div class="max-h-screen overflow-y-auto p-4 pb-48 bg-gray-50 z-0">
+        <div class="max-h-screen overflow-y-auto pb-48 bg-gray-100 z-0">
             <router-outlet></router-outlet>
         </div>
 

@@ -8,6 +8,11 @@
     cursor: pointer;
 }
 
+html, body {
+    touch-action: none; /* Prevents scrolling from interfering with touch events */
+}
+  
+
 #slim-scroll::-webkit-scrollbar-track {
     cursor: pointer;
     background-color: #a0aec0;

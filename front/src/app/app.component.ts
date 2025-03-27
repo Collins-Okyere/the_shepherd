@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApiService } from './services/api.service';
 import { ToastComponent } from './reusable-comps/toast/toast.component';
-import { ToastService } from './reusable-comps/simple-table/services/toast.service';
 import { ModalComponent } from './reusable-comps/modal/modal.component';
+import { MediaUploadComponent } from './reusable-comps/media-upload/media-upload.component';
+import { ToastService } from './reusable-comps/toast/toast.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ToastComponent, ModalComponent],
+  imports: [RouterOutlet, ToastComponent, ModalComponent, MediaUploadComponent],
   providers: [ApiService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
