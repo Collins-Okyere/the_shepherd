@@ -32,15 +32,7 @@ export class ApiService {
       return this.signOut();  
     };
   }
-
-  // Helper function to read cookies
-  getCookie(name: string): string | null {
-    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-    console.log(match)
-
-    return match ? match[2] : null;
-  }
-
+  
   async makeRequest(verb: string, path: string, params: any, unique_url?:string) {
     this.initData();
     const headers = new HttpHeaders({

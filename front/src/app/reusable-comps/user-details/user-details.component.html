@@ -1,0 +1,485 @@
+
+<div *ngIf="user" class="min-h-screen overflow-auto">
+    <div class="w-full pr-1  mx-2 lg:mx-4 py-2 lg:pr-8">
+
+        <div class="w-full bg-white shadow-lg rounded">
+
+            <!-- Heading -->
+            <div class="flex items-center justify-between pb-3 pt-4 mx-2 border-b-2 border-indigo-300">
+                <div class="flex justify-start px-3">
+                    <span class="relative p-1 bg-indigo-700 rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        </svg>
+                    </span>
+                    <span class="mx-6 font-bold text-black text-md">
+                        <span class="text-lg flex"><span class="flex lg:hidden mr-1">Selected</span> Member Details</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex h-full flex-col pb-2">
+
+                <!-- Upper Section & tabs -->
+                <div class="space-y-4">
+
+                    
+
+                    <!-- name & position etc -->
+                    <div class="py-4 px-2 md:px-8 sm:flex-1 sm:min-w-0 sm:flex sm:items-center justify-between sm:space-x-6 md:space-x-2 lg:space-x-6 sm:pb-1">
+
+                        <div class="flex min-w-0 space-x-4 justify-start">
+                            <div class="flex-shrink-0 group inline-flex overflow-hidden rounded-xl border-4 border-white bg-white" id="slim-scroll">
+                                <img class="cursor-pointer h-24 w-20 flex-shrink-0 sm:h-32 sm:w-28" [src]="user.photo" alt="">
+                            </div>
+                            <div class="space-y-1 md:space-y-4">
+                                <div class="space-x-2">
+                                    <span class="text-md md:text-xl font-bold text-slate-400">Name:</span>
+                                    <span class="text-lg md:text-2xl font-bold text-slate-900 flex-row flex-wrap whitespace-pre-wrap">{{user.first_name}} {{user.other_names}} {{user.last_name}}</span>
+                                </div>
+                                <div class="space-x-2">
+                                    <span class="text-md md:text-xl font-bold text-slate-400">ID No.:</span>
+                                    <span class="md:text-lg font-bold text-slate-600 truncate">{{user.member_id ?? user.staff_id}}</span>
+                                </div>
+                                <div class="space-x-2" *ngIf="user.positions">
+                                    <span class="text-md md:text-xl font-bold text-slate-400">Position:</span>
+                                    <span class="md:text-lg font-bold text-slate-600 truncate">{{user.position ?? user.positions[0]?.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other Action Buttons -->
+                        <div class="flex mt-2 md:space-y-3 sm:flex items-end justify-between md:justify-end sm:space-y-0 space-x-1 lg:space-x-4">
+
+                            <!-- <app-single-button [buttonData]="{buttonName: 'Message', icon: 'messagingIcon'}" (singleActionButton)="message(user)"></app-single-button>
+          
+                            <app-menu-button class="order-2 lg:order-1 flex lg:relative col-span-1 right-6 lg:left-0" [actionsData]="profileActions" (actionSelected)="actionSelected($event)"></app-menu-button> -->
+          
+                        </div>
+
+                    </div>
+
+                    <!-- Main Tabs -->
+                    <div class="border-b border-indigo-200 md:pt-2 md:mt-2 mx-2 md:mx-8">
+                        <div class="px-1 pt-2">
+                            <nav class="-mb-px flex justify-start space-x-3 lg:space-x-12">
+
+                                <a (click)="changeTab('profile')" [ngClass]="mainTab === 'profile' ? 'border-indigo-500 text-indigo-700' : 'border-transparent text-slate-500'" class="cursor-pointer lg:hover:text-slate-700 lg:hover:border-slate-300 whitespace-nowrap pb-3 px-1 border-b-2 font-medium text-sm">Profile</a>
+
+                                <a (click)="changeTab('admission')" [ngClass]="mainTab === 'admission' ? 'border-indigo-500 text-indigo-700' : 'border-transparent text-slate-500'" class="cursor-pointer lg:hover:text-slate-700 lg:hover:border-slate-300 whitespace-nowrap pb-3 px-1 border-b-2 font-medium text-sm">Admission</a>
+
+                                <a (click)="changeTab('relations')" [ngClass]="mainTab === 'relations' ? 'border-indigo-500 text-indigo-700' : 'border-transparent text-slate-500'" class="cursor-pointer lg:hover:text-slate-700 lg:hover:border-slate-300 whitespace-nowrap pb-3 px-1 border-b-2 font-medium text-sm">Relations</a>
+                                
+                                <a *ngIf="user.staff_id" (click)="changeTab('privilleges')" [ngClass]="mainTab === 'privilleges' ? 'border-indigo-500 text-indigo-700' : 'border-transparent text-slate-500'" class="cursor-pointer lg:hover:text-slate-700 lg:hover:border-slate-300 whitespace-nowrap pb-3 px-1 border-b-2 font-medium text-sm">privilleges</a>
+
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <!-- Profile Page -->
+                <div class="py-6">
+
+                    <!-- Basic Info -->
+                    <div *ngIf="mainTab === 'profile'" class="grid {{!edit ? 'grid-cols-2' : 'grid-cols-1'}} lg:grid-cols-2 gap-6 lg:gap-x-16 mx-4 lg:mx-8 px-4">
+
+                        <div class="col-span-1 space-y-6">
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Title </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.title ?? '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="title" [selectInputData]="{ items: noDB.titles, placeholder: 'Select Title', displayProperty: 'name', searchProperty: 'name', defaultValue: user.title }" (selectionChanged)="onSelectionChanged('gender', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">First Name </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.first_name ?? '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <input type="text" name="first_name" [(ngModel)]="user.first_name" class="col-span-2 w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm">
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700"> Last Name </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.last_name ?? '(Empty)'}}
+                                </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <input type="text" name="last_name" [(ngModel)]="user.last_name" class="col-span-2 w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm">
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Others Name(s) </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.other_names ?? '(Empty)'}}
+                                </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <input type="text" name="other_names" [(ngModel)]="user.other_names" class="col-span-2 w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm">
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Gender </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.gender ?? '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="gender" [selectInputData]="{ items: noDB.gender, placeholder: 'Select Gender', displayProperty: 'name', searchProperty: 'name', defaultValue: user.gender }" (selectionChanged)="onSelectionChanged('gender', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700"> Date Of Birth: </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.dob ?? '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <input type="date" name="dob" [(ngModel)]="user.dob" class="col-span-2 w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm">
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Marital Status </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.marital_status ?? '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="marital_status" [selectInputData]="{ items: noDB.maritalStatuses, placeholder: 'Select Option', displayProperty: 'name', searchProperty: 'name', defaultValue: user.marital_status }" (selectionChanged)="onSelectionChanged('gender', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-span-1 space-y-6">
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Nationality </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">
+                                    <span *ngIf="user.nationality"> 
+                                        <img class="rounded-full h-6 w-6 inline-block mr-3" [src]="user.nationality.flag">
+                                        <div class="inline-block">{{user.nationality.native}}</div>
+                                    </span>
+                                    <span *ngIf="!user.nationality">(Empty)</span>
+                                </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="nationality" [selectInputData]="{ items: noDB.countries, placeholder: 'Select Nationality', displayProperty: 'native', searchProperty: 'navtive', defaultValue: user.nationality }" (selectionChanged)="onSelectionChanged('nationality', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700"> Phone Number 1</dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">{{user.phone1 ?? '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <input type="tel" name="phone1" [(ngModel)]="user.phone1" class="col-span-2 w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm">
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700"> Phone Number 2</dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">{{user.phone2 ?? '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <input type="tel" name="phone2" [(ngModel)]="user.phone2" class="col-span-2 w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm">
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Email</dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">{{user.email ?? '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <input type="email" name="email" [(ngModel)]="user.email" class="col-span-2 w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm">
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Residencial Address </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.resid_address ?? '(Empty)'}}
+                                </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <textarea rows="3" type="text" name="resid_address" [(ngModel)]="user.resid_address" class="col-span-2 w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm"></textarea>
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Highest Education</dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.edu_level ?? '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="edu_level" [selectInputData]="{ items: noDB.eduLevels, placeholder: 'Select Option', displayProperty: 'name', searchProperty: 'name', defaultValue: user.edu_level }" (selectionChanged)="onSelectionChanged('gender', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Notes </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">{{user.notes ? user.notes : '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <textarea type="text" rows="3" name="notes" [(ngModel)]="user.notes" class="w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm"></textarea>
+                                </dd>
+                            </div>
+
+                        </div>
+
+                        <!-- action button -->
+                        <div class="{{!edit ? 'col-span-2' : 'col-span-1'}} lg:col-span-2 mt-10 border-t border-indigo-100">
+                            <button type="submit" (click)="editOrUpdateMember()" [ngClass]="edit  ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-indigo-300 hover:bg-indigo-400 text-indigo-700'" class="hover:-translate-y-px hover:shadow-xs active:opacity-85 tracking-tight-rem transition-all ease-in   border border-transparent rounded-md shadow-sm px-8 p-3 my-6 flex items-center justify-center font-semibold w-full">
+                                {{edit ? 'Save' : 'Edit'}}
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- Admission Info -->
+                    <div *ngIf="mainTab === 'admission'" class="grid {{!edit ? 'grid-cols-2' : 'grid-cols-1'}} lg:grid-cols-2 gap-6 lg:gap-x-16 mx-4 lg:mx-8 px-4">
+
+                        <div class="col-span-1 space-y-6">
+
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700"> {{user.staff_id ? 'Staff ID' : 'Member ID'}} </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.member_id ?? user.staff_id ?? '(Empty)'}} </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <input type="text" name="member_id" [(ngModel)]="userId" class="col-span-2 w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm">
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Branch</dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.branch  ?? '(Empty)'}}
+                                </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="branch" [selectInputData]="{ items: noDB.branches, placeholder: 'Select Branch', displayProperty: 'name', searchProperty: 'name', defaultValue: user.branch }" (selectionChanged)="onSelectionChanged('membership_status', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Member Type </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.user_type  ?? '(Empty)'}}
+                                </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="user_type" [selectInputData]="{ items: noDB.userTypes, placeholder: 'Select Type', displayProperty: 'name', searchProperty: 'name', defaultValue: user.user_type }" (selectionChanged)="onSelectionChanged('membership_status', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Membership Status </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.membership_status  ?? '(Empty)'}}
+                                </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="membership_status" [selectInputData]="{ items: noDB.membershipStatuses, placeholder: 'Select Status', displayProperty: 'name', searchProperty: 'name', defaultValue: user.membership_status }" (selectionChanged)="onSelectionChanged('membership_status', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Admission Date </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.admission_date ?? '(Empty)'}}</dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <input type="date" name="admission_date" [(ngModel)]="user.admission_date" class="col-span-2 w-full bg-white mt-1 rounded-md border py-2 px-3 shadow-sm border-indigo-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none sm:text-sm">
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Baptismal Status </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.baptismal_status  ?? '(Empty)'}}
+                                </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="baptismal_status" [selectInputData]="{ items: noDB.baptismalStatuses, placeholder: 'Select Status', displayProperty: 'name', searchProperty: 'name', defaultValue: user.baptismal_status }" (selectionChanged)="onSelectionChanged('membership_status', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">Invited By</dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">
+                                    <span *ngIf="user.nationality"> 
+                                        <img class="rounded-full h-6 w-6 inline-block mr-3" [src]="user.invited_by.photo">
+                                        <div class="inline-block">{{user.last_name}} {{user.other_names}} {{user.first_name}} ({{user.invited_by.member_id}})</div>
+                                    </span>
+                                    <span *ngIf="!user.invited_by">(Empty)</span>
+                                </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="invited_by" [selectInputData]="{ items: noDB.staff, placeholder: 'Select Member', displayProperty: 'full_name', searchProperty: 'full_name', defaultValue: user.invited_by }" (selectionChanged)="onSelectionChanged('membership_status', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+                        </div>
+
+                        <div class="col-span-1 space-y-6">
+
+                            <div *ngIf="!edit" class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700">ID Card Status</dt>
+                                <dd class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.with_card ? 'Has ID Card' : 'No ID Card'}} </dd>
+                            </div>
+
+                            <div class="w-full">
+                                <dt class="text-sm font-medium text-indigo-700"> Member Groups(s) </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">
+                                    <div *ngIf="user.groups?.length">
+                                        <div class="w-full p-0.5" *ngFor="let item of user.groups"> • {{item.name}}</div> 
+                                    </div>
+                                    <span *ngIf="!user.groups?.length">(Empty)</span>
+                                </dd>
+                                <dd *ngIf="edit" class="mt-2">
+                                    <app-select-input id="groups" [selectInputData]="{ items: noDB.groups, multiple: true, placeholder: 'Select Group(s)', displayProperty: 'name', searchProperty: 'name', defaultValue: user.groups }" (selectionChanged)="onSelectionChanged('groups', $event)"></app-select-input>                                          
+                                </dd>
+                            </div>
+
+                            <div class="w-full" *ngIf="user.staff_id">
+                                <dt class="text-sm font-medium text-indigo-700">Department(s) </dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> 
+                                    <div *ngIf="user.departments?.length">
+                                        <div class="w-full p-0.5" *ngFor="let item of user.departments"> • {{item.name}}</div> 
+                                    </div>
+                                </dd>
+                                <dd *ngIf="edit" class="mt-1">
+                                    <app-select-input id="departments" [selectInputData]="{ items: noDB.departments, placeholder: 'Select Department(s)', displayProperty: 'name', multiple: true, searchProperty: 'name', defaultValue: user.departments }" (selectionChanged)="onSelectionChanged('departments', $event)"></app-select-input>
+                                </dd>
+                            </div>
+
+                            <div class="w-full" *ngIf="user.is_church_worker">
+                                <dt class="text-sm font-medium text-indigo-700"> Position(s)</dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">
+                                    <div *ngIf="user.positions?.length">
+                                        <div class="w-full p-0.5" *ngFor="let item of user.positions"> • {{item.name}}</div> 
+                                    </div>
+                                    <span *ngIf="!user.positions?.length">(Empty)</span>
+                                </dd>
+                                <dd *ngIf="edit" class="mt-2">
+                                    <app-select-input id="positions" [selectInputData]="{ items: noDB.positions, placeholder: 'Select Position(s)', displayProperty: 'name', multiple: true, searchProperty: 'name', defaultValue: user.positions }" (selectionChanged)="onSelectionChanged('positions', $event)"></app-select-input>                                           
+                                </dd>
+                            </div>
+
+                            <div class="w-full" *ngIf="user.is_church_worker">
+                                <dt class="text-sm font-medium text-indigo-700"> Groups(s) Led</dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">
+                                    <div *ngIf="user.groups_led?.length">
+                                        <div class="w-full p-0.5" *ngFor="let item of user.groups_led"> • {{item.name}}</div> 
+                                    </div>
+                                    <span *ngIf="!user.groups?.length">(Empty)</span>
+                                </dd>
+                                <dd *ngIf="edit" class="mt-2">
+                                    <app-select-input id="groups_led" [selectInputData]="{ items: noDB.groups, multiple: true, placeholder: 'Select Group(s)', displayProperty: 'name', searchProperty: 'name', defaultValue: user.groups_led }" (selectionChanged)="onSelectionChanged('groups_led', $event)"></app-select-input>                                          
+                                </dd>
+                            </div>
+
+                            <div class="w-full" *ngIf="user.is_church_worker">
+                                <dt class="text-sm font-medium text-indigo-700"> Supervisor</dt>
+                                <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">
+                                    <span *ngIf="user.nationality"> 
+                                        <img class="rounded-full h-6 w-6 inline-block mr-3" [src]="user.invited_by.photo">
+                                        <div class="inline-block">{{user.last_name}} {{user.other_names}} {{user.first_name}} ({{user.invited_by.member_id}})</div>
+                                    </span>
+                                    <span *ngIf="!user.invited_by">(Empty)</span>
+                                </dd>
+                                <dd *ngIf="edit" class="mt-2">
+                                    <app-select-input id="supervisor" [selectInputData]="{ items: noDB.staff, placeholder: 'Select Supervisor', displayProperty: 'full_name', searchProperty: 'full_name', defaultValue: user.supervisor }" (selectionChanged)="onSelectionChanged('supervisor', $event)"></app-select-input>                                          
+                                </dd>
+                            </div>
+
+                        </div>
+
+                        <!-- action button -->
+                        <div class="{{!edit ? 'col-span-2' : 'col-span-1'}} lg:col-span-2 mt-10 border-t border-indigo-100">
+                            <button type="submit" (click)="editOrUpdateMember()"  [ngClass]="edit  ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-indigo-300 hover:bg-indigo-400 text-indigo-700'" class="hover:-translate-y-px hover:shadow-xs active:opacity-85 tracking-tight-rem transition-all ease-in rounded-md shadow-sm px-8 p-3 my-6 flex items-center justify-center font-semibold w-full">
+                                {{edit ? 'Save' : 'Edit'}}
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- Relations Page -->
+                    <div *ngIf="mainTab === 'relations'" class="px-3 lg:px-8">
+
+
+                        <div class="w-full lg:w-3/5 ml-auto my-3">
+                            <div class="text-sm font-medium text-indigo-700 whitespace-nowrap"> Add Relations</div>
+                            <div class="mt-1 flex justify-between whitespace-nowrap w-full items-center space-x-2">
+                                <app-select-input class="w-full" id="supervisor" [selectInputData]="selectData" (selectionChanged)="onSelectionChanged('relations', $event)"></app-select-input>   
+                                <button class="px-4 py-2.5 rounded-md text-sm font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-200" (click)="addRelations()">Save</button>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="table">
+
+                              <thead class="bg-gray-100 text-gray-700">
+                                <tr>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Contact Details</th>
+                                  <th scope="col">Branch Details</th>
+                                  <th scope="col" class="text-right">Action</th>
+                                </tr>
+                              </thead>
+
+                              <tbody class="h-full overflow-auto">
+                                <tr *ngFor="let user of user.relations; let i = index" class="hover:bg-gray-50 cursor-pointer">
+
+                                    <td>
+                                        <div class="flex items-center gap-3">
+                                        
+                                            <div class="avatar">
+                                                <div class="mask mask-squircle h-12 w-12">
+                                                    <img [src]="user.photo" alt="Avatar" />
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div class="font-medium whitespace-nowrap">{{user.title}} {{user.first_name}} {{user.last_name}} {{user.other_names}}</div>
+                                                <div class="text-sm text-gray-400">ID: <span class="text-gray-600">{{user.member_id}}</span></div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+
+                                    <td class="text-gray-600 whitespace-nowrap">
+                                        {{user.phone1}} / {{user.phone2}}
+                                        <br />
+                                        <span>{{user.email}}</span>
+                                    </td>
+
+                                    <td class="text-gray-600 whitespace-nowrap">
+                                        {{user.branch}}
+                                        <br />
+                                        {{ user?.position ?? user?.positions?.[0]?.name ?? '' }}
+                                    </td>
+
+                                    <td class="text-gray-600 whitespace-nowrap text-right">
+                                        <button class="btn btn-xs  text-red-700 hover:bg-red-600 hover:text-white" (click)="removeRelation(i)">Remove</button>
+                                    </td>
+
+                                </tr>
+                              </tbody>
+
+                            </table>
+                          </div>
+                    </div>
+
+                    <!-- Relations Page -->
+                    <div *ngIf="mainTab === 'privilleges'" class="px-3 lg:px-8">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-6 sm:grid-cols-2 sm:gap-x-8 col-span-2 border-indigo-100 mb-4">
+          
+                            <p class="text-sm leading-5 text-indigo-700 col-span-3 flex">User privilleges: <span class="hidden lg:flex ml-4 col-span-1 text-sm text-red-500"> (Select applicable privilege(s) to user)</span></p>
+                  
+                            <p class="lg:hidden col-span-2 lg:col-span-1 text-sm text-red-500">(Select to assign applicable privilege(s) to user)</p>
+                  
+                            <div class="col-span-2 lg:col-span-1 flex items-center" *ngFor="let priv of noDB.privilleges; trackBy: trackByName">
+                                <input type="checkbox" [id]="priv.name" name="{{ priv.name }}" [disabled]="!edit" [checked]="user.privilleges.includes(priv.name)" (change)="updatePrivilleges($event, priv)" [ngClass]="{'bg-gray-200': !edit, 'cursor-pointer': edit}" class="mr-2 w-5 h-5 text-indigo-700 rounded-lg border-gray-300" />
+                                <label [for]="priv.name" class="text-md text-gray-700 px-1">
+                                  {{ priv.name }}
+                                </label>
+                            </div>
+                              
+                        </div>
+
+                        <!-- action button -->
+                        <div class="{{!edit ? 'col-span-2' : 'col-span-1'}} lg:col-span-2 mt-10 border-t border-indigo-100">
+                            <button type="submit" (click)="editOrUpdateMember()" [ngClass]="edit  ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-indigo-300 hover:bg-indigo-400 text-indigo-700'" class="hover:-translate-y-px hover:shadow-xs active:opacity-85 tracking-tight-rem transition-all ease-in   border border-transparent rounded-md shadow-sm px-8 p-3 my-6 flex items-center justify-center font-semibold w-full">
+                                {{edit ? 'Save' : 'Edit'}}
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>    
+    </div>
+</div>
+

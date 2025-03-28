@@ -85,7 +85,7 @@
             <div class="lg:col-span-1">
               <label for="nationality" class="block text-sm text-gray-700">Nationality </label>
               <div class="mt-1">
-                <app-select-input id="nationality" [selectInputData]="{ items: noDB.countries, placeholder: 'Select Country', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('nationality', $event)"></app-select-input>
+                <app-select-input id="nationality" [selectInputData]="{ items: noDB.countries, placeholder: 'Select Nationality', displayProperty: 'native', searchProperty: 'native' }" (selectionChanged)="onSelectionChanged('nationality', $event)"></app-select-input>
               </div>
             </div>
 
@@ -103,7 +103,7 @@
               </div>
             </div>
 
-            <div class="lg:col-span-2">
+            <div class="lg:col-span-1">
               <label for="relations" class="block text-sm text-gray-700">Relations (If Applicable) </label>
               <div class="mt-1">
                 <app-select-input id="relations" [selectInputData]="{ items: noDB.members, placeholder: 'Select Relation', displayProperty: 'full_name', searchProperty: 'full_name', multiple: true }" (selectionChanged)="onSelectionChanged('relations', $event)"></app-select-input>
@@ -138,6 +138,13 @@
             </div>
 
             <div class="lg:col-span-1">
+              <label for="branch" class="block text-sm text-gray-700">Branch</label>
+              <div class="mt-1">
+                <app-select-input id="branch" [selectInputData]="{ items: noDB.branches, placeholder: 'Select Branch', displayProperty: 'name', searchProperty: 'name', }" (selectionChanged)="onSelectionChanged('membership_status', $event)"></app-select-input>
+              </div>
+            </div>
+
+            <div class="lg:col-span-1">
               <label for="membership_date" class="block text-sm text-gray-700">Membership Date </label>
               <div class="mt-1">
                 <input type="date" id="membership_date" name="membership_date" [(ngModel)]="member.membership_date" class="placeholder:text-sm placeholder:text-slate-300 appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
@@ -165,7 +172,7 @@
               </div>
             </div>
 
-            <div class="lg:col-span-2">
+            <div class="lg:col-span-1">
               <label for="groups" class="block text-sm text-gray-700">Member Group(s) </label>
               <div class="mt-1">
                 <app-select-input id="groups" [selectInputData]="{ items: noDB.groups, multiple: true, placeholder: 'Select Group', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('groups', $event)"></app-select-input>
@@ -194,9 +201,9 @@
                   </div>
         
                   <div class="lg:col-span-1">
-                    <label for="supervisors" class="block text-sm text-gray-700">Supervisor(s)</label>
+                    <label for="supervisor" class="block text-sm text-gray-700">Supervisor</label>
                     <div class="mt-1">
-                      <app-select-input id="supervisors" [selectInputData]="{ items: noDB.staff, placeholder: 'Select Supervisor(s)', multiple: true, displayProperty: 'full_name', searchProperty: 'full_name' }" (selectionChanged)="onSelectionChanged('supervisors', $event)"></app-select-input>
+                      <app-select-input id="supervisor" [selectInputData]="{ items: noDB.staff, placeholder: 'Select Supervisor', isplayProperty: 'full_name', searchProperty: 'full_name' }" (selectionChanged)="onSelectionChanged('supervisor', $event)"></app-select-input>
                     </div>
                   </div>
         
@@ -275,9 +282,9 @@
             </div>
 
             <div class="lg:col-span-2">
-              <label for="address" class="block text-sm text-gray-700">Residential Address </label>
+              <label for="resid_address" class="block text-sm text-gray-700">Residential Address </label>
               <div class="mt-1">
-                <textarea rows="2" type="text" id="address" name="address" placeholder="eg. No. 1234, ABC Street / GPS" [(ngModel)]="member.address" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"></textarea>
+                <textarea rows="2" type="text" id="resid_address" name="resid_address" placeholder="eg. No. 1234, ABC Street / GPS" [(ngModel)]="member.resid_address" class="placeholder:text-sm appearance-none min-w-0 w-full bg-white border border-slate-300 rounded-md shadow-sm py-2 px-4 text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"></textarea>
               </div>
             </div>
 
@@ -286,7 +293,7 @@
       </div>
 
       <!-- Action buttons -->
-      <div class="flex border-indigo-200 pt-8 mt-8 px-2 border-t py-4 justify-end space-x-6">
+      <div class="flex border-indigo-200 pt-4 px-2 border-t justify-end space-x-6">
         <button type="submit" (click)="reset()" class="hover:-translate-y-px hover:shadow-xs active:opacity-85 tracking-tight-rem transition-all bg-white ease-in-out border border-transparent rounded-md hover:shadow-sm px-10 py-3 flex items-center justify-center text-sm font-medium text-red-700 border-red-200 hover:bg-gray-50">
           Reset
         </button>

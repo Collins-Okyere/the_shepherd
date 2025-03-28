@@ -1,7 +1,7 @@
 <div class="relative mt-1">
 
-  <button *ngIf="selectInputData.multiple" type="button" (click)="!dropdownOpen ? toggleDropdown() : null" [ngClass]="{'outline-red-500 border-red-500': selectInputData.toastData?.status === 'danger', 'outline-yellow-500 border-yellow-500': !selectedItems.length && selectInputData.toastData?.status === 'warning', 'outline-gray-300': selectInputData.toastData?.status !== 'danger' && selectInputData.toastData?.status !== 'warning' }" class="grid w-full cursor-default grid-cols-1 rounded-md bg-white {{!selectedItems.length && !dropdownOpen  ? 'py-2.5 px-4' : ''}} text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm" aria-haspopup="listbox" [attr.aria-expanded]="dropdownOpen">
-    <span [ngClass]="selectedItems.length > 0 ? 'mb-1.5' : ''" class="col-start-1 row-start-1 justify-between flex items-center gap-3">
+  <button *ngIf="selectInputData.multiple" type="button" [ngClass]="{'outline-red-500 border-red-500': selectInputData.toastData?.status === 'danger', 'outline-yellow-500 border-yellow-500': !selectedItems.length && selectInputData.toastData?.status === 'warning', 'outline-gray-300': selectInputData.toastData?.status !== 'danger' && selectInputData.toastData?.status !== 'warning' }" class="grid w-full cursor-default grid-cols-1 rounded-md bg-white {{!selectedItems.length && !dropdownOpen  ? 'py-2.5 px-4' : ''}} text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm" aria-haspopup="listbox" [attr.aria-expanded]="dropdownOpen">
+    <span (click)="!dropdownOpen ? toggleDropdown() : null"  [ngClass]="selectedItems.length > 0 ? 'mb-1.5' : ''" class="col-start-1 row-start-1 justify-between flex items-center gap-3">
 
       <span class="flex items-center pr-6">
 
@@ -37,14 +37,20 @@
                   
   <button *ngIf="!selectInputData.multiple" type="button" (click)="toggleDropdown()"  [ngClass]="{ 'outline-red-500 border-red-500': selectInputData.toastData?.status == 'danger', 'outline-yellow-500 border-yellow-500': !selectedItem && selectInputData.toastData?.status == 'warning', 'outline-gray-300': selectInputData.toastData?.status != 'danger' && selectInputData.toastData?.status != 'warning' }" class="grid w-full cursor-default grid-cols-1 rounded-md bg-white {{!selectedItem ? 'py-2.5' : 'py-2'}} px-4 text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2  focus:outline-indigo-600 sm:text-sm" aria-haspopup="listbox" [attr.aria-expanded]="dropdownOpen"> 
     
-    <span class="col-start-1 row-start-1 flex items-center gap-3 pr-6">
-      <img *ngIf="selectedItem?.photo || selectedItem?.flag || selectedItem?.logo|| selectedItem?.image" [src]="selectedItem.photo || selectedItem.flag || selectedItem.logo || selectedItem.image" alt="" class="size-6 shrink-0 rounded-full"/>
-      <span class="block truncate {{selectedItem ? 'text-gray-900' : 'text-gray-500'}}">{{ !selectedItem ? selectInputData.placeholder : selectedItem?.name || selectedItem?.title || selectedItem ?? selectedItem  }} {{selectedItem?.student_id || selectedItem?.staff_id || selectedItem?.member_id || selectedItem?.employee_id ? '(' + (selectedItem.student_id || selectedItem.staff_id || selectedItem.member_id || selectedItem.employee_id) + ')' : '' }}</span>
+    <span class="justify-between flex items-center">
+
+      <span class="col-start-1 row-start-1 flex items-center gap-3 pr-6">
+        <img *ngIf="selectedItem?.photo || selectedItem?.flag || selectedItem?.logo|| selectedItem?.image" [src]="selectedItem.photo || selectedItem.flag || selectedItem.logo || selectedItem.image" alt="" class="size-6 shrink-0 rounded-full"/>
+        <span class="block truncate {{selectedItem ? 'text-gray-900' : 'text-gray-500'}}">{{ !selectedItem ? selectInputData.placeholder : selectedItem?.name || selectedItem?.title || selectedItem ?? selectedItem  }} {{selectedItem?.student_id || selectedItem?.staff_id || selectedItem?.member_id || selectedItem?.employee_id ? '(' + (selectedItem.student_id || selectedItem.staff_id || selectedItem.member_id || selectedItem.employee_id) + ')' : '' }}</span>
+      </span>
+
+      <svg class="col-start-1 row-start-1 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
+        <path fill-rule="evenodd" d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd"/>
+      </svg>
+
     </span>
 
-    <svg class="col-start-1 row-start-1 size-5 self-center justify-self-end text-gray-500 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
-      <path fill-rule="evenodd" d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd"/>
-    </svg>
+    <input *ngIf="selectInputData?.items?.length > 8 && dropdownOpen" type="text" [(ngModel)]="searchQuery" (input)="filterItems()" [ngClass]="!selectedItems.length && dropdownOpen  ? 'py-2.5' : 'py-2.5'" class="w-full pl-4 pr-9 text-gray-500 bg-gray-50 rounded-md sm:text-sm outline-none border-none" placeholder="{{selectInputData.placeholder}}"/>
 
   </button>
   

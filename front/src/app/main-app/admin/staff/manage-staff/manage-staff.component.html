@@ -1,1 +1,15 @@
-<p>manage-staff works!</p>
+
+<!-- Main Section Below -->
+<div class="flex lg:py-0 w-full bg-gray-100">
+    
+    <aside class="{{ !isShowingDetails ? '' : 'hidden lg:flex' }} z-30 lg:mb-4 xl:order-first flex flex-col flex-shrink-0 w-full lg:w-80 h-full ml-1 bg-white">
+        <app-items-list class="lg:pb-24" [listData]="listData" (selectObject)="selectObject($event)"></app-items-list>
+    </aside>
+
+    <!-- Main Info Section -->
+    <app-user-details class="w-full" [user]="selectedItem" (update)="updateStaff($event)"></app-user-details>
+
+</div>
+
+<app-fab-btn *ngIf="isShowingDetails" [fabData]="fabData" class="lg:hidden" (clicked)="handleFabClick()"></app-fab-btn>
+

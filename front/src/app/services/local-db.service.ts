@@ -335,7 +335,7 @@ export class LocalDbService {
     {name: 'PhD'},
     {name: 'Others'}
   ]
-
+  
   groups:any = [
     {name: 'Choir'},
     {name: 'Youth'},
@@ -356,15 +356,10 @@ export class LocalDbService {
   ]
 
   privilleges:any = [
-    {name: 'Admit Members'},
-    {name: 'Mark Attendance'}
+    { name: 'Admit Member', value: 'admit_member', description: 'Can admit members', user_type: 'Admin' },
+    { name: 'Manage Members', value: 'manage_members', description: 'Can manage members', user_type: 'Admin' },
+    { name: 'Mark Attendance', value: 'mark_attendance', description: 'Can mark attendance', user_type: 'Admin' },
   ]
-
-
-
-
-
-
 
   notifications = [
     { title: 'Notification 1', content: 'notify' },
@@ -396,8 +391,8 @@ export class LocalDbService {
   branches: any = [
     {
       id: 1,
-      name: '',
-      alt_name: '',
+      name: 'Rehoboth Arena',
+      alt_name: 'Rehoboth',
       churchId: 1,
       email: '',
       phone1: '',
@@ -470,44 +465,6 @@ export class LocalDbService {
     },
   ]
 
-  staff:any = [
-    {
-      id: 1,
-      first_name: 'Admin',
-      other_names: '',
-      last_name: 'User',
-      staff_id: 'admin',
-      photo: 'avatars/avatar_male.png',
-      privlleges: [],
-      gender: 'Male',
-      title: 'Mr.',
-      churchId: '',
-      branchId: '',
-      relations: [],
-      assignedMinistries: [],
-      assignedCells: [],
-      education: '',
-      categories: [],
-      departments: [],
-      positions: [],
-      nationality: 1,
-      ssnitNo: '',
-      bank: {
-        name: '',
-        accountNo: '',
-        branch: ''
-      },
-      notes: [],
-      admissionDate: [],
-      isDeleted: false,
-      assignedWorkers: [],
-      phone1: '',
-      phone2: '',
-      email: '',
-      address: ''
-    }
-  ]
-
   members:any = [
     {
       id: 1,
@@ -518,28 +475,109 @@ export class LocalDbService {
       photo: 'avatars/avatar_male.png',
       gender: 'Male',
       title: 'Mr.',
-      churchId: '',
-      branchId: '',
-      membershipStatus: 1,
-      invitedBy: '',
-      relations: [],
-      assignedMembers: [],
-      isChurchWorker: 1,
-      isBaptised: 1,
-      assignedMinistries: [],
-      assignedCells: [],
-      isMarried: 1,
-      education: '',
-      categories: [],
-      nationality: 1,
-      notes: [],
-      admissionDate: [],
+      church_id: 1,
+      branch_id: 1,
+      membership_status: 'Active',
+      invited_by:  {first_name: 'Collins', other_names: 'Okyere', last_name: 'Agyei', name: 'Collins Okyere Agyei', member_id: 'TS01', photo: this.avatar},
+      supervisor:  {first_name: 'Collins', other_names: 'Okyere', last_name: 'Agyei', name: 'Collins Okyere Agyei', member_id: 'TS01', photo: this.avatar},
+      isChurchWorker: true,
+      baptismal_status: 'Baptised',
+      marital_status: 'Married',
+      groups_led: [{name: 'Choir'}, {name: 'Ushers'}],
+      groups: [{name: 'Choir'}, {name: 'Ushers'}],
+      departments: [{name: 'Fiance'}, {name: 'HR'}],
+      positions: [{name: 'Pastor'}, {name: 'Ministry Head'}],
+      edu_level: 'Degree',
+      nationality: {name: 'Ghanaian', flag: 'https://flagcdn.com/w320/gh.png', continent: 'Africa', native: 'Ghanaian'},
+      notes: 'Some Notes',
+      admission_date: '2024-12-02',
+      dob: '2024-12-02',
       isDeleted: false,
-      assignedWorkers: [],
-      phone1: '',
-      phone2: '',
-      email: '',
-      address: ''
+      phone1: '0246123456',
+      phone2: '0234234654',
+      email: 'collins@gmail.com',
+      resid_address: '244 gbawe Road',
+      user_type: 'Church Leader / Worker',
+      branch: 'Rehoboth Arena',
+      privilleges: [ 
+        { name: 'Admit Member', value: 'admit_member', description: 'Can admit members', user_type: 'Admin' },
+        { name: 'Manage Members', value: 'manage_members', description: 'Can manage members', user_type: 'Admin' },
+        { name: 'Mark Attendance', value: 'mark_attendance', description: 'Can mark attendance', user_type: 'Admin' },
+      ],
+      relations: [
+        {
+          id: 1,
+          first_name: 'Collins',
+          other_names: 'Okyere',
+          last_name: 'Agyei',
+          member_id: 'TS01',
+          photo: 'avatars/avatar_male.png',
+          title: 'Mr.',
+          isDeleted: false,
+          phone1: '0246123456',
+          phone2: '0234234654',
+          email: 'collins@gmail.com',
+          branch: 'Rehoboth Arena',
+        }
+      ]
+    }
+  ]
+
+  staff:any = [
+    {
+      id: 1,
+      first_name: 'Collins',
+      other_names: 'Okyere',
+      last_name: 'Agyei',
+      staff_id: 'TS01',
+      photo: 'avatars/avatar_male.png',
+      gender: 'Male',
+      title: 'Mr.',
+      church_id: 1,
+      branch_id: 1,
+      membership_status: 'Active',
+      invited_by:  {first_name: 'Collins', other_names: 'Okyere', last_name: 'Agyei', name: 'Collins Okyere Agyei', member_id: 'TS01', photo: this.avatar},
+      supervisor:  {first_name: 'Collins', other_names: 'Okyere', last_name: 'Agyei', name: 'Collins Okyere Agyei', member_id: 'TS01', photo: this.avatar},
+      isChurchWorker: true,
+      baptismal_status: 'Baptised',
+      marital_status: 'Married',
+      groups_led: [{name: 'Choir'}, {name: 'Ushers'}],
+      groups: [{name: 'Choir'}, {name: 'Ushers'}],
+      departments: [{name: 'Fiance'}, {name: 'HR'}],
+      positions: [{name: 'Pastor'}, {name: 'Ministry Head'}],
+      edu_level: 'Degree',
+      nationality: {name: 'Ghanaian', flag: 'https://flagcdn.com/w320/gh.png', continent: 'Africa', native: 'Ghanaian'},
+      notes: 'Some Notes',
+      admission_date: '2024-12-02',
+      dob: '2024-12-02',
+      isDeleted: false,
+      phone1: '0246123456',
+      phone2: '0234234654',
+      email: 'collins@gmail.com',
+      resid_address: '244 gbawe Road',
+      user_type: 'Church Leader / Worker',
+      branch: 'Rehoboth Arena',
+      privilleges: [
+        { name: 'Admit Member', value: 'admit_member', description: 'Can admit members', user_type: 'Admin' },
+        { name: 'Manage Members', value: 'manage_members', description: 'Can manage members', user_type: 'Admin' },
+        { name: 'Mark Attendance', value: 'mark_attendance', description: 'Can mark attendance', user_type: 'Admin' },
+      ],
+      relations: [
+        {
+          id: 1,
+          first_name: 'Collins',
+          other_names: 'Okyere',
+          last_name: 'Agyei',
+          member_id: 'TS01',
+          photo: 'avatars/avatar_male.png',
+          title: 'Mr.',
+          isDeleted: false,
+          phone1: '0246123456',
+          phone2: '0234234654',
+          email: 'collins@gmail.com',
+          branch: 'Rehoboth Arena',
+        }
+      ]
     }
   ]
 
@@ -549,32 +587,53 @@ export class LocalDbService {
   ]
   
   countries = [
-    { id: 1, name: 'Ghana', flag: 'https://flagcdn.com/w320/gh.png', continent: 'Africa' },
-    { id: 2, name: 'Ethiopia', flag: 'https://flagcdn.com/w320/et.png', continent: 'Africa' },
-    { id: 3, name: 'Kenya', flag: 'https://flagcdn.com/w320/ke.png', continent: 'Africa' },
-    { id: 4, name: 'Nigeria', flag: 'https://flagcdn.com/w320/ng.png', continent: 'Africa' },
-    { id: 5, name: 'South Africa', flag: 'https://flagcdn.com/w320/za.png', continent: 'Africa' },
-    { id: 6, name: 'Congo (Democratic Republic)', flag: 'https://flagcdn.com/w320/cd.png', continent: 'Africa' },
-    { id: 7, name: 'Brazil', flag: 'https://flagcdn.com/w320/br.png', continent: 'South America' },
-    { id: 8, name: 'Mexico', flag: 'https://flagcdn.com/w320/mx.png', continent: 'North America' },
-    { id: 9, name: 'United States', flag: 'https://flagcdn.com/w320/us.png', continent: 'North America' },
-    { id: 10, name: 'Argentina', flag: 'https://flagcdn.com/w320/ar.png', continent: 'South America' },
-    { name: 'Colombia', flag: 'https://flagcdn.com/w320/co.png', continent: 'South America' },
-    { id: 12, name: 'Chile', flag: 'https://flagcdn.com/w320/cl.png', continent: 'South America' },
-    { id: 13, name: 'Peru', flag: 'https://flagcdn.com/w320/pe.png', continent: 'South America' },
-    { id: 14, name: 'Venezuela', flag: 'https://flagcdn.com/w320/ve.png', continent: 'South America' },
-    { id: 15, name: 'Italy', flag: 'https://flagcdn.com/w320/it.png', continent: 'Europe' },
-    { id: 16, name: 'France', flag: 'https://flagcdn.com/w320/fr.png', continent: 'Europe' },
-    { id: 17, name: 'Spain', flag: 'https://flagcdn.com/w320/es.png', continent: 'Europe' },
-    { id: 18, name: 'Poland', flag: 'https://flagcdn.com/w320/pl.png', continent: 'Europe' },
-    { id: 19, name: 'Russia', flag: 'https://flagcdn.com/w320/ru.png', continent: 'Europe/Asia' },
-    { id: 20, name: 'Germany', flag: 'https://flagcdn.com/w320/de.png', continent: 'Europe' },
-    { id: 21, name: 'Ukraine', flag: 'https://flagcdn.com/w320/ua.png', continent: 'Europe' },
-    { id: 22, name: 'Portugal', flag: 'https://flagcdn.com/w320/pt.png', continent: 'Europe' },
-    { id: 23, name: 'Romania', flag: 'https://flagcdn.com/w320/ro.png', continent: 'Europe' },
-    { id: 24, name: 'Hungary', flag: 'https://flagcdn.com/w320/hu.png', continent: 'Europe' },
-    { id: 25, name: 'Philippines', flag: 'https://flagcdn.com/w320/ph.png', continent: 'Asia' },
-    { id: 26, name: 'Australia', flag: 'https://flagcdn.com/w320/au.png', continent: 'Oceania' }
+      { id: 1, name: 'Ghana', flag: 'https://flagcdn.com/w320/gh.png', continent: 'Africa', native: 'Ghanaian' },
+      { id: 2, name: 'Ethiopia', flag: 'https://flagcdn.com/w320/et.png', continent: 'Africa', native: 'Ethiopian' },
+      { id: 3, name: 'Kenya', flag: 'https://flagcdn.com/w320/ke.png', continent: 'Africa', native: 'Kenyan' },
+      { id: 4, name: 'Nigeria', flag: 'https://flagcdn.com/w320/ng.png', continent: 'Africa', native: 'Nigerian' },
+      { id: 5, name: 'South Africa', flag: 'https://flagcdn.com/w320/za.png', continent: 'Africa', native: 'South African' },
+      { id: 6, name: 'Congo (Democratic Republic)', flag: 'https://flagcdn.com/w320/cd.png', continent: 'Africa', native: 'Congolese' },
+      { id: 7, name: 'Brazil', flag: 'https://flagcdn.com/w320/br.png', continent: 'South America', native: 'Brazilian' },
+      { id: 8, name: 'Mexico', flag: 'https://flagcdn.com/w320/mx.png', continent: 'North America', native: 'Mexican' },
+      { id: 9, name: 'United States', flag: 'https://flagcdn.com/w320/us.png', continent: 'North America', native: 'American' },
+      { id: 10, name: 'Argentina', flag: 'https://flagcdn.com/w320/ar.png', continent: 'South America', native: 'Argentinian' },
+      { id: 11, name: 'Colombia', flag: 'https://flagcdn.com/w320/co.png', continent: 'South America', native: 'Colombian' },
+      { id: 12, name: 'Chile', flag: 'https://flagcdn.com/w320/cl.png', continent: 'South America', native: 'Chilean' },
+      { id: 13, name: 'Peru', flag: 'https://flagcdn.com/w320/pe.png', continent: 'South America', native: 'Peruvian' },
+      { id: 14, name: 'Venezuela', flag: 'https://flagcdn.com/w320/ve.png', continent: 'South America', native: 'Venezuelan' },
+      { id: 15, name: 'Italy', flag: 'https://flagcdn.com/w320/it.png', continent: 'Europe', native: 'Italian' },
+      { id: 16, name: 'France', flag: 'https://flagcdn.com/w320/fr.png', continent: 'Europe', native: 'French' },
+      { id: 17, name: 'Spain', flag: 'https://flagcdn.com/w320/es.png', continent: 'Europe', native: 'Spanish' },
+      { id: 18, name: 'Poland', flag: 'https://flagcdn.com/w320/pl.png', continent: 'Europe', native: 'Pole' },
+      { id: 19, name: 'Russia', flag: 'https://flagcdn.com/w320/ru.png', continent: 'Europe/Asia', native: 'Russian' },
+      { id: 20, name: 'Germany', flag: 'https://flagcdn.com/w320/de.png', continent: 'Europe', native: 'German' },
+      { id: 21, name: 'Ukraine', flag: 'https://flagcdn.com/w320/ua.png', continent: 'Europe', native: 'Ukrainian' },
+      { id: 22, name: 'Portugal', flag: 'https://flagcdn.com/w320/pt.png', continent: 'Europe', native: 'Portuguese' },
+      { id: 23, name: 'Romania', flag: 'https://flagcdn.com/w320/ro.png', continent: 'Europe', native: 'Romanian' },
+      { id: 24, name: 'Hungary', flag: 'https://flagcdn.com/w320/hu.png', continent: 'Europe', native: 'Hungarian' },
+      { id: 25, name: 'Philippines', flag: 'https://flagcdn.com/w320/ph.png', continent: 'Asia', native: 'Filipino' },
+      { id: 26, name: 'Australia', flag: 'https://flagcdn.com/w320/au.png', continent: 'Oceania', native: 'Australian' },
+      { id: 27, name: 'Japan', flag: 'https://flagcdn.com/w320/jp.png', continent: 'Asia', native: 'Japanese' },
+      { id: 28, name: 'South Korea', flag: 'https://flagcdn.com/w320/kr.png', continent: 'Asia', native: 'South Korean' },
+      { id: 29, name: 'India', flag: 'https://flagcdn.com/w320/in.png', continent: 'Asia', native: 'Indian' },
+      { id: 30, name: 'China', flag: 'https://flagcdn.com/w320/cn.png', continent: 'Asia', native: 'Chinese' },
+      { id: 31, name: 'Indonesia', flag: 'https://flagcdn.com/w320/id.png', continent: 'Asia', native: 'Indonesian' },
+      { id: 32, name: 'Turkey', flag: 'https://flagcdn.com/w320/tr.png', continent: 'Europe/Asia', native: 'Turkish' },
+      { id: 33, name: 'Saudi Arabia', flag: 'https://flagcdn.com/w320/sa.png', continent: 'Asia', native: 'Saudi' },
+      { id: 34, name: 'Egypt', flag: 'https://flagcdn.com/w320/eg.png', continent: 'Africa', native: 'Egyptian' },
+      { id: 35, name: 'Thailand', flag: 'https://flagcdn.com/w320/th.png', continent: 'Asia', native: 'Thai' },
+      { id: 36, name: 'Malaysia', flag: 'https://flagcdn.com/w320/my.png', continent: 'Asia', native: 'Malaysian' },
+      { id: 37, name: 'Canada', flag: 'https://flagcdn.com/w320/ca.png', continent: 'North America', native: 'Canadian' },
+      { id: 38, name: 'United Kingdom', flag: 'https://flagcdn.com/w320/gb.png', continent: 'Europe', native: 'British' },
+      { id: 39, name: 'Netherlands', flag: 'https://flagcdn.com/w320/nl.png', continent: 'Europe', native: 'Dutch' },
+      { id: 40, name: 'Sweden', flag: 'https://flagcdn.com/w320/se.png', continent: 'Europe', native: 'Swedish' },
+      { id: 41, name: 'Switzerland', flag: 'https://flagcdn.com/w320/ch.png', continent: 'Europe', native: 'Swiss' },
+      { id: 42, name: 'Greece', flag: 'https://flagcdn.com/w320/gr.png', continent: 'Europe', native: 'Greek' },
+      { id: 43, name: 'New Zealand', flag: 'https://flagcdn.com/w320/nz.png', continent: 'Oceania', native: 'New Zealander' },
+      { id: 44, name: 'Norway', flag: 'https://flagcdn.com/w320/no.png', continent: 'Europe', native: 'Norwegian' },
+      { id: 45, name: 'Denmark', flag: 'https://flagcdn.com/w320/dk.png', continent: 'Europe', native: 'Dane' },
+      { id: 46, name: 'Finland', flag: 'https://flagcdn.com/w320/fi.png', continent: 'Europe', native: 'Finn' },
+      { id: 47, name: 'Belgium', flag: 'https://flagcdn.com/w320/be.png', continent: 'Europe', native: 'Belgian' }
   ];
 
   product_plans: any = [

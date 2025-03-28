@@ -38,7 +38,7 @@ export class SelectInputComponent {
     }    
     if(this.selectInputData.defaultValue){
       if(this.selectInputData.multiple){
-        this.selectedItems = [this.selectInputData.defaultValue];
+        this.selectedItems = [...this.selectInputData.defaultValue];
       }else{
         this.selectedItem = this.selectInputData.defaultValue;
       }
@@ -54,15 +54,22 @@ export class SelectInputComponent {
     if (!this.searchQuery) {
       this.filteredItems = [...this.selectInputData.items];
     } else {
-      this.filteredItems = this.selectInputData.items.filter((item:any) =>{
-        if(item[this.selectInputData.displayProperty] === 'full_name'){
-          item[this.selectInputData.displayProperty] = `${item.last_name}  ${item.other_names} ${item.first_name}`
-        }else{
-          item[this.selectInputData.searchProperty]?.toLowerCase().includes(this.searchQuery.toLowerCase()) || item[this.selectInputData.displayProperty]?.toLowerCase().includes(this.searchQuery.toLowerCase())
+      this.filteredItems = this.selectInputData.items.filter((item: any) => {
+        let displayValue = item[this.selectInputData.displayProperty];
+  
+        // Handle full_name case separately
+        if (this.selectInputData.displayProperty === 'full_name') {
+          displayValue = `${item.last_name} ${item.other_names} ${item.first_name}`;
         }
-      })
+  
+        return (
+          item[this.selectInputData.searchProperty]?.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          displayValue?.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      });
     }
   }
+  
   
   toggleItemSelection(item: any): void {
     if (this.selectInputData.multiple) {

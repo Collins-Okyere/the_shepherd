@@ -5,30 +5,22 @@ import { ApiService } from '../../../../services/api.service';
 import { FabBtnComponent } from '../../../../reusable-comps/fab-btn/fab-btncomponent';
 import { ItemsListComponent } from '../../../../reusable-comps/items-list/items-list.component';
 import { LocalDbService } from '../../../../services/local-db.service';
-import { SelectInputComponent } from '../../../../reusable-comps/select-input/select-input.component';
+import { UserDetailsComponent } from '../../../../reusable-comps/user-details/user-details.component';
 
 @Component({
     selector: 'app-manage-members',
     standalone: true,
-    imports: [CommonModule, FormsModule, ItemsListComponent, FabBtnComponent, SelectInputComponent],
+    imports: [CommonModule, FormsModule, ItemsListComponent, FabBtnComponent, UserDetailsComponent],
     templateUrl: './manage-members.component.html',
     styleUrl: './manage-members.component.scss'
 })
 export class ManageMembersComponent {
 
-  loopArray:any =[];
   selectedItem:any = {};
   @Input() listData:any = {
-    checkbox: false,
     list_type: 'Members',
-    loopArray: this.loopArray,
+    loopArray: [],
   }
-  @Input() searchData:any = {
-    searchValue: '',
-    showIcon: true
-  };
-  edit:boolean = false;
-  mainTab:string = 'profile';
   members:any = [];
   isShowingDetails:any = false
   fabData:any = {
@@ -38,9 +30,6 @@ export class ManageMembersComponent {
     },
     bgColor: 'bg-violet-600'
   };
-  subItemMobile:boolean = false;
-  selectedSubItem:any;
-  subItem:any = [];
 
   constructor(private api: ApiService, public nonDB: LocalDbService) {}
 
@@ -58,84 +47,26 @@ export class ManageMembersComponent {
     //   if (data) {
     //     this.selectedItems = data.members;
       this.members = this.nonDB.members;
-      this.loopArray = this.members
-      this.listData.loopArray = this.loopArray
+      this.listData.loopArray = this.members
       this.selectedItem = this.listData.loopArray[this.listData.loopArray.length - 1];
       this.listData.selectedItem = this.selectedItem;
     //   }   
     // })
   }
-
-  get admissionDate() {
-    return this.selectedItem.admission_date || this.selectedItem.membership_date;
-  }
-  
-  set admissionDate(value: string) {
-    if (this.selectedItem.admission_date) {
-      this.selectedItem.admission_date = value;
-    } else {
-      this.selectedItem.membership_date = value;
-    }
-  }
   
   selectObject(obj:any, val?:string){
     this.selectedItem = obj;
-    this.edit = false;
-    this.changeTab('profile');
     this.isShowingDetails = true
-    if(val === 'subItems'){
-      this.selectedSubItem = null;
-      this.selectedSubItem = obj;
-      this.subItemMobile = true;
-    };
-  }
-
-  changeTab(val:string){
-    this.mainTab = val;
-    this.edit = false;
-  }
-
-  editOrUpdateMember() {
-    if (this.edit) {
-      this.updateMember(this.selectedItem);
-    } else {
-      this.editMember(this.selectedItem);
-    }
-  }
-
-  editMember(obj:any){
-    this.selectedItem = obj;
-    this.edit = true
   }
 
   updateMember(obj:any){
     this.selectedItem = obj;
     // this.api.makeRequest('POST', 'members', this.selectedItem).then((data: any) => { });
-    this.edit = false;
+    alert('Member details updated!')
   }
   
   handleFabClick() {
     this.isShowingDetails = !this.isShowingDetails;
   }
-
-  onSelectionChanged(field: string, value: any) {
-    this.selectedItem[field] = value;
-    if(field === 'gender'){
-      if(this.selectedItem.phot0 !== (this.nonDB.avatar || this.nonDB.avatar_female)){
-        if(value.name === 'Female'){
-          this.selectedItem = { ...this.selectedItem, photo: this.nonDB.avatar_female  };
-        }else{
-          this.selectedItem = { ...this.selectedItem, photo: this.nonDB.avatar  };
-        }
-      }
-    };
-    if (field === 'user_type') {
-      if(value.name === 'Member'){
-        this.selectedItem = { ...this.selectedItem, departments: [], positions: [], supervisors: [], groups_led: [], privlleges: [] };
-      }
-    }
-  }
-
-  
 
 }
