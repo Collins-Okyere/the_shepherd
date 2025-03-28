@@ -57,7 +57,6 @@ export class SelectInputComponent {
       this.filteredItems = this.selectInputData.items.filter((item: any) => {
         let displayValue = item[this.selectInputData.displayProperty];
   
-        // Handle full_name case separately
         if (this.selectInputData.displayProperty === 'full_name') {
           displayValue = `${item.last_name} ${item.other_names} ${item.first_name}`;
         }

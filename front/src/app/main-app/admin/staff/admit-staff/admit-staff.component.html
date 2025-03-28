@@ -12,7 +12,7 @@
     <!-- Form --> 
     <div class="space-y-4 my-4 rounded-md">
 
-      <div class="collapse collapse-arrow bg-white rounded-md">
+      <div class="collapse collapse-arrow bg-white rounded-md overflow-visible">
         
         <input type="checkbox" class="peer" checked />
         
@@ -85,7 +85,7 @@
             <div class="lg:col-span-1">
               <label for="nationality" class="block text-sm text-gray-700">Nationality </label>
               <div class="mt-1">
-                <app-select-input id="nationality" [selectInputData]="{ items: noDB.countries, placeholder: 'Select Country', displayProperty: 'name', searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('nationality', $event)"></app-select-input>
+                <app-select-input id="nationality" [selectInputData]="{ items: noDB.countries, placeholder: 'Select Country', displayProperty: 'native', searchProperty: 'navtive' }" (selectionChanged)="onSelectionChanged('nationality', $event)"></app-select-input>
               </div>
             </div>
 
@@ -108,7 +108,7 @@
 
       </div>
 
-      <div class="collapse collapse-arrow bg-white rounded-md">
+      <div class="collapse collapse-arrow bg-white rounded-md overflow-visible">
         <input type="checkbox" class="peer" checked />
         <div class="collapse-title">
           <p class="text-md leading-5 text-indigo-800 mb-3 lg:col-span-1 pl-8 my-3">Admission Information:</p>
@@ -152,7 +152,7 @@
                   </div>
         
                   <div class="lg:col-span-1">
-                    <label for="groups_led" class="block text-sm text-gray-700">Group(s) Led </label>
+                    <label for="groups_led" class="block text-sm text-gray-700">Group(s) / Ministries To Supervise </label>
                     <div class="mt-1">
                       <app-select-input id="groups_led" [selectInputData]="{ items: noDB.groups, placeholder: 'Select Group(s)', displayProperty: 'name', multiple: true, searchProperty: 'name' }" (selectionChanged)="onSelectionChanged('groups_led', $event)"></app-select-input>
                     </div>
@@ -169,7 +169,7 @@
         </div>
       </div>
 
-      <div class="collapse collapse-arrow bg-white rounded-md">
+      <div class="collapse collapse-arrow bg-white rounded-md overflow-visible">
         <input type="checkbox" class="peer" checked />
         <div class="collapse-title">
           <p class="text-md leading-5 text-indigo-800 mb-3 lg:col-span-1 pl-8 my-3">Contact Information:</p>

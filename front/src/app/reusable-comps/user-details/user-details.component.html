@@ -139,7 +139,7 @@
                             </div>
 
                             <div class="w-full">
-                                <dt class="text-sm font-medium text-indigo-700">Marital Status </dt>
+                                <dt class="text-sm font-medium text-indigo-700">Relationship Status </dt>
                                 <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap"> {{user.marital_status ?? '(Empty)'}} </dd>
                                 <dd *ngIf="edit" class="mt-1">
                                     <app-select-input id="marital_status" [selectInputData]="{ items: noDB.maritalStatuses, placeholder: 'Select Option', displayProperty: 'name', searchProperty: 'name', defaultValue: user.marital_status }" (selectionChanged)="onSelectionChanged('gender', $event)"></app-select-input>
@@ -307,7 +307,7 @@
                             </div>
 
                             <div class="w-full">
-                                <dt class="text-sm font-medium text-indigo-700"> Member Groups(s) </dt>
+                                <dt class="text-sm font-medium text-indigo-700"> Assign Group / Ministrys(s) </dt>
                                 <dd *ngIf="!edit" class="mt-1 text-sm text-slate-900 whitespace-nowrap">
                                     <div *ngIf="user.groups?.length">
                                         <div class="w-full p-0.5" *ngFor="let item of user.groups"> • {{item.name}}</div> 

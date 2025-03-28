@@ -299,15 +299,17 @@ export class LocalDbService {
     { name: 'Mr.' },
     { name: 'Mrs.' },
     { name: 'Ms.' },
+    { name: 'Ps.' },
+    { name: 'Rev.' },
+    { name: 'Bish.' },
+    { name: 'Archbish.' },
     { name: 'Dr.' },
     { name: 'Prof.' },
-    { name: 'Rev.' },
-    { name: 'Ps.' },
   ];
 
   maritalStatuses:any = [
     {name: 'Single'},
-    {name: 'Couting'},
+    {name: 'Courting'},
     {name: 'Married'},
     {name: 'Divorced'},
     {name: 'Widowed'},
@@ -529,6 +531,7 @@ export class LocalDbService {
       first_name: 'Collins',
       other_names: 'Okyere',
       last_name: 'Agyei',
+      name: 'Collins Okyere Agyei',
       staff_id: 'TS01',
       photo: 'avatars/avatar_male.png',
       gender: 'Male',

@@ -26,7 +26,7 @@ export class UserDetailsComponent {
     bgColor: 'bg-violet-600'
   };
   noDB:any
-  selectData:any
+  selectData:any = {}
   relations:any = []
 
   constructor(private readonly nonDB: LocalDbService){}
