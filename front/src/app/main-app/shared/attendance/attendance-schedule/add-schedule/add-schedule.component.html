@@ -1,0 +1,188 @@
+<div class="p-4 bg-gray-100 rounded-lg">
+    <div class="bg-white rounded-md p-4 pb-28 lg:px-8">
+
+        <div class="flex justify-between py-4 border-b border-darkBlueLighter">
+
+            <h2 class="text-lg text-darkBlue font-bold">New Attendance Schedule</h2>
+
+            <div class="col-span-2 flex justify-end items-center gap-4">
+                <label class="flex items-center gap-2 whitespace-nowrap">
+                    <input type="checkbox" [(ngModel)]="schedule.forStudents" class="w-4 h-4 accent-primaryDeep" /> For Students 
+                </label>
+                <label class="flex items-center gap-2 whitespace-nowrap">
+                    <input type="checkbox" [(ngModel)]="schedule.forEmployees" class="w-4 h-4 accent-primaryDeep" /> For Employees 
+                </label>
+            </div>
+
+        </div>
+
+        <div class="flex justify-end pt-4">
+            <button class="text-red-700 bg-red-50 hover:bg-red-100 px-4 py-2 rounded" (click)="back()">Back To Schedules</button>
+        </div>
+
+        <div class="grid grid-cols-9 gap-x-6 items-center pt-6 m-4 mb-6">
+                    
+            <div class="col-span-2">
+                <input type="text" placeholder="Enter Schedule Name" class="w-full border rounded-md py-1.5 px-4" [(ngModel)]="schedule.name"/>
+            </div>
+
+            <div class="col-span-4">
+                <ng-select [(ngModel)]="schedule.days" [multiple]="true" name="selected-days" [required]="true" placeholder="Select Attendance Days" [appendTo]="'Body'">
+                    <ng-option *ngFor="let sel of days" [value]="sel">{{sel}}</ng-option>
+                </ng-select>
+            </div>
+
+            <div class="col-span-3 flex justify-end space-x-4 items-center">
+
+                <div class="flex whitespace-nowrap gap-2 gap-x-4 items-center">
+                    <label class="text-sm">Start Date:</label>
+                    <input type="date" class="w-full border rounded-md px-2 py-1" [(ngModel)]="schedule.startDate" />
+                </div>
+
+                <div class="flex whitespace-nowrap gap-2 gap-x-4 items-center">
+                    <label class="text-sm">End Date:</label>
+                    <input type="date" class="w-full border rounded-md px-2 py-1" [(ngModel)]="schedule.endDate" />
+                </div>
+
+            </div>
+
+        </div>
+
+        <div *ngIf="schedule.name" class="w-full divide-y divide-gray-100 border-t border-gray-100 px-4">
+    
+            <div *ngIf="schedule.forStudents" class="mb-2 grid grid-cols-5 gap-x-12 items-center pb-4">
+
+                <div class="col-span-5 text-darkBlueLight mt-6 mb-3 text-xs">For Students Attendance Schedule:</div>
+
+                <div class="col-span-3">
+                    <ng-select [(ngModel)]="schedule.classes" [multiple]="true" name="selected-classes" [required]="true" placeholder="Select Classes" [appendTo]="'Body'">
+                        <ng-option *ngFor="let sel of classes" [value]="sel">{{sel}}</ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="col-span-2 flex justify-between items-center">
+
+                    <div class="flex whitespace-nowrap items-center space-x-4">
+                        <label class="block text-sm">Reporting Time:</label>
+                        <input type="time" class="w-full border rounded-md px-2 py-1" [(ngModel)]="schedule.studentsReportingTime" />
+                    </div>
+
+                    <div class="flex whitespace-nowrap items-center space-x-4">
+                        <label class="block text-sm">Closing Time:</label>
+                        <input type="time" class="w-full border rounded-md px-2 py-1" [(ngModel)]="schedule.studentsClosingTime" />
+                    </div>
+
+                </div>
+
+            </div>
+    
+            <div *ngIf="schedule.forEmployees" class="mb-12 grid grid-cols-5 gap-x-12 border-gray-200 items-center">
+
+                <div class="col-span-5 text-darkBlueLight mt-6 mb-3 text-xs">For Employees Attendance Schedule:</div>
+
+                <div class="col-span-3">
+                    <ng-select [(ngModel)]="schedule.departments" [multiple]="true" name="selected-departments" [required]="true" placeholder="Select Departments" [appendTo]="'Body'">
+                        <ng-option *ngFor="let sel of departments" [value]="sel">{{sel}}</ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="col-span-2 flex justify-between items-center">
+
+                    <div class="flex whitespace-nowrap items-center space-x-4">
+                        <label class="block text-sm">Reporting Time:</label>
+                        <input type="time" class="w-full border rounded-md px-2 py-1" [(ngModel)]="schedule.employeesReportingTime" />
+                    </div>
+
+                    <div class="flex whitespace-nowrap items-center space-x-4">
+                        <label class="block text-sm">Closing Time:</label>
+                        <input type="time" class="w-full border rounded-md px-2 py-1" [(ngModel)]="schedule.employeesClosingTime" />
+                    </div>
+
+                </div>
+
+            </div>
+            
+        </div>
+  
+        <div class="mt-6 border-t border-darkBlueLighter" *ngIf="schedule.name && (schedule.forEmployees || schedule.forStudents)">
+            <div class="shadow py-8 px-4 rounded-md mt-6">
+
+                <div class="flex justify-between pb-4">
+                    <h2 class="text-lg text-darkBlue font-bold">Attendance Schedule Events </h2>
+                    <button *ngIf="schedule.eventsList?.length > 0 && schedule.eventsList[schedule.eventsList.length - 1].description" class="shadow-sm hover:shadow-md shadow-gray-400 bg-primaryDeep hover:bg-primary text-white text-xs px-3 py-2 rounded" (click)="addEvent()">+ Add Event</button>
+                </div>
+
+                <table class="w-full mt-2">
+
+                    <thead class="bg-primaryDeep text-white">
+
+                        <tr>
+                            <th scope="col" style="width: 30%;" class="p-2 py-4">Activity</th>
+                            <th scope="col" class="p-2 py-4">Start Date</th>
+                            <th scope="col" class="p-2 py-4">End Date</th>
+                            <th scope="col" class="p-2 py-4"  *ngIf="schedule.forStudents">Classes</th>
+                            <th scope="col" class="p-2 py-4"  *ngIf="schedule.forEmployees">Departments</th>
+                            <th scope="col" class="p-2 py-4">Holiday</th>
+                            <th scope="col" class="p-2 py-4">Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let event of schedule.eventList" class="border-y border-gray-200">
+
+                            <td class="p-2 py-4">
+                                <input type="text" class="w-full border rounded-md py-1 px-3" [(ngModel)]="event.description" />
+                            </td>
+
+                            <td class="p-2 py-4">
+                                <input type="date" class="w-full border rounded-md p-1" [(ngModel)]="event.startDate" />
+                            </td>
+
+                            <td class="p-2 py-4">
+                                <input type="date" class="w-full border rounded-md p-1" [(ngModel)]="event.endDate" />
+                            </td>
+
+                            <td class="p-2 py-4" *ngIf="schedule.forStudents">
+                                <ng-select [(ngModel)]="event.classes" [multiple]="true" name="selected-event-classes" [required]="true" placeholder="Select Classes" [appendTo]="'Body'">
+                                    <ng-option *ngFor="let sel of classes" [value]="sel">{{sel}}</ng-option>
+                                </ng-select>   
+                            </td>
+
+                            <td class="p-2 py-4" *ngIf="schedule.forEmployees">
+                                <ng-select [(ngModel)]="event.departments" [multiple]="true" name="selected-event-departments" [required]="true" placeholder="Select Departments" [appendTo]="'Body'">
+                                    <ng-option *ngFor="let sel of departments" [value]="sel">{{sel}}</ng-option>
+                                </ng-select>    
+                            </td>
+
+                            <td class="py-4 text-center">
+                                <input type="checkbox" [(ngModel)]="event.isHoliday" class="w-4 h-4 accent-primaryDeep" />
+                            </td>
+
+                            <td class="p-2 py-4 grid grid-cols-2 space-x-3">
+                                <div class="col-span-1">
+                                    <button class="bg-red-50 text-red-700 px-3 py-1.5 rounded-full" (click)="removeEvent(event)">✖</button>
+                                </div>
+                                <div class="col-span-1">
+                                    <button *ngIf="event === schedule.eventList[schedule.eventList.length - 1] && event.description" class="bg-blue-50 text-primaryDeep px-3 py-1 text-xl rounded-full font-extrabold" (click)="addEvent()">+</button>
+                                </div>
+                            </td>
+                            
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <div class="mt-8 flex justify-end gap-2">
+                    <button *ngIf="schedule.eventList?.length > 1" class="bg-red-50 text-red-700 hover:bg-red-100 px-4 py-2 rounded" (click)="clear()">Clear</button>
+                    <button *ngIf="schedule.eventList?.length && schedule.eventList[schedule.eventList.length - 1].description" class="bg-primaryDeep hover:bg-primary text-white px-4 py-2 rounded" (click)="save()">{{incomingSched.updating ? 'Update' : 'Save'}}</button>
+                </div>
+
+            </div>
+        </div>
+      
+    </div>
+</div>
+  

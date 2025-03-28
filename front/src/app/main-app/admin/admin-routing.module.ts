@@ -12,7 +12,6 @@ import { ManageStaffComponent } from './staff/manage-staff/manage-staff.componen
 import { ChurchInfosComponent } from './general-setup/church-infos/church-infos.component';
 import { ChurchSetupComponent } from './general-setup/church-setup/church-setup.component';
 import { UserPrivillegesComponent } from './general-setup/user-privilleges/user-privilleges.component';
-import { MarkAttendanceComponent } from '../shared/attendance/mark-attendance/mark-attendance.component';
 import { AttendanceReportsComponent } from '../shared/attendance/attendance-reports/attendance-reports.component';
 import { AttendanceSettingsComponent } from '../shared/attendance/attendance-settings/attendance-settings.component';
 import { ConatctUsComponent } from '../../pages/conatct-us/conatct-us.component';
@@ -23,6 +22,7 @@ import { UserGuideComponent } from '../../pages/user-guide/user-guide.component'
 import { BillingComponent } from '../shared/help-center/billing/billing.component';
 import { BulkDataComponent } from '../shared/more/bulk-data/bulk-data.component';
 import { StaffSettingsComponent } from './staff/staff-settings/staff-settings.component';
+import { MarkAttendanceComponent } from '../shared/attendance/mark-attendance/mark-attendance.component';
 
 const routes: Routes = [
   {
